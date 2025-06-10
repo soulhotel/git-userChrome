@@ -48,13 +48,13 @@ if [ -d "chrome/chrome" ]; then
     mv chrome/chrome-double/* chrome/ 2>/dev/null
     rm -rf chrome/chrome-double
 fi
-echo "• 🟢 • git clone complete"
+echo "• 🔵 • git clone complete"
 if [ -f "chrome/user.js" ]; then
     cp "chrome/user.js" "user.js"
-    echo "• 🟢 • user.js has been copied to Profile"
+    echo "• 🟡 • user.js found, copying user.js to profile."
 fi
-echo -e "\n• 🟢 • Restarting Firefox in 3.."
-sleep 7 && echo "• 🟡 • Restarting Firefox in 2.."
+echo -e "\n• 🟡 • Restarting Firefox in 3.."
+sleep 3 && echo "• 🟠 • Restarting Firefox in 2.."
 sleep 2 && echo "• 🔴 • Restarting Firefox in ..."
 sleep 1 && clear
 
