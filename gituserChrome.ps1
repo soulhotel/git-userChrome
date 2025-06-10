@@ -32,15 +32,29 @@ Clear-Host
 # DOWNLOAD FF ULTIMA -----------------------------------------------
 
 Set-Location $profilePath
+if (Test-Path "$profilePath\chrome") {
+    Write-Host "• 🔴 • There's already a chrome folder here. Renaming it to chrome-old."
+    Rename-Item -Path "$profilePath\chrome" -NewName "chrome-old"
+}
 git clone $gitTheme chrome
-Copy-Item "$profilePath\chrome\user.js" -Destination "$profilePath\user.js"
+if (Test-Path "$profilePath\chrome\chrome") {
+    Write-Host "• 🔴 • There's a chrome folder inside of the chrome folder."
+    Rename-Item -Path "$profilePath\chrome\chrome" -NewName "chrome-double"
 
+    Write-Host "• 🔴 • Moving everything inside of double chrome folder to chrome folder."
+    # Move all files (including hidden) from chrome-double to chrome
+    Get-ChildItem -Path "$profilePath\chrome\chrome-double" -Force | Move-Item -Destination "$profilePath\chrome"
+    Remove-Item -Recurse -Force "$profilePath\chrome\chrome-double"
+}
 Write-Host "`n• 🟢 • git clone complete"
-Write-Host "• 🟢 • user.js has been copied to Profile"
-Write-Host "• 🟢 • Restarting Firefox in 3.."
-Start-Sleep -Seconds 1
+if (Test-Path "$profilePath\chrome\user.js") {
+    Copy-Item "$profilePath\chrome\user.js" -Destination "$profilePath\user.js"
+    Write-Host "• 🟢 • user.js has been copied to Profile"
+}
+Write-Host "`n• 🟢 • Restarting Firefox in 3.."
+Start-Sleep -Seconds 2
 Write-Host "• 🟡 • Restarting Firefox in 2.."
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 2
 Write-Host "• 🔴 • Restarting Firefox in ..."
 Start-Sleep -Seconds 1
 Clear-Host

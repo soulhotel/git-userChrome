@@ -5,9 +5,9 @@ gitTheme="${1:-https://github.com/soulhotel/FF-ULTIMA.git}"
 
 clear
 echo -e "\n\033[3m• 🔴 • gituserChrome (Linux, Mac Version).\033[0m"
-echo -e "\033[3m• 🔴 • This script can be used to download any hosted Theme via the gitTheme variable.\033[0m"
-echo -e "• 🟠 • gitTheme selected: $gitTheme"
-echo -e "• 🟡 • These are the Profile Folders found in your firefox directory..\n"
+echo -e "\n\033[3m• 🔴 • This script can be used to download any hosted Theme via the gitTheme variable.\033[0m"
+echo -e "\n• 🟠 • gitTheme selected: $gitTheme"
+echo -e "\n• 🟡 • These are the Profile Folders found in your firefox directory..\n"
 
 # List all folders in ~/.mozilla/firefox/ --------------------------
 
@@ -34,19 +34,27 @@ profile_path="$HOME/.mozilla/firefox/$selected_profile"
 # DOWNLOAD FF ULTIMA -----------------------------------------------
 
 cd "$profile_path" || { echo "• 🔴 • Failed to cd into profile"; exit 1; }
-git clone "$gitTheme" chrome
-cd chrome && cp "user.js" "../user.js"
-
-echo
+if [ -d "chrome" ]; then
+    echo "• 🔴 • There's already a chrome folder here. Renaming it to chrome-old."
+    mv chrome chrome-old
+fi
+git clone "$gitTheme" chrome # git to chrome time
+if [ -d "chrome/chrome" ]; then
+    echo "• 🔴 • There's a chrome folder inside of the chrome folder."
+    mv chrome/chrome chrome/chrome-double
+    echo "• 🔴 • Moving everything inside of double chrome folder to chrome folder."
+    mv chrome/chrome-double/.??* chrome/chrome-double/* chrome/ 2>/dev/null
+    rm -rf chrome/chrome-double
+fi
 echo "• 🟢 • git clone complete"
-echo "• 🟢 • user.js has been copied to Profile"
-echo "• 🟢 • Restarting Firefox in 3.."
-sleep 1
-echo "• 🟡 • Restarting Firefox in 2.."
-sleep 1
-echo "• 🔴 • Restarting Firefox in ..."
-sleep 1
-clear
+if [ -f "user.js" ]; then
+    cp "user.js" "../user.js"
+    echo "• 🟢 • user.js has been copied to Profile"
+fi
+echo -e "\n• 🟢 • Restarting Firefox in 3.."
+sleep 2 && echo "• 🟡 • Restarting Firefox in 2.."
+sleep 2 && echo "• 🔴 • Restarting Firefox in ..."
+sleep 1 && clear
 
 
 # RESTART FIREFOX --------------------------------------------------
