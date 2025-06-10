@@ -5,9 +5,8 @@ gitTheme="${1:-https://github.com/soulhotel/FF-ULTIMA.git}"
 
 clear
 echo -e "\n\033[3m• 🔴 • gituserChrome (Linux, Mac Version).\033[0m"
-echo -e "\033[3m• 🔴 • This script can be used to download any hosted Theme via the gitTheme variable.\033[0m"
-echo -e "• 🟠 • gitTheme selected: $gitTheme"
-echo -e "• 🟡 • These are the Profile Folders found in your firefox directory..\n"
+echo -e "\033[3m• 🟠 • This script can be used to download any hosted Theme via the gitTheme variable.\033[0m"
+echo -e "• 🟡 • gitTheme selected: $gitTheme, now choose your firefox profile..\n"
 
 # List all folders in ~/.mozilla/firefox/ --------------------------
 
@@ -43,12 +42,13 @@ if [ -d "chrome/chrome" ]; then
     echo "• 🔴 • There's a chrome folder inside of the chrome folder."
     mv chrome/chrome chrome/chrome-double
     echo "• 🔴 • Moving everything inside of double chrome folder to chrome folder."
-    mv chrome/chrome-double/.??* chrome/chrome-double/* chrome/ 2>/dev/null
+    mv chrome/chrome-double/.??* chrome/ 2>/dev/null
+    mv chrome/chrome-double/* chrome/ 2>/dev/null
     rm -rf chrome/chrome-double
 fi
 echo "• 🟢 • git clone complete"
-if [ -f "user.js" ]; then
-    cp "user.js" "../user.js"
+if [ -f "chrome/user.js" ]; then
+    cp "chrome/user.js" "user.js"
     echo "• 🟢 • user.js has been copied to Profile"
 fi
 echo -e "\n• 🟢 • Restarting Firefox in 3.."
@@ -97,11 +97,11 @@ esac
 
 
 # CLEANUP USER.JS --------------------------
-read -rp $'\n• 🟡 • Cleanup user.js file from '"$profile_choice"'? [Y/n] ' apply_userjs
+read -rp $'\n• 🟡 • Cleanup user.js file from '"$selected_profile"'? [Y/n] ' apply_userjs
 apply_userjs=${apply_userjs:-Y}
 
 if [[ "$apply_userjs" =~ ^[Yy]$ ]]; then
-    echo -e "\n• 🟡 • Waiting to clean up user.js (5 seconds).."
+    echo -e "\n• 🟡 • Waiting to remove user.js (5 seconds).."
     sleep 5 && rm "$profile_path/user.js"
     echo -e "\n• 🟢 • Firefox restarted. user.js cleaned up. Enjoy the theme."
 else
