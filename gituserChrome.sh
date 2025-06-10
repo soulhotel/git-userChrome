@@ -54,7 +54,7 @@ fi
 echo -e "\n• 🟢 • Restarting Firefox in 3.."
 sleep 2 && echo "• 🟡 • Restarting Firefox in 2.."
 sleep 2 && echo "• 🔴 • Restarting Firefox in ..."
-sleep 1 && clear
+sleep 3 && clear
 
 
 # RESTART FIREFOX --------------------------------------------------
