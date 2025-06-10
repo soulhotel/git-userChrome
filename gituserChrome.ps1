@@ -53,11 +53,11 @@ if (Test-Path "$profilePath\chrome\user.js") {
     Write-Host "• 🟢 • user.js has been copied to Profile"
 }
 Write-Host "`n• 🟢 • Restarting Firefox in 3.."
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 4
 Write-Host "• 🟡 • Restarting Firefox in 2.."
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 3
 Write-Host "• 🔴 • Restarting Firefox in ..."
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 2
 Clear-Host
 
 # RESTART FIREFOX --------------------------------------------------
