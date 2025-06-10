@@ -33,8 +33,10 @@ Clear-Host
 
 Set-Location $profilePath
 if (Test-Path "$profilePath\chrome") {
-    Write-Host "• 🔴 • There's already a chrome folder here. Renaming it to chrome-old."
-    Rename-Item -Path "$profilePath\chrome" -NewName "chrome-old"
+    $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+    $newName = "chrome-$timestamp"
+    Write-Host "• 🔴 • There's already a chrome folder here. Renaming it to $newName."
+    Rename-Item -Path "$profilePath\chrome" -NewName $newName
 }
 git clone $gitTheme chrome
 if (Test-Path "$profilePath\chrome\chrome") {
