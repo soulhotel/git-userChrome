@@ -54,9 +54,9 @@ if [ -f "chrome/user.js" ]; then
     echo "• 🟢 • user.js has been copied to Profile"
 fi
 echo -e "\n• 🟢 • Restarting Firefox in 3.."
-sleep 2 && echo "• 🟡 • Restarting Firefox in 2.."
+sleep 7 && echo "• 🟡 • Restarting Firefox in 2.."
 sleep 2 && echo "• 🔴 • Restarting Firefox in ..."
-sleep 3 && clear
+sleep 1 && clear
 
 
 # RESTART FIREFOX --------------------------------------------------
