@@ -5,9 +5,9 @@ gitTheme="${1:-https://github.com/soulhotel/FF-ULTIMA.git}"
 
 clear
 echo -e "\n\033[3m• 🔴 • gituserChrome (Linux, Mac Version).\033[0m"
-echo -e "\n\033[3m• 🔴 • This script can be used to download any hosted Theme via the gitTheme variable.\033[0m"
-echo -e "\n• 🟠 • gitTheme selected: $gitTheme"
-echo -e "\n• 🟡 • These are the Profile Folders found in your firefox directory..\n"
+echo -e "\033[3m• 🔴 • This script can be used to download any hosted Theme via the gitTheme variable.\033[0m"
+echo -e "• 🟠 • gitTheme selected: $gitTheme"
+echo -e "• 🟡 • These are the Profile Folders found in your firefox directory..\n"
 
 # List all folders in ~/.mozilla/firefox/ --------------------------
 
@@ -97,15 +97,15 @@ esac
 
 
 # CLEANUP USER.JS --------------------------
-read -rp $'\n• 🟡 • Apply user.js file to '"$profile_choice"'? [Y/n] ' apply_userjs
+read -rp $'\n• 🟡 • Cleanup user.js file from '"$profile_choice"'? [Y/n] ' apply_userjs
 apply_userjs=${apply_userjs:-Y}
 
 if [[ "$apply_userjs" =~ ^[Yy]$ ]]; then
     echo -e "\n• 🟡 • Waiting to clean up user.js (5 seconds).."
     sleep 5 && rm "$profile_path/user.js"
-    echo -e "\n• 🟢 • Firefox successfully restarted, user.js has been cleaned up. Enjoy the theme."
+    echo -e "\n• 🟢 • Firefox restarted. user.js cleaned up. Enjoy the theme."
 else
-    echo -e "\n• 🟡 • No user.js applied. Enjoy the theme."
+    echo -e "\n• 🟢 • Firefox restarted. No user.js applied. Enjoy the theme."
 fi
 
 echo
