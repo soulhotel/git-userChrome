@@ -5,9 +5,8 @@ param (
 
 Clear-Host
 Write-Host "• 🔴 • gituserChrome (Windows Version)."
-Write-Host "• 🔴 • This script can be used to download any hosted Theme via the gitTheme variable."
-Write-Host "• 🟠 • gitTheme selected: $gitTheme"
-Write-Host "• 🟡 • These are the Profile Folders found in your Firefox directory..`n"
+Write-Host "• 🟠 • This script can be used to download any hosted Theme via the gitTheme variable."
+Write-Host "• 🟡 • gitTheme: $gitTheme , now choose a profile..`n"
 
 # Get Firefox profile directories
 $profileRoot = "$env:APPDATA\Mozilla\Firefox\Profiles"
@@ -84,17 +83,17 @@ switch ($firefoxChoice) {
 }
 
 # CLEANUP USER.JS --------------------------
-$userInput = Read-Host "`n• 🟡 • Apply user.js file to $profileChoice ($selectedProfile)? [Y/n]"
+$userInput = Read-Host "`n• 🟡 • Cleanup user.js file from $profileChoice ($selectedProfile)? [Y/n]"
 if ([string]::IsNullOrWhiteSpace($userInput)) {
     $userInput = "Y"
 }
 if ($userInput -match '^[Yy]$') {
-    Write-Host "`n• 🟡 • Waiting to clean up user.js (5 seconds).."
+    Write-Host "`n• 🟡 • Waiting to delete up user.js (5 seconds).."
     Start-Sleep -Seconds 5
     Remove-Item "$profilePath\user.js" -Force
-    Write-Host "`n• 🟢 • Firefox successfully restarted, user.js has been cleaned up. Enjoy the theme.`n"
+    Write-Host "`n• 🟢 • Firefox successfully restarted. user.js cleaned up. Enjoy the theme.`n"
 } else {
-    Write-Host "`n• 🟡 • No user.js applied. Enjoy the theme.`n"
+    Write-Host "`n• 🟡 • Firefox successfully restarted. No user.js applied. Enjoy the theme.`n"
 }
 
 Read-Host "Press ENTER to close this script."
