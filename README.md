@@ -33,7 +33,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (irm 'https://raw.gi
 
 The script will automate:
 - Finding the Profile Folder
-- Downloading a CSS Theme into it (`chrome/`)
+- Backing up any `existing chrome folder` to `chrome-datetime`
+- Downloading the CSS Theme into `chrome/`
+- Filtering the downloaded theme for weird formats like `chrome/chrome` (double folders), and properly flattens the directory.
 - Applying user.js if applicable.
 - Restarting Firefox
 - Cleaning up user.is if applicable
