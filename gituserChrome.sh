@@ -54,9 +54,9 @@ if [ -f "chrome/user.js" ]; then
     echo "• 🟡 • user.js found, copying user.js to profile."
 fi
 echo -e "\n• 🟡 • Restarting Firefox in 3.."
-sleep 3 && echo "• 🟠 • Restarting Firefox in 2.."
-sleep 2 && echo "• 🔴 • Restarting Firefox in ..."
-sleep 1 && clear
+sleep 4 && echo "• 🟠 • Restarting Firefox in 2.."
+sleep 3 && echo "• 🔴 • Restarting Firefox in ..."
+sleep 2 && clear
 
 
 # RESTART FIREFOX --------------------------------------------------
@@ -99,7 +99,7 @@ esac
 
 
 # CLEANUP USER.JS --------------------------
-read -rp $'\n• 🟡 • Cleanup user.js file from '"$selected_profile"'? [Y/n] ' apply_userjs
+read -rp $'\n• 🟡 • Cleanup the user.js file from '"$selected_profile"'? [Y/n] ' apply_userjs
 apply_userjs=${apply_userjs:-Y}
 
 if [[ "$apply_userjs" =~ ^[Yy]$ ]]; then
