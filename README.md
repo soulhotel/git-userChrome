@@ -10,8 +10,8 @@
 
 ## How it Works:
 
-- It can download any CSS theme by running one command (locally or online)
-- By passing a themes repo as the argument/flag allows you to grab any theme via github, codeberg, etc.
+- It can download any CSS theme by running <ins>**one**</ins> command (locally or online).
+- Using a themes repo as the argument/flag allows you to grab any theme via github, codeberg, etc.
 
 ###### *LINUX & MAC (BASH)*
 ```
@@ -33,7 +33,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (irm 'https://raw.gi
 
 The script will automate:
 - Finding the Profile Folder
-- Downloading a CSS Theme into it (chrome)
+- Downloading a CSS Theme into it (`chrome/`)
 - Applying user.js if applicable.
 - Restarting Firefox
 - Cleaning up user.is if applicable
