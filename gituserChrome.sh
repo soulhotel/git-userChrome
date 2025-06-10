@@ -34,8 +34,10 @@ profile_path="$HOME/.mozilla/firefox/$selected_profile"
 
 cd "$profile_path" || { echo "• 🔴 • Failed to cd into profile"; exit 1; }
 if [ -d "chrome" ]; then
-    echo "• 🔴 • There's already a chrome folder here. Renaming it to chrome-old."
-    mv chrome chrome-old
+    timestamp=$(date +%Y%m%d-%H%M%S)
+    newname="chrome-$timestamp"
+    echo "• 🔴 • There's already a chrome folder here. Renaming it to $newname."
+    mv chrome "$newname"
 fi
 git clone "$gitTheme" chrome # git to chrome time
 if [ -d "chrome/chrome" ]; then
