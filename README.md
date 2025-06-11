@@ -43,20 +43,14 @@ It waits for running commands to finish before moving on to the next. Fully auto
 
 ## Previews
 
-###### *WINDOWS PREVIEW*
-
-> better quality [on youtube](https://www.youtube.com/watch?v=yc3xRjVgR8A&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2)
+###### *WINDOWS PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=yc3xRjVgR8A&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2))
 
 https://github.com/user-attachments/assets/f93c548e-54f4-4e9e-96db-15753e60171c
 
-###### *LINUX PREVIEW*
-
-> better quality [on youtube](https://www.youtube.com/watch?v=Cb350ZcjUu0&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=1)
+###### *LINUX PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=Cb350ZcjUu0&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=1))
 
 https://github.com/user-attachments/assets/1306eedf-f1ec-400d-8e0d-9e0021b4a5e5
 
-######  *INSTALLING ANY THEME PREVIEW*
-
-> better quality [on youtube](https://www.youtube.com/watch?v=lrBIZQqGGdU&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2)
+######  *INSTALLING ANY THEME PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=lrBIZQqGGdU&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2))
 
 https://github.com/user-attachments/assets/9ce82177-08f5-4a50-9dfa-2f8a222b8fa5
