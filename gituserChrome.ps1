@@ -66,21 +66,45 @@ Write-Host "`n• 🟡 • Which Firefox are we working with today?"
 Write-Host "`n1 🟠 firefox"
 Write-Host "2 🔵 firefox developer edition"
 Write-Host "3 🟣 firefox nightly"
-Write-Host "4 ⚪ librewolf`n"
+Write-Host "4 ⚪ librewolf"
+Write-Host "5 ⚫ custom location`n"
 $firefoxChoice = Read-Host "Which Firefox is used with $profileChoice $selectedProfile"
 Clear-Host
-Get-Process -Name firefox, firefox-developer-edition, firefox-nightly, librewolf -ErrorAction SilentlyContinue | ForEach-Object { $_.Kill() }
-while (Get-Process -Name firefox, firefox-developer-edition, firefox-nightly, librewolf -ErrorAction SilentlyContinue) { Start-Sleep -Milliseconds 500 }
-switch ($firefoxChoice) {
-    "1" { Start-Process "firefox.exe" }
-    "2" { Start-Process "firefox-developer-edition.exe" }
-    "3" { Start-Process "firefox-nightly.exe" }
-    "4" { Start-Process "librewolf.exe" }
-    default {
-        Write-Host "`n• 🔴 • Invalid choice. Exiting."
-        exit 1
-    }
+$firefoxPaths = @{
+    "1" = "C:\Program Files\Mozilla Firefox\firefox.exe"
+    "2" = "C:\Program Files\Firefox Developer Edition\firefox.exe"
+    "3" = "C:\Program Files\Firefox Nightly\firefox.exe"
+    "4" = "C:\Program Files\LibreWolf\librewolf.exe"
 }
+if ($firefoxChoice -eq "5") {
+    $chosenPath = Read-Host "Enter the full path to your Firefox executable (e.g., C:\Path\To\firefox.exe)"
+} else {
+    $chosenPath = $firefoxPaths[$firefoxChoice]
+}
+if (-not (Test-Path $chosenPath)) {
+    Write-Host "`n• 🔴 • Could not find Firefox executable at:"
+    Write-Host "         $chosenPath"
+    exit 1
+}
+Get-Process | Where-Object {
+    $_.Path -like "*Mozilla Firefox\firefox.exe" -or
+    $_.Path -like "*Firefox Developer Edition\firefox.exe" -or
+    $_.Path -like "*Firefox Nightly\firefox.exe" -or
+    $_.Path -like "*LibreWolf\librewolf.exe"
+} | ForEach-Object { $_.Kill() }
+# Wait until closed
+while (
+    Get-Process | Where-Object {
+        $_.Path -like "*Mozilla Firefox\firefox.exe" -or
+        $_.Path -like "*Firefox Developer Edition\firefox.exe" -or
+        $_.Path -like "*Firefox Nightly\firefox.exe" -or
+        $_.Path -like "*LibreWolf\librewolf.exe"
+    }
+) {
+    Start-Sleep -Milliseconds 500
+}
+# And restart
+Start-Process $chosenPath
 
 # CLEANUP USER.JS --------------------------
 $userInput = Read-Host "`n• 🟡 • Cleanup user.js file from $profileChoice ($selectedProfile)? [Y/n]"
