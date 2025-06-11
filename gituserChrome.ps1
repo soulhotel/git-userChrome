@@ -3,6 +3,7 @@ param (
     [string]$gitTheme = "https://github.com/soulhotel/FF-ULTIMA.git"
 )
 
+function Invoke-gituserChrome {
 Clear-Host
 Write-Host "• 🔴 • gituserChrome (Windows Version)."
 Write-Host "• 🟠 • This script can be used to download any hosted Theme via the gitTheme variable."
@@ -121,3 +122,8 @@ if ($userInput -match '^[Yy]$') {
 }
 
 Read-Host "Press ENTER to close this script."
+
+}
+
+Invoke-gituserChrome
+
