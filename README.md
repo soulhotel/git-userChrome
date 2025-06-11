@@ -23,7 +23,7 @@ bash <(curl -s https://raw.githubusercontent.com/soulhotel/git-userChrome/main/g
 
 ###### *WINDOWS (POWERSHELL)*
 ```
-powershell -NoProfile -ExecutionPolicy Bypass -Command "iex (irm 'https://raw.githubusercontent.com/soulhotel/git-userChrome/main/gituserChrome.ps1') -gitTheme 'https://github.com/soulhotel/FF-ULTIMA.git'"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "irm 'https://raw.githubusercontent.com/soulhotel/git-userChrome/main/gituserChrome.ps1' | iex; Invoke-gituserChrome -gitTheme 'https://github.com/soulhotel/ff-ultima.git'"
 ```
 ```
 .\gituserChrome.ps1 -gitTheme "https://github.com/soulhotel/ff-ultima.git"
