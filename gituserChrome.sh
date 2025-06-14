@@ -5,8 +5,8 @@ gitTheme="${1:-https://github.com/soulhotel/FF-ULTIMA.git}"
 
 clear
 echo -e "\n\033[3m• 🔴 • gituserChrome (Linux, Mac Version).\033[0m"
-echo -e "\033[3m• 🟠 • This script can be used to download any hosted Theme via the gitTheme variable.\033[0m"
-echo -e "• 🟡 • gitTheme: $gitTheme, now choose a profile..\n"
+echo -e "\033[3m• 🟠 • This script can be used to download any userChrome Theme via the gitTheme variable.\033[0m"
+echo -e "• 🟡 • gitTheme selected: $gitTheme, now choose a profile..\n"
 
 # List all folders in ~/.mozilla/firefox/ --------------------------
 
