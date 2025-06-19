@@ -5,9 +5,9 @@ param (
 
 function Invoke-gituserChrome {
 Clear-Host
-Write-Host "• 🔴 • gituserChrome (Windows Version)."
-Write-Host "• 🟠 • This script can be used to download any hosted Theme via the gitTheme variable."
-Write-Host "• 🟡 • gitTheme: $gitTheme , now choose a profile..`n"
+Write-Host "• • • gituserChrome (Windows Version)."
+Write-Host "• • • This script can be used to download any userChrome Theme via the gitTheme variable."
+Write-Host "• • • gitTheme selected: $gitTheme , now choose a profile..`n"
 
 # Get Firefox profile directories
 $profileRoot = "$env:APPDATA\Mozilla\Firefox\Profiles"
@@ -40,7 +40,7 @@ if (Test-Path "$profilePath\chrome") {
 }
 git clone $gitTheme chrome
 if (Test-Path "$profilePath\chrome\chrome") {
-    Write-Host "• 🔴 • There's a chrome folder inside of the chrome folder."
+    Write-Host "• • • There's a chrome folder inside of the chrome folder."
     Rename-Item -Path "$profilePath\chrome\chrome" -NewName "chrome-double"
 
     Write-Host "• 🔴 • Moving everything inside of double chrome folder to chrome folder."
@@ -51,25 +51,25 @@ if (Test-Path "$profilePath\chrome\chrome") {
 Write-Host "`n• 🟢 • git clone complete"
 if (Test-Path "$profilePath\chrome\user.js") {
     Copy-Item "$profilePath\chrome\user.js" -Destination "$profilePath\user.js"
-    Write-Host "• 🟢 • user.js has been copied to Profile"
+    Write-Host "• 🟢 • user.js copied to Profile"
 }
-Write-Host "`n• 🟢 • Restarting Firefox in 3.."
-Start-Sleep -Seconds 4
-Write-Host "• 🟡 • Restarting Firefox in 2.."
+Write-Host "`n• • • Restarting Firefox in 3.."
 Start-Sleep -Seconds 3
-Write-Host "• 🔴 • Restarting Firefox in ..."
+Write-Host "• • • Restarting Firefox in 2.."
+Start-Sleep -Seconds 3
+Write-Host "• • • Restarting Firefox in ..."
 Start-Sleep -Seconds 2
 Clear-Host
 
 # RESTART FIREFOX --------------------------------------------------
 
-Write-Host "`n• 🟡 • Which Firefox are we working with today?"
+Write-Host "`n• • • Which Firefox are we working with today?"
 Write-Host "`n1 🟠 firefox"
 Write-Host "2 🔵 firefox developer edition"
 Write-Host "3 🟣 firefox nightly"
 Write-Host "4 ⚪ librewolf"
 Write-Host "5 ⚫ custom location`n"
-$firefoxChoice = Read-Host "Which Firefox is used with $profileChoice $selectedProfile"
+$firefoxChoice = Read-Host "• • • Which Firefox is used with $profileChoice $selectedProfile"
 Clear-Host
 $firefoxPaths = @{
     "1" = "C:\Program Files\Mozilla Firefox\firefox.exe"
@@ -78,7 +78,7 @@ $firefoxPaths = @{
     "4" = "C:\Program Files\LibreWolf\librewolf.exe"
 }
 if ($firefoxChoice -eq "5") {
-    $chosenPath = Read-Host "Enter the full path to your Firefox executable (e.g., C:\Path\To\firefox.exe)"
+    $chosenPath = Read-Host "• • • Enter the full path to your Firefox executable (e.g., C:\Path\To\firefox.exe)"
 } else {
     $chosenPath = $firefoxPaths[$firefoxChoice]
 }
@@ -108,20 +108,20 @@ while (
 Start-Process $chosenPath
 
 # CLEANUP USER.JS --------------------------
-$userInput = Read-Host "`n• 🟡 • Cleanup user.js file from $profileChoice ($selectedProfile)? [Y/n]"
+$userInput = Read-Host "`n• • • Cleanup user.js file from $profileChoice ($selectedProfile)? [Y/n]"
 if ([string]::IsNullOrWhiteSpace($userInput)) {
     $userInput = "Y"
 }
 if ($userInput -match '^[Yy]$') {
-    Write-Host "`n• 🟡 • Waiting to delete up user.js (5 seconds).."
-    Start-Sleep -Seconds 5
+    Write-Host "`n• • • Waiting to delete up user.js (5 seconds).."
+    Start-Sleep -Seconds 3
     Remove-Item "$profilePath\user.js" -Force
     Write-Host "`n• 🟢 • Firefox successfully restarted. user.js cleaned up. Enjoy the theme.`n"
 } else {
-    Write-Host "`n• 🟡 • Firefox successfully restarted. No user.js applied. Enjoy the theme.`n"
+    Write-Host "`n• 🟢 • Firefox successfully restarted. No user.js applied. Enjoy the theme.`n"
 }
 
-Read-Host "Press ENTER to close this script."
+Read-Host "• • • Press ENTER to close this script."
 
 }
 
