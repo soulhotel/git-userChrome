@@ -8,11 +8,19 @@ echo -e "\n\033[3m• • • gituserChrome (Linux, Mac Version).\033[0m"
 echo -e "\033[3m• • • This script can be used to download any userChrome Theme via the gitTheme variable.\033[0m"
 echo -e "• • • gitTheme selected: $gitTheme, now choose a profile..\n"
 
-# List all folders in ~/.mozilla/firefox/ --------------------------
+# List all folders in typical OS directory -------------------------
 
+# Mac?
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    profile_base="$HOME/Library/Application Support/Firefox/Profiles"
+else
+    profile_base="$HOME/.mozilla/firefox"
+fi
+
+# Filter Profiles
 profiles=()
 index=1
-for dir in ~/.mozilla/firefox/*/; do
+for dir in "$profile_base"/*/; do
     folder_name=$(basename "$dir")
     case "$folder_name" in
         "Crash Reports"|"Pending Pings"|"Profile Groups")
@@ -23,12 +31,13 @@ for dir in ~/.mozilla/firefox/*/; do
     profiles+=("$folder_name")
     index=$((index + 1))
 done
+
+# Select Profile
 echo
 read -p "• 🟡 • Which profile are we installing the theme into: " profile_choice
 clear
 selected_profile="${profiles[$((profile_choice - 1))]}"
-profile_path="$HOME/.mozilla/firefox/$selected_profile"
-
+profile_path="$profile_base/$selected_profile"
 
 # DOWNLOAD FF ULTIMA -----------------------------------------------
 
@@ -61,7 +70,7 @@ sleep 2 && clear
 
 # RESTART FIREFOX --------------------------------------------------
 
-echo "• • • Which Firefox are we working with today?"
+echo "• • • Which Firefox are we restarting?"
 echo
 echo "1 🟠 firefox"
 echo "2 🔵 firefox developer edition"
@@ -99,6 +108,7 @@ esac
 
 
 # CLEANUP USER.JS --------------------------
+echo "• • • Note: If your browser did not shut down, you most likely have it installed in an unusual place. Just restart your before cleaning up the user.js..."
 read -rp $'\n• • • Cleanup the user.js file from '"$selected_profile"'? [Y/n] ' apply_userjs
 apply_userjs=${apply_userjs:-Y}
 
