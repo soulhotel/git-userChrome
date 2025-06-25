@@ -81,24 +81,48 @@ read -p "• • • Which Firefox is used with $selected_profile: " firefox_cho
 clear
 case "$firefox_choice" in
   1)  # default firefox
-    pkill -9 -f "/usr/lib/firefox/firefox"
-    while pgrep -f "/usr/lib/firefox/firefox" >/dev/null; do sleep 0.5; done
-    nohup firefox >/dev/null 2>&1 &
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        pkill -9 -f "Firefox.app"
+        while pgrep -f "Firefox.app" >/dev/null; do sleep 0.5; done
+        open -a "Firefox"
+    else
+        pkill -9 -f "/usr/lib/firefox/firefox"
+        while pgrep -f "/usr/lib/firefox/firefox" >/dev/null; do sleep 0.5; done
+        nohup firefox >/dev/null 2>&1 &
+    fi
     ;;
   2)  # dev edition
-    pkill -9 -f "/usr/lib/firefox-developer-edition/firefox"
-    while pgrep -f "/usr/lib/firefox-developer-edition/firefox" >/dev/null; do sleep 0.5; done
-    nohup firefox-developer-edition >/dev/null 2>&1 &
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        pkill -9 -f "Firefox Developer Edition.app"
+        while pgrep -f "Firefox Developer Edition.app" >/dev/null; do sleep 0.5; done
+        open -a "Firefox Developer Edition"
+    else
+        pkill -9 -f "/usr/lib/firefox-developer-edition/firefox"
+        while pgrep -f "/usr/lib/firefox-developer-edition/firefox" >/dev/null; do sleep 0.5; done
+        nohup firefox-developer-edition >/dev/null 2>&1 &
+    fi
     ;;
   3)  # nightly
-    pkill -9 -f "/usr/lib/firefox-nightly/firefox"
-    while pgrep -f "/usr/lib/firefox-nightly/firefox" >/dev/null; do sleep 0.5; done
-    nohup firefox-nightly >/dev/null 2>&1 &
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        pkill -9 -f "Firefox Nightly.app"
+        while pgrep -f "Firefox Nightly.app" >/dev/null; do sleep 0.5; done
+        open -a "Firefox Nightly"
+    else
+        pkill -9 -f "/usr/lib/firefox-nightly/firefox"
+        while pgrep -f "/usr/lib/firefox-nightly/firefox" >/dev/null; do sleep 0.5; done
+        nohup firefox-nightly >/dev/null 2>&1 &
+    fi
     ;;
-  4)  # librewolf - assuming path or just name is enough
-    pkill -9 -f librewolf
-    while pgrep -f librewolf >/dev/null; do sleep 0.5; done
-    nohup librewolf >/dev/null 2>&1 &
+  4)  # librewolf
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        pkill -9 -f "LibreWolf.app"
+        while pgrep -f "LibreWolf.app" >/dev/null; do sleep 0.5; done
+        open -a "LibreWolf"
+    else
+        pkill -9 -f librewolf
+        while pgrep -f librewolf >/dev/null; do sleep 0.5; done
+        nohup librewolf >/dev/null 2>&1 &
+    fi
     ;;
   *)
     echo "• 🔴 • Invalid choice. Exiting."
@@ -108,18 +132,21 @@ esac
 
 
 # CLEANUP USER.JS --------------------------
-echo "• • • Note: If your browser did not shut down, you most likely have it installed in an unusual place. Just restart your before cleaning up the user.js..."
+echo
+echo "• • • Note: If your browser did not shutdown and restart, it is most likely installed in an unusual place. Just restart your browser before cleaning up the user.js..."
 read -rp $'\n• • • Cleanup the user.js file from '"$selected_profile"'? [Y/n] ' apply_userjs
 apply_userjs=${apply_userjs:-Y}
 
-if [[ "$apply_userjs" =~ ^[Yy]$ ]]; then
+if [[ "$apply_userjs" == "" || "$apply_userjs" == "Y" || "$apply_userjs" == "y" ]]; then
     echo -e "\n• • • Waiting to remove user.js (5 seconds).."
-    sleep 4 && rm "$profile_path/user.js"
+    sleep 3 && echo "• • • Waiting just in case (3 seconds)..."
+    sleep 1 && echo "• • • A copy of the user.js can be found in the chrome folder, if you ever need it..."
+    sleep 1 && rm "$profile_path/user.js"
     echo -e "\n• 🟢 • Firefox restarted. user.js cleaned up. Enjoy the theme."
 else
-    echo -e "\n• 🟢 • Firefox restarted. No user.js applied. Enjoy the theme."
+    echo -e "\n• 🟢 • Firefox restarted. No user.js applied. Enjoy the theme.\n"
 fi
 
 echo
-read -p "• • • Press ENTER to close this script."
+read -p "• • • You can press ENTER or Close this script."
 
