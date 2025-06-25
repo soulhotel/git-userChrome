@@ -37,6 +37,26 @@ The script will fully automate the theme installation process by:
 - Cleaning up user.is if applicable.
 - It waits for running commands to finish before moving on to the next.
 
+## Don't have Git? (open a terminal and paste the command):
+
+<ins>Git for Mac</ins>
+```
+xcode-select --install
+git --version
+```
+<ins>Git for Arch</ins>
+```
+sudo pacman -S git
+```
+<ins>Git for Deb derivatives</ins>
+```
+sudo apt install git
+```
+<ins>Git for Windows</ins>
+```
+https://gitforwindows.org/
+```
+
 ## Previews
 
 ###### *WINDOWS PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=yc3xRjVgR8A&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2))
@@ -44,6 +64,10 @@ https://github.com/user-attachments/assets/f93c548e-54f4-4e9e-96db-15753e60171c
 
 ###### *LINUX PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=Cb350ZcjUu0&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=1))
 https://github.com/user-attachments/assets/1306eedf-f1ec-400d-8e0d-9e0021b4a5e5
+
+##### *MAC PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=jDK7I6Ph3gU))
+
+- https://www.youtube.com/watch?v=jDK7I6Ph3gU
 
 ######  *INSTALLING ANY THEME PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=lrBIZQqGGdU&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2))
 https://github.com/user-attachments/assets/9ce82177-08f5-4a50-9dfa-2f8a222b8fa5
