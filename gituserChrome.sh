@@ -44,7 +44,7 @@ clear
 selected_profile="${profiles[$((profile_choice - 1))]}"
 profile_base="${profile_paths[$((profile_choice - 1))]}"
 profile_path="$profile_base/$selected_profile"
-# Is Snap
+# Snap Check
 is_snap=0
 if [[ "$profile_base" == *"/snap/firefox/"* ]]; then
     is_snap=1
