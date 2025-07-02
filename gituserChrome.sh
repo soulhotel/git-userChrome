@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # THEME REPO -------------------------------------------------------
+
 gitTheme="${1:-https://github.com/soulhotel/FF-ULTIMA.git}"
 
 clear
@@ -10,34 +11,44 @@ echo -e "• • • gitTheme selected: $gitTheme, now choose a profile..\n"
 
 # List all folders in typical OS directory -------------------------
 
-# Mac?
+# Profile locations
 if [[ "$OSTYPE" == "darwin"* ]]; then
     profile_base="$HOME/Library/Application Support/Firefox/Profiles"
 else
     profile_base="$HOME/.mozilla/firefox"
+    profile_base_snap="$HOME/snap/firefox/common/.mozilla/firefox"
 fi
-
 # Filter Profiles
 profiles=()
+profile_paths=()
 index=1
-for dir in "$profile_base"/*/; do
-    folder_name=$(basename "$dir")
-    case "$folder_name" in
-        "Crash Reports"|"Pending Pings"|"Profile Groups")
-            continue
-            ;;
-    esac
-    echo "$index) $folder_name"
-    profiles+=("$folder_name")
-    index=$((index + 1))
+for base in "$profile_base" "$profile_base_snap"; do
+    [[ -d "$base" ]] || continue
+    for dir in "$base"/*/; do
+        folder_name=$(basename "$dir")
+        case "$folder_name" in
+            "Crash Reports"|"Pending Pings"|"Profile Groups")
+                continue
+                ;;
+        esac
+        echo "$index) $folder_name"
+        profiles+=("$folder_name")
+        profile_paths+=("$base")
+        index=$((index + 1))
+    done
 done
-
-# Select Profile
+# Select profile
 echo
 read -p "• 🟡 • Which profile are we installing the theme into: " profile_choice
 clear
 selected_profile="${profiles[$((profile_choice - 1))]}"
+profile_base="${profile_paths[$((profile_choice - 1))]}"
 profile_path="$profile_base/$selected_profile"
+# Is Snap
+is_snap=0
+if [[ "$profile_base" == *"/snap/firefox/"* ]]; then
+    is_snap=1
+fi
 
 # DOWNLOAD FF ULTIMA -----------------------------------------------
 
@@ -86,9 +97,17 @@ case "$firefox_choice" in
         while pgrep -f "Firefox.app" >/dev/null; do sleep 0.5; done
         open -a "Firefox"
     else
-        pkill -9 -f "/usr/lib/firefox/firefox"
-        while pgrep -f "/usr/lib/firefox/firefox" >/dev/null; do sleep 0.5; done
-        nohup firefox >/dev/null 2>&1 &
+        if [[ "$is_snap" -eq 1 ]]; then
+            echo "• • • Restarting Snap Firefox..."
+            pkill -9 firefox
+            while pgrep -f firefox >/dev/null; do sleep 0.5; done
+            nohup firefox >/dev/null 2>&1 &
+        else
+            echo "• • • Restarting regular Firefox..."
+            pkill -9 -f "/usr/lib/firefox/firefox"
+            while pgrep -f "/usr/lib/firefox/firefox" >/dev/null; do sleep 0.5; done
+            nohup firefox >/dev/null 2>&1 &
+        fi
     fi
     ;;
   2)  # dev edition
@@ -97,9 +116,17 @@ case "$firefox_choice" in
         while pgrep -f "Firefox Developer Edition.app" >/dev/null; do sleep 0.5; done
         open -a "Firefox Developer Edition"
     else
-        pkill -9 -f "/usr/lib/firefox-developer-edition/firefox"
-        while pgrep -f "/usr/lib/firefox-developer-edition/firefox" >/dev/null; do sleep 0.5; done
-        nohup firefox-developer-edition >/dev/null 2>&1 &
+        if [[ "$is_snap" -eq 1 ]]; then
+            echo "• • • There is no snap for Firefox Developer Edition."
+            echo "• • • Restarting default Dev Edition instead..."
+            pkill -9 firefox-developer-edition
+            while pgrep -f firefox-developer-edition >/dev/null; do sleep 0.5; done
+            nohup firefox-developer-edition >/dev/null 2>&1 &
+        else
+            pkill -9 -f "/usr/lib/firefox-developer-edition/firefox"
+            while pgrep -f "/usr/lib/firefox-developer-edition/firefox" >/dev/null; do sleep 0.5; done
+            nohup firefox-developer-edition >/dev/null 2>&1 &
+        fi
     fi
     ;;
   3)  # nightly
@@ -108,9 +135,17 @@ case "$firefox_choice" in
         while pgrep -f "Firefox Nightly.app" >/dev/null; do sleep 0.5; done
         open -a "Firefox Nightly"
     else
-        pkill -9 -f "/usr/lib/firefox-nightly/firefox"
-        while pgrep -f "/usr/lib/firefox-nightly/firefox" >/dev/null; do sleep 0.5; done
-        nohup firefox-nightly >/dev/null 2>&1 &
+        if [[ "$is_snap" -eq 1 ]]; then
+            echo "• • • There is no snap for Firefox Nightly."
+            echo "• • • Restarting regular Firefox instead..."
+            pkill -9 firefox
+            while pgrep -f firefox >/dev/null; do sleep 0.5; done
+            nohup firefox >/dev/null 2>&1 &
+        else
+            pkill -9 -f "/usr/lib/firefox-nightly/firefox"
+            while pgrep -f "/usr/lib/firefox-nightly/firefox" >/dev/null; do sleep 0.5; done
+            nohup firefox-nightly >/dev/null 2>&1 &
+        fi
     fi
     ;;
   4)  # librewolf
@@ -129,7 +164,6 @@ case "$firefox_choice" in
     exit 1
     ;;
 esac
-
 
 # CLEANUP USER.JS --------------------------
 echo
