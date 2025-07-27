@@ -74,8 +74,8 @@ if [ -f "chrome/user.js" ]; then
     echo "• • • user.js found, copying user.js to profile."
 fi
 echo -e "\n• • • Restarting Firefox in 3.."
-sleep 3 && echo "• • • Restarting Firefox in 2.."
-sleep 3 && echo "• • • Restarting Firefox in ..."
+sleep 1 && echo "• • • Restarting Firefox in 2.."
+sleep 1 && echo "• • • Restarting Firefox in ..."
 sleep 2 && clear
 
 
