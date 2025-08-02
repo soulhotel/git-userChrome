@@ -8,9 +8,9 @@
 
 ## Overview:
 
-A cross-platform gui for gituserChrome, written in python & QT, the goal is to create a lightweight frontend for browsing, managing, & installing userChrome themes onto any firefox profile, into any firefox install, all in about 1-3 clicks.
+A cross-platform gui for gituserChrome, python & QT. Goal is to create a lightweight frontend for everything userChrome. Browsing, managing, & installing userChrome themes onto any firefox profile, into any firefox install, all in maybe 1 to 3 clicks.
 
-> This is also my first attempt at making a gui for anything & first attempt at using python, so we'll see how this goes.. Source will be up once I settle on content structure.
+> This is also my first attempt at making a gui for anything & first attempt at using python, so we'll see how that goes.. Source will be up once I settle on content structure.
 
 ## Previews
 
