@@ -11,14 +11,13 @@ echo -e "• • • gitTheme selected: $gitTheme, now choose a profile..\n"
 
 # List all folders in typical OS directory -------------------------
 
-# Profile locations
 if [[ "$OSTYPE" == "darwin"* ]]; then
     profile_base="$HOME/Library/Application Support/Firefox/Profiles"
 else
     profile_base="$HOME/.mozilla/firefox"
     profile_base_snap="$HOME/snap/firefox/common/.mozilla/firefox"
 fi
-# Filter Profiles
+
 profiles=()
 profile_paths=()
 index=1
