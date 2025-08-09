@@ -6,6 +6,9 @@
 
 </div>
 
+>[!NOTE]
+> **gituserChrome is available as a standalone cross-platform script. And coming soon, a GUI.**
+
 ## How it Works:
 
 - With just <ins>**one**</ins> command. It can automate the installation of any userChrome theme.
@@ -26,9 +29,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "irm 'https://raw.githubu
 .\gituserChrome.ps1 -gitTheme "https://github.com/soulhotel/ff-ultima.git"
 ```
 
+###### *NEED GIT? (CLICK HERE)*
+```
+sudo pacman -S git                        # ARCH
+sudo apt install git                      # DEBIAN/UBUNTU
+xcode-select --install && git --version   # MAC
+https://gitforwindows.org/                # WINDOWS
+```
+
+
 ## What That Script Do?:
 
-The script will fully automate the installation process by:
+The standalone script can fully automate the installation process by:
 - Finding the Profile Folder.
 - Backing up any `existing chrome` folder into `chrome-datetime`.
 - Downloading the CSS Theme into `chrome/`
@@ -37,25 +49,12 @@ The script will fully automate the installation process by:
 - Restarting Firefox.
 - Cleaning up user.is if applicable.
 
-## Don't have Git? (open a terminal and paste the command):
+The GUI expands on that experience by:
+- Building every necessary variable into a config
+- That config is then passed into it's own dedicated automation script
+- The GUI can autoselect your most recently used profile
+- And you can browse for themes and select themes in-app. (fcss integration?)
 
-<ins>Git for Mac</ins>
-```
-xcode-select --install
-git --version
-```
-<ins>Git for Arch</ins>
-```
-sudo pacman -S git
-```
-<ins>Git for Deb derivatives</ins>
-```
-sudo apt install git
-```
-<ins>Git for Windows</ins>
-```
-https://gitforwindows.org/
-```
 
 ## Previews
 
