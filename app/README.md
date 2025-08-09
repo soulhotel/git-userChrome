@@ -1,4 +1,20 @@
+<div align="center">
+
+# Git userChrome..
+
+###### ...A tool to git userChrome Themes from anywhere.
+
+</div>
+
+## Overview:
+
+A cross-platform gui for gituserChrome, python & QT. Goal is to create a lightweight frontend for everything userChrome. Browsing, managing, & installing userChrome themes onto any firefox profile, into any firefox install, all in maybe 1 to 3 clicks.
+
+With PyQt6 | pyqt6-tools, this app can be run with `python main.py` for now.
+
+
 ![gu-ezgif com-optimize](https://github.com/user-attachments/assets/3bfa2aec-5e01-4d7f-97ef-008da76ca36c)
+
 
 <!--
 
