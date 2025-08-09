@@ -68,6 +68,3 @@ https://github.com/user-attachments/assets/1306eedf-f1ec-400d-8e0d-9e0021b4a5e5
 ##### *MAC PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=jDK7I6Ph3gU))
 
 - https://www.youtube.com/watch?v=jDK7I6Ph3gU
-
-######  *INSTALLING ANY THEME PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=lrBIZQqGGdU&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2))
-https://github.com/user-attachments/assets/9ce82177-08f5-4a50-9dfa-2f8a222b8fa5
