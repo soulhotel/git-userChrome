@@ -49,12 +49,11 @@ The standalone script can fully automate the installation process by:
 - Restarting Firefox.
 - Cleaning up user.is if applicable.
 
-The GUI expands on that experience by:
+The gui application expands on that experience by:
 - Building every necessary variable into a config
 - That config is then passed into it's own dedicated automation script
 - The GUI can autoselect your most recently used profile
 - And you can browse for themes and select themes in-app. (fcss integration?)
-
 
 ## Previews
 
