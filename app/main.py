@@ -1,9 +1,12 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtCore import QSettings, QResource, QFile, QTextStream, QPropertyAnimation, QEasingCurve, QUrl
 from PyQt6.QtGui import QDesktopServices
+from pathlib import Path
 import sys
 
-QResource.registerResource("ui/resources.rcc")
+resource_path = Path(__file__).parent / "ui" / "resources.rcc"
+QResource.registerResource(str(resource_path))
+stylesheet_path = Path(__file__).parent / "ui" / "mainwindow.qss"
 
 from ui.mainwindowui import Ui_MainWindow
 from src.getuserconfig import GetUserConfig
@@ -18,7 +21,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.load_stylesheet("ui/mainwindow.qss")
+        self.load_stylesheet(str(stylesheet_path))
         self.settings = QSettings(QSettings.Format.IniFormat,
                                 QSettings.Scope.UserScope,
                                 "gituserChrome")
