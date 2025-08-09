@@ -147,7 +147,7 @@ case "$firefox_choice" in
         fi
     fi
     ;;
-  4)  # librewolf
+  4)
     if [[ "$OSTYPE" == "darwin"* ]]; then
         pkill -9 -f "LibreWolf.app"
         while pgrep -f "LibreWolf.app" >/dev/null; do sleep 0.5; done
@@ -158,7 +158,7 @@ case "$firefox_choice" in
         nohup librewolf >/dev/null 2>&1 &
     fi
     ;;
-  *)
+  *) # zen and floorp eventually
     echo "• 🔴 • Invalid choice. Exiting."
     exit 1
     ;;
