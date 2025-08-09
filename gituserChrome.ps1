@@ -9,7 +9,6 @@ Write-Host "• • • gituserChrome (Windows Version)"
 Write-Host "• • • This script can be used to download any userChrome Theme via the gitTheme variable."
 Write-Host "• • • gitTheme selected: $gitTheme , now choose a profile..`n"
 
-# Get Firefox profile directories
 $profileRoot = "$env:APPDATA\Mozilla\Firefox\Profiles"
 $dirs = Get-ChildItem -Directory $profileRoot | Where-Object {
     $_.Name -notin @("Crash Reports", "Pending Pings", "Profile Groups")
