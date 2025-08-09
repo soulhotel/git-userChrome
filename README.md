@@ -8,8 +8,9 @@
 
 ## How it Works:
 
-- It can download any CSS theme by running <ins>**one**</ins> command (locally or online).
-- Using a themes repo as the argument/flag allows you to grab any theme via github, codeberg, etc.
+- With just <ins>**one**</ins> command. It can automate the installation of any userChrome theme.
+- Using a themes Homepage as the argument/flag allows you to grab any theme via github, codeberg, etc.
+- This process is well tested through users of my FF Ultima theme.
 ###### *LINUX & MAC (BASH)*
 ```
 bash <(curl -s https://raw.githubusercontent.com/soulhotel/git-userChrome/main/gituserChrome.sh) https://github.com/soulhotel/ff-ultima.git
@@ -27,7 +28,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "irm 'https://raw.githubu
 
 ## What That Script Do?:
 
-The script will fully automate the theme installation process by:
+The script will fully automate the installation process by:
 - Finding the Profile Folder.
 - Backing up any `existing chrome` folder into `chrome-datetime`.
 - Downloading the CSS Theme into `chrome/`
@@ -35,7 +36,6 @@ The script will fully automate the theme installation process by:
 - Applying user.js if applicable.
 - Restarting Firefox.
 - Cleaning up user.is if applicable.
-- It waits for running commands to finish before moving on to the next.
 
 ## Don't have Git? (open a terminal and paste the command):
 
