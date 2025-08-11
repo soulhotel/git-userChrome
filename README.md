@@ -2,67 +2,22 @@
 
 # Git userChrome..
 
-###### . . . a tool to get userChrome Themes from anywhere.
+###### ...A tool to git userChrome Themes from anywhere.
 
 </div>
 
->[!NOTE]
-> **gituserChrome is available as a standalone cross-platform script. And coming soon, a GUI.**
+## Overview:
 
-## How it Works:
+Cross-platform gui for gituserChrome. Goal is to create a lightweight frontend for everything userChrome. Browsing, managing, & installing userChrome themes onto any firefox profile, into any firefox install, all in maybe 1 to 3 clicks.
 
-- With just <ins>**one**</ins> command. It can automate the installation of any userChrome theme.
-- Using a themes Homepage as the argument/flag allows you to grab any theme via github, codeberg, etc.
-- This process is well tested through users of my FF Ultima theme.
-###### *LINUX & MAC (BASH)*
-```
-bash <(curl -s https://raw.githubusercontent.com/soulhotel/git-userChrome/main/gituserChrome.sh) https://github.com/soulhotel/ff-ultima.git
-```
-```
-./gituserChrome.sh https://github.com/soulhotel/ff-ultima.git
-```
-###### *WINDOWS (POWERSHELL)*
-```
-powershell -NoProfile -ExecutionPolicy Bypass -Command "irm 'https://raw.githubusercontent.com/soulhotel/git-userChrome/main/gituserChrome.ps1' | iex; Invoke-gituserChrome -gitTheme 'https://github.com/soulhotel/ff-ultima.git'"
-```
-```
-.\gituserChrome.ps1 -gitTheme "https://github.com/soulhotel/ff-ultima.git"
-```
+Built with tauri & vanilla js;
 
-###### *NEED GIT? (CLICK HERE)*
-```
-sudo pacman -S git                        # ARCH
-sudo apt install git                      # DEBIAN/UBUNTU
-xcode-select --install && git --version   # MAC
-https://gitforwindows.org/                # WINDOWS
-```
+<img width="3070" height="989" alt="image" src="https://github.com/user-attachments/assets/d81cf979-1821-4a46-8afb-d7f21161909c" />
 
 
-## What That Script Do?:
-
-The standalone script can fully automate the installation process by:
-- Finding the Profile Folder.
-- Backing up any `existing chrome` folder into `chrome-datetime`.
-- Downloading the CSS Theme into `chrome/`
-- Properly handle weird formats like `chrome/chrome` (double folders) from the downloaded theme.
-- Applying user.js if applicable.
-- Restarting Firefox.
-- Cleaning up user.is if applicable.
-
-The gui application expands on that experience by:
-- Building every necessary variable into a config
-- That config is then passed into it's own dedicated automation script
-- The GUI can autoselect your most recently used profile
-- And you can browse for themes and select themes in-app. (fcss integration?)
-
-## Previews
-
-###### *WINDOWS PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=yc3xRjVgR8A&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2))
-https://github.com/user-attachments/assets/f93c548e-54f4-4e9e-96db-15753e60171c
-
-###### *LINUX PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=Cb350ZcjUu0&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=1))
-https://github.com/user-attachments/assets/1306eedf-f1ec-400d-8e0d-9e0021b4a5e5
-
-##### *MAC PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=jDK7I6Ph3gU))
-
-- https://www.youtube.com/watch?v=jDK7I6Ph3gU
+<!--
+- What enticed me to try tauri: Once it came time to build the qt iteration of gui, I skipped building for linux because I already knew building there would be easy. I went to Windows to produce a build. I was met with headaches.
+- Moving over to tauri was easy, I created the basic html, css, for the application in 1 day, maybe 7 hours total. Now I just have to convert the exact same functionality that I already established.
+- Also I dont need to "build" a toggle button. Win.
+- I'm loving this work flow so far.
+-->
