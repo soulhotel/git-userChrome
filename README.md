@@ -15,6 +15,15 @@ Built with pyqt & pyqt6-tools; the app is mostly complete, except for a "setting
 ![gu-ezgif com-optimize](https://github.com/user-attachments/assets/3bfa2aec-5e01-4d7f-97ef-008da76ca36c)
 
 
+
+
+
+https://github.com/user-attachments/assets/79da038a-6cc8-46e3-aeff-0e8a99433c37
+
+
+
+
+
 <!--
 - This is pretty much first attempt at making a gui for anything & first attempt at using python. So we'll see how this goes..
 - My approach is a bit on the easy side, 99% of the ui was made in qtdesigner, so I pretty much skipped the how-to create part & focus more on assigning functionality, eventually I'll need to revisit this and learn, because the overall sizing of elements in the scrollable widget need work
