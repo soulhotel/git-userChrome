@@ -1,19 +1,16 @@
 <div align="center">
 
 # Git userChrome..
-
-###### . . . a tool to get userChrome Themes from anywhere.
-
 </div>
 
->[!NOTE]
-> **gituserChrome is available as a standalone cross-platform script. And coming soon, a GUI.**
+## Overview
 
-## How it Works:
+These are standalone scripts for gituserChrome.
 
 - With just <ins>**one**</ins> command. It can automate the installation of any userChrome theme.
 - Using a themes Homepage as the argument/flag allows you to grab any theme via github, codeberg, etc.
 - This process is well tested through users of my FF Ultima theme.
+
 ###### *LINUX & MAC (BASH)*
 ```
 bash <(curl -s https://raw.githubusercontent.com/soulhotel/git-userChrome/main/gituserChrome.sh) https://github.com/soulhotel/ff-ultima.git
@@ -38,9 +35,9 @@ https://gitforwindows.org/                # WINDOWS
 ```
 
 
-## What That Script Do?:
+## More Info
 
-The standalone script can fully automate the installation process by:
+The script can fully automate the installation process by:
 - Finding the Profile Folder.
 - Backing up any `existing chrome` folder into `chrome-datetime`.
 - Downloading the CSS Theme into `chrome/`
