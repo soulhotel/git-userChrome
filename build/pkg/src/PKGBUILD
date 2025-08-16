@@ -1,0 +1,12 @@
+pkgname=gituserchrome
+pkgver=1.0
+pkgrel=1
+pkgdesc="An automation tool to git userChrome themes."
+arch=('x86_64')
+license=('MIT')
+source=(gituserChrome appicon.png)
+sha256sums=(d612166f9a899765076d8b9a390bc3b5ceffcd13efbddae4b3ee17f6f4b42c49 c7ea61a96bd86b493f1d4b7d64d044abb2238fdfe3d33c74aa81c6615f0db62c)
+package() {
+    install -Dm755 "$srcdir/gituserChrome" "$pkgdir/usr/bin/gituserChrome"
+    install -Dm644 "$srcdir/appicon.png" "$pkgdir/usr/share/icons/hicolor/256x256/apps/gituserChrome.png"
+}

@@ -193,3 +193,65 @@ EOF
     mv "$RPMDIR/RPMS/x86_64/$APP_BINARY-$APP_VERSION-1.x86_64.rpm" "$BUILD_DIR/bin/"
     echo "RPM package created: $BUILD_DIR/bin/$APP_BINARY-$APP_VERSION-1.x86_64.rpm"
 fi
+
+
+echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
+cd "$PROJECT_ROOT" && echo "Working Dir: $PROJECT_ROOT"
+echo -e "\nDo you want to build an Arch package [Y/n] "
+read -r arch_answer
+
+if [[ "$arch_answer" =~ ^[Yy]$ ]]; then
+    BUILD_DIR="$PROJECT_ROOT/build"
+    PKGDIR="$BUILD_DIR/pkg"
+    mkdir -p "$PKGDIR/src" "$PKGDIR/pkg"
+    WAILS_JSON="$PROJECT_ROOT/wails.json"
+    APP_NAME=$(jq -r '.info.productName' "$WAILS_JSON")
+    APP_BINARY=$(jq -r '.outputfilename' "$WAILS_JSON")
+    APP_VERSION=$(jq -r '.info.productVersion' "$WAILS_JSON")
+    APP_DESC=$(jq -r '.info.comments' "$WAILS_JSON")
+    BIN_SRC="$BUILD_DIR/bin/$APP_BINARY"
+    cp "$BIN_SRC" "$PKGDIR/src/$APP_BINARY"
+
+    SRC_FILES=("$APP_BINARY")
+    if [ -f "$BUILD_DIR/appicon.png" ]; then
+        cp "$BUILD_DIR/appicon.png" "$PKGDIR/src/appicon.png"
+        SRC_FILES+=("appicon.png")
+    fi
+    if [ -f "$BUILD_DIR/$APP_BINARY.desktop" ]; then
+        cp "$BUILD_DIR/$APP_BINARY.desktop" "$PKGDIR/src/$APP_BINARY.desktop"
+        SRC_FILES+=("$APP_BINARY.desktop")
+    fi
+
+    SHA_LIST=()
+    for f in "${SRC_FILES[@]}"; do
+        sha=$(sha256sum "$PKGDIR/src/$f" | cut -d ' ' -f1)
+        SHA_LIST+=("$sha")
+    done
+
+    cat > "$PKGDIR/src/PKGBUILD" <<EOF
+pkgname=${APP_BINARY,,}
+pkgver=$APP_VERSION
+pkgrel=1
+pkgdesc="$APP_DESC"
+arch=('x86_64')
+license=('MIT')
+source=(${SRC_FILES[@]})
+sha256sums=(${SHA_LIST[@]})
+package() {
+    install -Dm755 "\$srcdir/$APP_BINARY" "\$pkgdir/usr/bin/$APP_BINARY"
+EOF
+
+    if [ -f "$PKGDIR/src/appicon.png" ]; then
+        echo "    install -Dm644 \"\$srcdir/appicon.png\" \"\$pkgdir/usr/share/icons/hicolor/256x256/apps/$APP_BINARY.png\"" >> "$PKGDIR/src/PKGBUILD"
+    fi
+    if [ -f "$PKGDIR/src/$APP_BINARY.desktop" ]; then
+        echo "    install -Dm644 \"\$srcdir/$APP_BINARY.desktop\" \"\$pkgdir/usr/share/applications/$APP_BINARY.desktop\"" >> "$PKGDIR/src/PKGBUILD"
+    fi
+
+    echo "}" >> "$PKGDIR/src/PKGBUILD"
+
+    cd "$PKGDIR/src"
+    makepkg -f --noconfirm
+    cp *.pkg.tar.zst "$BUILD_DIR/bin/"
+    echo "Arch package created: $BUILD_DIR/bin/$(ls $BUILD_DIR/bin/*.pkg.tar.zst | xargs -n1 basename)"
+fi
