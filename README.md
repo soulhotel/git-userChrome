@@ -8,10 +8,11 @@
 
 </div>
 
-### Overview:
-
 >[!NOTE]
 > **As of August 16, 2025. gituserChrome is available as both a standalone script or a GUI**
+
+
+### Overview:
 
 gituserChrome automates the installation of userChrome themes. It handles downloading, saving themes, and managing them between profiles and different flavors of Firefox (Firefox variants, Librewolf, Zen, FLoorp). With just <ins>**one**</ins> command (or 1 click). It can automate the installation process. Using a themes Homepage as the argument/flag allows you to grab any theme via github, codeberg, etc. This process is safe and smart ([see more](https://github.com/soulhotel/git-userChrome?tab=readme-ov-file#previews) about the order of operations below). The process is also well tested & vetted through users of my [FF Ultima](https://github.com/soulhotel/FF-ULTIMA) theme.
 
