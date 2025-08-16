@@ -1,8 +1,0 @@
-# i do not want to mess around with piping virt envs yet, and being on arch.. gotta work with the least resistance of what's available.. so this is how i build.
-
-designer6 ui/mainwindow.ui
-pyuic6 ui/mainwindow.ui -o ui/mainwindowui.py
-/usr/lib/qt6/rcc -binary ui/resources.qrc -o ui/resources.rcc
-python main.py
-
-pyuic6 ui/mainwindow.ui -o ui/mainwindowui.py && /usr/lib/qt6/rcc -binary ui/resources.qrc -o ui/resources.rcc && python main.py
