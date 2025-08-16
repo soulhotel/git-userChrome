@@ -4,6 +4,8 @@ build/darwin
 build/windows
 build/AppDir
 build/deb
+build/pkg
+build/rpm
 *.zip
 .DS_Store
 
