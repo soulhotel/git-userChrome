@@ -127,3 +127,69 @@ EOF
     "$AIT" "$APPDIR" "$OUTPUT"
     echo "AppImage created: $OUTPUT"
 fi
+
+
+echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
+cd "$PROJECT_ROOT" && echo "Working Dir: $PROJECT_ROOT"
+echo -e "\nMake sure the working directory is project root...\n"
+echo -e "\nDo you want to build an RPM package [Y/n] "
+read -r rpm_answer
+
+if [[ "$rpm_answer" =~ ^[Yy]$ ]]; then
+    BUILD_DIR="$PROJECT_ROOT/build"
+    RPMDIR="$BUILD_DIR/rpm"
+    WAILS_JSON="$PROJECT_ROOT/wails.json"
+    APP_NAME=$(jq -r '.info.productName' "$WAILS_JSON")
+    APP_BINARY=$(jq -r '.outputfilename' "$WAILS_JSON")
+    APP_VERSION=$(jq -r '.info.productVersion' "$WAILS_JSON")
+    APP_DESC=$(jq -r '.info.comments' "$WAILS_JSON")
+    BIN_SRC="$BUILD_DIR/bin/$APP_BINARY"
+    if [ ! -f "$WAILS_JSON" ]; then
+        echo "Error: Cannot find wails.json at $WAILS_JSON" && exit 1
+    fi
+    if [ ! -f "$BIN_SRC" ]; then
+        echo "Error: Cannot find binary at $BIN_SRC" && exit 1
+    fi
+    rm -rf "$RPMDIR"
+    mkdir -p "$RPMDIR/BUILD" "$RPMDIR/RPMS" "$RPMDIR/SOURCES" "$RPMDIR/SPECS" "$RPMDIR/SRPMS"
+    mkdir -p "$RPMDIR/usr/bin"
+    cp "$BIN_SRC" "$RPMDIR/usr/bin/$APP_BINARY"
+    chmod 755 "$RPMDIR/usr/bin/$APP_BINARY"
+    if [ -f "$BUILD_DIR/appicon.png" ]; then
+        mkdir -p "$RPMDIR/usr/share/icons/hicolor/256x256/apps"
+        cp "$BUILD_DIR/appicon.png" "$RPMDIR/usr/share/icons/hicolor/256x256/apps/$APP_BINARY.png"
+    fi
+
+    SPEC_FILE="$RPMDIR/SPECS/$APP_BINARY.spec"
+cat > "$SPEC_FILE" <<EOF
+Name: $APP_BINARY
+Version: $APP_VERSION
+Release: 1%{?dist}
+Summary: $APP_DESC
+License: MIT
+URL: https://github.com/soulhotel/git-userChrome
+Group: Applications/Utilities
+BuildArch: x86_64
+
+%description
+$APP_DESC
+
+%install
+mkdir -p %{buildroot}/usr/bin
+cp -p $RPMDIR/usr/bin/$APP_BINARY %{buildroot}/usr/bin/
+mkdir -p %{buildroot}/usr/share/icons/hicolor/256x256/apps
+cp -p $RPMDIR/usr/share/icons/hicolor/256x256/apps/$APP_BINARY.png %{buildroot}/usr/share/icons/hicolor/256x256/apps/
+
+%files
+/usr/bin/$APP_BINARY
+/usr/share/icons/hicolor/256x256/apps/$APP_BINARY.png
+
+%changelog
+* $(date +"%a %b %d %Y") Jonnie <soulhotel@pm.me> - $APP_VERSION-1
+- Initial RPM release
+EOF
+
+    rpmbuild --define "_topdir $RPMDIR" -bb "$SPEC_FILE"
+    mv "$RPMDIR/RPMS/x86_64/$APP_BINARY-$APP_VERSION-1.x86_64.rpm" "$BUILD_DIR/bin/"
+    echo "RPM package created: $BUILD_DIR/bin/$APP_BINARY-$APP_VERSION-1.x86_64.rpm"
+fi
