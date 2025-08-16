@@ -4,6 +4,8 @@ build/darwin
 build/windows
 build/AppDir
 build/deb
+build/pkg
+build/rpm
 *.zip
 .DS_Store
 
@@ -18,7 +20,7 @@ frontend/dist/
 # the current working directory is "git-userChrome" (project directory)
 # COMMENT OUT BELOW WHEN PUSHING TO MAIN
 
-dev
+#dev
 
 # Logs
 
