@@ -252,29 +252,81 @@ func findFirefoxs() map[string]string {
 		"Zen Browser":               {"zen"},
 		"Floorp":                    {"floorp"},
 	}
-
+	linuxPath := map[string][]string{
+		"Firefox":                   {"firefox.desktop"},
+		"Firefox Developer Edition": {"firefox-developer-edition.desktop", "firefox_developer_edition.desktop", "firefox developer edition.desktop"},
+		"Firefox Nightly":           {"firefox-nightly.desktop", "firefox_nightly.desktop", "firefox nightly.desktop"},
+		"Librewolf":                 {"librewolf.desktop", "Librewolf.desktop"},
+		"Zen Browser":               {"zen.desktop", "Zen.desktop"},
+		"Floorp":                    {"floorp.desktop"},
+	}
 	detected := make(map[string]string)
 	for browser, names := range firefoxBrowsers {
 		detected[browser] = ""
 		found := false
-
 		switch gruntime.GOOS {
 		case "linux":
-			// usr/lib most consistent for restarting firefox later on
-			possiblePaths := []string{}
-			for _, name := range names {
-				possiblePaths = append(possiblePaths,
-					"/usr/lib/"+name+"/firefox",
-					"/usr/bin/"+name,
-					"/usr/local/bin/"+name,
-					filepath.Join(os.Getenv("HOME"), "bin", name),
-				)
+			// the desktop files will provide the most accurate executable path
+			desktopDirs := []string{
+				"/usr/share/applications",
+				"/usr/local/share/applications",
+				filepath.Join(os.Getenv("HOME"), ".local/share/applications"),
 			}
-			for _, p := range possiblePaths {
-				if fi, err := os.Stat(p); err == nil && !fi.IsDir() {
-					detected[browser] = p
-					found = true
+			for _, dir := range desktopDirs {
+				entries, err := os.ReadDir(dir)
+				if err != nil {
+					continue
+				}
+				for _, candidate := range linuxPath[browser] {
+					for _, entry := range entries {
+						if entry.IsDir() {
+							continue
+						}
+						if strings.EqualFold(entry.Name(), candidate) {
+							path := filepath.Join(dir, entry.Name())
+							data, err := os.ReadFile(path)
+							if err != nil {
+								continue
+							}
+							lines := strings.Split(string(data), "\n")
+							for _, line := range lines {
+								if strings.HasPrefix(line, "Exec=") {
+									execPath := strings.Fields(strings.TrimPrefix(line, "Exec="))[0]
+									detected[browser] = execPath
+									found = true
+									break
+								}
+							}
+						}
+						if found {
+							break
+						}
+					}
+					if found {
+						break
+					}
+				}
+				if found {
 					break
+				}
+			}
+			// otherwise, just default to common places, lib first
+			if !found {
+				possiblePaths := []string{}
+				for _, name := range names {
+					possiblePaths = append(possiblePaths,
+						"/usr/lib/"+name+"/firefox",
+						"/usr/bin/"+name,
+						"/usr/local/bin/"+name,
+						filepath.Join(os.Getenv("HOME"), "bin", name),
+					)
+				}
+				for _, p := range possiblePaths {
+					if fi, err := os.Stat(p); err == nil && !fi.IsDir() {
+						detected[browser] = p
+						found = true
+						break
+					}
 				}
 			}
 
@@ -340,7 +392,6 @@ func findFirefoxs() map[string]string {
 				}
 			}
 		}
-
 		// Only if not found yet, fall back to exec.LookPath for all OS
 		if !found {
 			for _, name := range names {
@@ -352,7 +403,6 @@ func findFirefoxs() map[string]string {
 			}
 		}
 	}
-
 	return detected
 }
 

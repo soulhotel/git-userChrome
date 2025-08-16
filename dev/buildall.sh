@@ -263,5 +263,5 @@ EOF
     cp *.pkg.tar.zst "$BUILD_DIR/bin/"
     LATEST_PKG=$(ls -1t *.pkg.tar.zst | head -n1)
     echo "Arch package created: $BUILD_DIR/bin/$(ls $BUILD_DIR/bin/*.pkg.tar.zst | xargs -n1 basename)"
-    echo -e "to install it (for now): sudo pacman -U build/bin$LATEST_PKG"
+    echo -e "to install it (for now): sudo pacman -U build/bin/$LATEST_PKG"
 fi
