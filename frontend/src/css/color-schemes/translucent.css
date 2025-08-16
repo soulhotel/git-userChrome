@@ -25,8 +25,8 @@
         --forward-icon: url("../../ui/icon/arrowright.png");
         --copy-icon: url("../../ui/icon/copy.svg");
         --openlink-icon: url("../../ui/icon/openlink.svg");
-        --status-icon: url("ui/icon/loading2.gif");
-        --trash-icon: url("ui/icon/trash.svg");
+        --status-icon: url("../../ui/icon/loading2.gif");
+        --trash-icon: url("../../ui/icon/trash.svg");
     }
 }
 
@@ -56,7 +56,7 @@
         --forward-icon: url("../../ui/icon/arrowright.png");
         --copy-icon: url("../../ui/icon/copy.svg");
         --openlink-icon: url("../../ui/icon/openlink.svg");
-        --status-icon: url("ui/icon/loading2.gif");
-        --trash-icon: url("ui/icon/trash.svg");
+        --status-icon: url("../../ui/icon/loading2.gif");
+        --trash-icon: url("../../ui/icon/trash.svg");
     }
 }

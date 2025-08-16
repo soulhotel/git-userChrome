@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=git userChrome
+Name[en_US]=git userChrome
+Comment[en_US]=An automation tool to git userChrome themes
+Comment=An automation tool to git userChrome themes
+Exec="/usr/local/bin/git userChrome"
+Icon="path/to/appicon.png"
+Terminal=false
+Type=Application
+Categories=Utility;

@@ -1,6 +1,5 @@
 # build output
 
-build/bin
 build/darwin
 build/windows
 *.zip
@@ -12,6 +11,8 @@ node_modules
 node_modules/
 frontend/dist
 frontend/dist/
+build/*.sh
+build/ait.AppImage
 
 # Logs
 
