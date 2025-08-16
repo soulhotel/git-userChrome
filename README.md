@@ -62,5 +62,10 @@ The standalone script fully automates the installation process by:
 ###### *LINUX PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=Cb350ZcjUu0&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=1))
 <!-- https://github.com/user-attachments/assets/1306eedf-f1ec-400d-8e0d-9e0021b4a5e5 -->
 
-##### *MAC PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=jDK7I6Ph3gU))
+###### *MAC PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=jDK7I6Ph3gU))
+
+###### *GUI on WINDOWS*
+
+<img width="1561" height="725" alt="Screenshot_20250815_212950" src="https://github.com/user-attachments/assets/203de812-cdda-4c51-b867-1ba43bebff16" />
+
 
