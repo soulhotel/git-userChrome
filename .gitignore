@@ -1,4 +1,5 @@
 # build output
+
 build/darwin
 build/windows
 build/AppDir
@@ -7,18 +8,20 @@ build/deb
 .DS_Store
 
 # development and dependencies
+
 node_modules
 node_modules/
 frontend/dist
 frontend/dist/
-# the build.sh scripts are intended to be used assuming
+
+# the build all script is intended to be used assuming
 # the current working directory is "git-userChrome" (project directory)
 # COMMENT OUT BELOW WHEN PUSHING TO MAIN
-build/*.sh
-build/ait.AppImage
-# todo other scripts
 
-# logs
+dev
+
+# Logs
+
 logs
 *.log
 tmp/
