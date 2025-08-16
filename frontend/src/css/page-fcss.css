@@ -1,0 +1,50 @@
+/* page 2 fcss store ///////////////////////////////////////////////////////////// */
+
+/* baseline always assumes a 1:1 container viewpoint */
+/* .main .content * { border: 1px red solid } */
+
+.main .content .nav-fcss {
+    display: inline;
+    height: calc(100% - var(--header-height));
+    .page-header {
+        min-height: 5%;
+        background: rgb(30, 41, 59);
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        & .icon {
+            cursor: pointer;
+            margin-inline: 28px;
+            &:hover {
+                transform: scale(0.98);
+            }
+        }
+    }
+    .page-container {
+        height: 95%;
+        overflow-y: auto;
+    }
+    .page-footer {
+        justify-items: center;
+        height: 0;
+    }
+    .page-header, .page-container, .page-footer {
+        align-content: center;
+        padding: 0;
+    }
+    iframe {
+        width: 100%;
+        height:100%;
+        border: none;
+    }
+}
+.content:has(.page.nav-fcss[selected]) {
+    /* [44] lets try something out */
+    iframe, .nav-fcss {
+        border-radius: 12px; /* unsure how well border radius will perform on other platforms */
+    } 
+    /* [44] but it can be somewhat enforced background to match. */
+    background-color: rgb(30, 41, 59) !important;
+    border-radius: 12px;
+    overflow: hidden;
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "REFERENCE",
+  "version": "0.1.0",
+  "identifier": "com.soulhotel.reference",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "git-userchrome",
+        "width": 1200,
+        "height": 800,
+        "minWidth": 850,
+        "minHeight": 600,
+        "decorations": true,
+        "fullscreen": false,
+        "resizable": true,
+        "maximized": false,
+        "transparent": false,
+        "visible": true,
+        "alwaysOnTop": false,
+        "center": false,
+        "x": 0, "y": 0
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

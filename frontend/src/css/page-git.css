@@ -1,0 +1,73 @@
+/* page 3 git /////////////////////////////////////////////////////////////////// */
+
+/* baseline always assumes a 1:1 container viewpoint */
+/* .main .content * { border: 1px red solid } */
+
+.main .content .nav-git {
+    /* display: contents; */
+    display: inline;
+    height: calc(100% - var(--header-height));
+    .page-header {
+        min-height: 100px;
+        margin: 1% 2%;
+        font-size: calc(var(--app-font-size) - 3px);
+    }
+    .page-container {
+        display:flex;
+        min-height:0px;
+        overflow-y: auto;
+    }
+    .page-footer {
+        justify-items: right;
+        min-height: 100px;
+        margin: 2% 2%;
+        display: flex;
+    }
+    .page-header, .page-container, .page-footer {
+        align-content: center;
+        padding: 0px 40px;
+    }
+    .page-container {
+        justify-content: center;
+    }
+}
+
+.main .content .nav-git {
+    .gitConsole {
+        width: 100%;
+        margin: 5px;
+        min-width: 500px;
+        min-height: 300px;
+        padding: 1em;
+        border-radius: var(--btn-border-radius);
+        background: rgba(100,100,100,0.1);
+        border: none;
+        color: var(--app-fgc);
+    }
+    .statusicon {
+        margin-top:2px;
+    }
+    .statusicon, #status {
+        margin-right: 20px;
+    }
+    #toggleConsoleBtn {
+        justify-self: right;
+        margin-left: auto;
+        align-content: center;
+        background: var(--btn-bgc);
+        box-shadow: var(--btn-box-shadow);
+        border-radius: var(--btn-border-radius);
+        width: fit-content;
+        height: 35px;
+        padding: 5px 20px;
+        user-select: none; -webkit-user-select: none;
+        &:hover {
+            background-color: color-mix(in srgb, var(--btn-bgc) 80%, rgb(25,25,25));
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+}

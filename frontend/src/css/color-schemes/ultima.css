@@ -1,0 +1,28 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+        --app-bgc: rgb(43, 42, 51);
+        --app-fgc: white;
+        --app-icon: url("../ui/logo/ultima.l.png");
+        --setup-icon: url("../ui/icon/setup.svg");
+        --fcss-icon: url("../ui/logo/fcs.png");
+        --git-icon: url("../ui/logo/github.png");
+        --settings-icon: url("../ui/icon/settings.svg");
+        --scheme-filter: brightness(0) saturate(100%) invert(100%);
+        --btn-bgc: rgb(35, 35, 42);
+        --btn-selected-bgc: color-mix(in srgb, var(--btn-bgc) 80%, transparent);
+        --btn-box-shadow: 0.15rem 0.3rem 0.3rem -0.1rem rgba(0,0,0,0.4);
+        --btn-outline-color: 1px solid color-mix(in srgb, white 10%, transparent);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --app-bgc: rgb(250, 250, 255);
+        --app-fgc: rgb(25,25,25);
+        --app-icon: url("../ui/logo/ultima.d2.png");
+        --scheme-filter: brightness(0) saturate(100%);
+        --btn-bgc: rgb(232, 232, 236);
+        --btn-selected-bgc: color-mix(in srgb, var(--btn-bgc) 80%, transparent);
+        --btn-box-shadow: 0.1rem 0.3rem 0.4rem -0.1rem rgba(75,75,75,0.3);
+    }
+}

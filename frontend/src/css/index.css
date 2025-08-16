@@ -1,0 +1,145 @@
+
+/* using this for the initiation splash */
+
+:root {
+    --init-font-size: 22px;
+}
+
+:root:has(.initializing) body {
+    background-color: transparent;
+}
+
+body {
+    color: var(--app-fgc);
+    min-height: 100vh;
+    min-width:100vw;
+    margin: 0;
+    display:flex;
+    /* justify-content: center;
+    align-items: center;
+    overflow: hidden; */
+}
+
+#init {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;z-index:1000;
+    top:0;bottom:0;left:0;right:0;
+    & * {
+        font-size: var(--init-font-size);
+    }
+    & #status, & #logo, & #log, & #error {
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 500px;
+        min-height:50px;
+        text-align: center;
+        user-select: none; -webkit-user-select: none;
+    }
+}
+#init {
+    & #loading, & #init_text {
+        display: inline-block;
+        margin-inline: 3px;
+    }
+}
+
+#init {
+    & #loading {
+        background-image: url(../ui/icon/loading2.gif);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: var(--init-font-size);
+        height: var(--init-font-size);
+        margin-top: 2px;
+        color: transparent;
+    }
+    & #logo {
+        background-image: url(../ui/logo/ultima.dark.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        width: 300px;
+        height: 300px;
+        color: transparent;
+    }
+    & #log {
+        font-style: italic;
+        font-size: calc(var(--init-font-size) - 2px);
+        color: color-mix(in srgb, var(--app-fgc) 30%, transparent);
+    }
+    & #error {
+        font-style: italic;
+        font-size: calc(var(--init-font-size) - 4px);
+        color: color-mix(in srgb, var(--app-fgc) 70%, red);
+    }
+}
+
+
+:root:has(.initializing) .sidebar,
+:root:has(.initializing) .main {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+.initializing {
+    animation: blurGrow 1.3s ease-in-out forwards;
+}
+.doneinit {
+    animation: blurGrowFade 0.9s ease-in-out forwards;
+}
+.initted {
+    display: none !important;
+}
+@keyframes blurGrow {
+    0% {
+        transform: scale(0.7);
+        filter: blur(36px);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1);
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
+@keyframes blurGrowFade {
+    0% {
+        transform: scale(1);
+        filter: blur(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(10);
+        filter: blur(100px);
+        opacity: 0;
+    }
+}
+
+/*
+    <div id="init">
+        <div id="status"><div id="loading">o</div><div id="init_text">Gitting everything ready...</div></div>
+        <div id="logo">o</div>
+        <div id="log">Searching for configuration...</div>
+    </div>
+*/
+/*
+@keyframes blurGrowFade {
+    0% {
+        transform: scale(1);
+        filter: blur(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(10);
+        filter: blur(10px);
+        opacity: 0;
+    }
+}
+#init:hover {
+    animation: blurGrowFade 1s ease-in-out forwards;
+}
+*/

@@ -1,0 +1,21 @@
+# build output
+
+build/bin
+build/darwin
+build/windows
+*.zip
+.DS_Store
+
+# development and dependencies
+
+node_modules
+node_modules/
+frontend/dist
+frontend/dist/
+
+# Logs
+
+logs
+*.log
+tmp/
+npm-debug.log*

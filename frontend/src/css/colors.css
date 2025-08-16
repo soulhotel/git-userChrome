@@ -1,0 +1,43 @@
+@import url('color-schemes/system.css');
+@import url('color-schemes/translucent.css');
+
+.icon  {
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        width: var(--init-font-size);
+        height: var(--init-font-size);
+        user-select: none;
+}
+
+.csicon        { background-image: var(--cs-icon) }
+.ficon         { background-image: var(--f-icon) }
+.fdeicon       { background-image: var(--fde-icon) }
+.fnicon        { background-image: var(--fn-icon) }
+.libreicon     { background-image: var(--libre-icon) }
+.zenicon       { background-image: var(--zen-icon) }  
+.floorpicon    { background-image: var(--floorp-icon) }
+.profileicon   { background-image: var(--profile-icon) }
+.fileicon      { background-image: var(--filesearch-icon) }
+.backicon      { background-image: var(--back-icon) }
+.forwardicon   { background-image: var(--forward-icon) }
+.copyicon      { background-image: var(--copy-icon) }
+.openlinkicon  { background-image: var(--openlink-icon) }
+.statusicon    { background-image: var(--status-icon) }
+.trashicon     { background-image: var(--trash-icon) }
+
+.profileicon,
+.fileicon,
+.backicon,
+.forwardicon,
+.openlinkicon,
+.copyicon,
+.trashicon
+{ 
+    filter: var(--scheme-filter);
+}
+
+* {
+    scrollbar-width: thin !important;
+    scrollbar-color:rgba(70, 70, 80, 0.2) rgba(5,5,5, 0.0) !important;
+}

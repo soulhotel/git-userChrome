@@ -1,0 +1,106 @@
+/* page 1 //////////////////////////////////////////////////////////////////////// */
+
+/* baseline always assumes a 1:1 container viewpoint */
+/* .main .content * { border: 1px red solid } */
+
+.main .content .nav-setup {
+    /* display: contents; */
+    display: inline;
+    user-select: none;
+    -webkit-user-select: none;
+    .page-header {
+        min-height: 100px;
+    }
+    .page-container {
+        min-height: 400px;
+        overflow-y: auto;
+    }
+    .page-footer {
+        justify-items: right;
+        min-height: 100px;
+    }
+    .page-header, .page-container, .page-footer {
+        align-content: center;
+        padding: 0px 40px;
+    }
+    .page-container {
+        justify-content: center;
+    }
+}
+
+.main .content .nav-setup {
+    .conf {
+        display: flex;
+        padding: 10px;
+        margin-inline: auto;
+        min-width: 450px;
+        max-width:1000px;
+        height: 50px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    /* .conf .q {
+        max-width: 300px;
+        margin-right: auto;
+    } */
+    .conf .select {
+        min-width: 300px;
+        height: 35px;
+        padding: 0.5em;
+        background-color: var(--btn-bgc);
+        color: var(--app-fgc);
+        appearance: none;
+        border: none;
+        border-radius: calc(var(--btn-border-radius) - 10px);
+        box-shadow: var(--btn-box-shadow);
+        transition: width 0.5s ease, min-width 0.5s ease;
+        &:hover {
+            background-color: color-mix(in srgb, var(--btn-bgc) 80%, rgb(25,25,25));
+            cursor: pointer;
+        }
+        text-align-last:center;
+        -moz-text-align-last: center;
+        text-align: center;
+    }
+    .submit-git-btn {
+        justify-self: right;
+        margin-left: auto;
+        align-content: center;
+        background: var(--btn-bgc);
+        box-shadow: var(--btn-box-shadow);
+        border-radius: var(--btn-border-radius);
+        width: fit-content;
+        height: 35px;
+        padding: 5px 20px;
+        user-select: none; -webkit-user-select: none;
+        &:hover {
+            background-color: color-mix(in srgb, var(--btn-bgc) 80%, rgb(25,25,25));
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+}
+
+#gitis .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: red !important;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+
+#git_is {
+    pointer-events: none !important;
+}
+#git_is:not(:checked) + .slider {
+    cursor: progress;
+    background-color: rgb(189, 104, 104) !important;
+}

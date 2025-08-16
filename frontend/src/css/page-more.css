@@ -1,0 +1,52 @@
+/* page 4 settings //////////////////////////////////////////////////////////////// */
+
+/* baseline always assumes a 1:1 container viewpoint */
+/* .main .content * { border: 1px red solid } */
+
+.main .content .nav-more {
+    /* display: contents; */
+    display: inline;
+    .page-header {
+        min-height: 150px;
+        max-height: 375px;
+        display: flex;
+        gap: 40px;
+        overflow: hidden;
+        font-size: calc(var(--app-font-size) - 4px);
+        & label {
+            border-radius: var(--btn-border-radius);
+            background-color: var(--btn-bgc);
+            padding: 40px;
+
+        }
+    }
+    .page-container {
+        height: auto;
+        overflow-y: auto;
+        font-size: calc(var(--app-font-size) - 2px);
+    }
+    .page-header, .page-container, .page-footer {
+        padding: 0px 40px;
+    }
+}
+
+.main .content .nav-more .page-container {
+    display: block;
+    padding: 40px;
+    .l {
+        display: flex;
+        align-content: center;
+        padding: 20px 40px;
+        gap: 10px;
+    }
+    label {
+        min-width: 200px;
+    }
+    a {
+        color: var(--app-fgc);
+        font-style: italic;
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+} 

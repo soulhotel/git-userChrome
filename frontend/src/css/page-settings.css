@@ -1,0 +1,159 @@
+/* page 4 settings //////////////////////////////////////////////////////////////// */
+
+/* baseline always assumes a 1:1 container viewpoint */
+/* .main .content * { border: 1px red solid } */
+
+.main .content .nav-settings {
+    /* display: contents; */
+    display: inline;
+    .page-header {
+        min-height: 100px;
+    }
+    .page-container {
+        min-height: 400px;
+        overflow-y: auto;
+    }
+    .page-footer {
+        justify-items: right;
+        min-height: 100px;
+    }
+    .page-header, .page-container, .page-footer {
+        align-content: center;
+        padding: 0px 40px;
+    }
+    .page-container {
+        justify-content: center;
+    }
+}
+
+.main .content .nav-settings {
+    .conf {
+        display: flex;
+        padding: 10px;
+        margin-inline: auto;
+        min-width: 450px;
+        max-width:1200px;
+        height: 50px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .conf .q {
+        max-width: 300px;
+        margin-right: auto;
+    }
+    .conf .select {
+        min-width: 475px;
+        height: 35px;
+        padding: 0.5em;
+        background-color: var(--btn-bgc);
+        box-shadow: var(--btn-box-shadow);
+        color: var(--app-fgc);
+        appearance: none;
+        text-align: center;
+        border: none;
+        margin-left: 5px;
+        border-radius: calc(var(--btn-border-radius) - 10px);
+        transition: width 0.5s ease, min-width 0.5s ease;
+        &:hover {
+            background-color: color-mix(in srgb, var(--btn-bgc) 80%, rgb(25,25,25));
+            cursor: pointer;
+        }
+        text-align-last:center;
+        -moz-text-align-last: center;
+        text-align: center;
+    }
+    .conf input {
+        min-width: 435px;
+        height: 35px;
+        padding: 0.5em;
+        appearance: none;
+        background-color: var(--btn-bgc);
+        border-radius: calc(var(--btn-border-radius) - 10px);
+        transition: width 0.5s ease, min-width 0.5s ease;
+        color: var(--app-fgc);
+        border: none;
+        margin-left: 5px;
+    }
+    #fsFBinary, #fsFdBinary, #fsFnBinary,
+    #fsLBinary, #fsZBinary, #fsFloorpBinary, #fsProfile {
+        min-width: 35px;
+        height: 35px;
+        padding: 0.5em;
+        margin-left: 3px;
+        text-align:center;
+        align-content:center;
+        border-radius: calc(var(--btn-border-radius) - 10px);
+        background-color: color-mix(in srgb, var(--btn-bgc) 70%, transparent);
+        box-shadow: var(--btn-box-shadow);
+        cursor: pointer; user-select: none; -webkit-user-select: none;
+        &:hover { background-color: color-mix(in srgb, var(--btn-bgc) 80%, rgb(25,25,25)); }
+        &:active { border: var(--btn-outline-color); }
+        & .icon {
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            width: var(--app-font-size);
+            height: var(--app-font-size);            
+        }
+    }
+    .conf #selectTheme {
+        min-width: 400px;
+        height: 35px;
+        padding: 0.5em;
+    }
+    .conf #addTheme, .conf #removeTheme {
+        min-width: 35px;
+        height: 35px;
+        margin-left: 3px;
+        text-align:center;
+        align-content:center;
+        border-radius: calc(var(--btn-border-radius) - 10px);
+        background-color: color-mix(in srgb, var(--btn-bgc) 70%, transparent);
+        box-shadow: var(--btn-box-shadow);
+        cursor: pointer; user-select: none; -webkit-user-select: none;
+        &:hover { background-color: color-mix(in srgb, var(--btn-bgc) 80%, rgb(25,25,25)); }
+        &:active { border: var(--btn-outline-color); }
+        & .trashicon {
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            margin-left:7px; margin-top:2px;
+            filter: sepia(100%) saturate(500%) hue-rotate(300deg);
+        }
+    }
+    .conf #openConf, .conf #resetConf {
+        min-width: 235px;
+        height: 35px;
+        margin-left: 3px;
+        text-align:center;
+        align-content:center;
+        border-radius: calc(var(--btn-border-radius) - 10px);
+        transition: width 0.5s ease, min-width 0.5s ease;
+        background-color: color-mix(in srgb, var(--btn-bgc) 70%, transparent);
+        box-shadow: var(--btn-box-shadow);
+        cursor: pointer; user-select: none; -webkit-user-select: none;
+        &:hover { background-color: color-mix(in srgb, var(--btn-bgc) 80%, rgb(25,25,25)); }
+        &:active { border: var(--btn-outline-color); }
+    }
+    .icon {opacity: 0.5;}
+    #saveSettingsBtn {
+        justify-self: right;
+        margin-left: auto;
+        align-content: center;
+        background: var(--btn-bgc);
+        box-shadow: var(--btn-box-shadow);
+        border-radius: var(--btn-border-radius);
+        width: fit-content;
+        height: 35px;
+        padding: 5px 20px;
+        user-select: none; -webkit-user-select: none;
+        &:hover {
+            background-color: color-mix(in srgb, var(--btn-bgc) 80%, rgb(25,25,25));
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+}

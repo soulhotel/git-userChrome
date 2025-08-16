@@ -1,0 +1,22 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "git userChrome",
+  "outputfilename": "git userChrome",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dir": "frontend/src",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "wailsjsdir": "frontend",
+  "author": {
+    "name": "soulhotel.offline",
+    "email": "155501797+soulhotel@users.noreply.github.com"
+  },
+  "info": {
+      "companyName": "soulhotel",
+      "productName": "git userChrome",
+      "productVersion": "1.0",
+      "copyright": "© 2025 soulhotel. Free and Open Source under the MIT License.",
+      "comments": "An automation tool to git userChrome themes."
+  }
+}
