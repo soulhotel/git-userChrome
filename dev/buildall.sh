@@ -217,10 +217,18 @@ if [[ "$arch_answer" =~ ^[Yy]$ ]]; then
         cp "$BUILD_DIR/appicon.png" "$PKGDIR/src/appicon.png"
         SRC_FILES+=("appicon.png")
     fi
-    if [ -f "$BUILD_DIR/$APP_BINARY.desktop" ]; then
-        cp "$BUILD_DIR/$APP_BINARY.desktop" "$PKGDIR/src/$APP_BINARY.desktop"
-        SRC_FILES+=("$APP_BINARY.desktop")
-    fi
+    DESKTOP_FILE="$PKGDIR/src/$APP_BINARY.desktop"
+    cat > "$DESKTOP_FILE" <<EOF
+[Desktop Entry]
+Name=$APP_NAME
+Comment=$APP_DESC
+Exec=/usr/bin/$APP_BINARY
+Icon=$APP_BINARY
+Terminal=false
+Type=Application
+Categories=Utility;
+EOF
+    SRC_FILES+=("$APP_BINARY.desktop")
 
     SHA_LIST=()
     for f in "${SRC_FILES[@]}"; do
@@ -253,5 +261,7 @@ EOF
     cd "$PKGDIR/src"
     makepkg -f --noconfirm
     cp *.pkg.tar.zst "$BUILD_DIR/bin/"
+    LATEST_PKG=$(ls -1t *.pkg.tar.zst | head -n1)
     echo "Arch package created: $BUILD_DIR/bin/$(ls $BUILD_DIR/bin/*.pkg.tar.zst | xargs -n1 basename)"
+    echo -e "to install it (for now): sudo pacman -U build/bin$LATEST_PKG"
 fi
