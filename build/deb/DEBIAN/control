@@ -1,7 +1,0 @@
-Package: gituserchrome
-Version: 1.0
-Section: utils
-Priority: optional
-Architecture: amd64
-Maintainer: soulhotel.offline <155501797+soulhotel@users.noreply.github.com>
-Description: An automation tool to git userChrome themes.
