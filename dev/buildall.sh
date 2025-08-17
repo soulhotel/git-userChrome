@@ -80,7 +80,7 @@ read -r appimage_answer
 if [[ "$appimage_answer" =~ ^[Yy]$ ]]; then
     BUILD_DIR="$PROJECT_ROOT/build"
     APPDIR="$BUILD_DIR/AppDir"
-    AIT="$PROJECT_ROOT/dev/ait.AppImage"
+    AIT="$PROJECT_ROOT/dev/appimagetool-x86_64.AppImage"
     WAILS_JSON="$PROJECT_ROOT/wails.json"
     APP_NAME=$(jq -r '.info.productName' "$WAILS_JSON")
     APP_BINARY=$(jq -r '.outputfilename' "$WAILS_JSON")

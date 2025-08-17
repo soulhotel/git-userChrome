@@ -21,5 +21,5 @@ cp -p /home/j/Documents/projects/git-userChrome/build/rpm/usr/share/icons/hicolo
 /usr/share/icons/hicolor/256x256/apps/gituserChrome.png
 
 %changelog
-* Sat Aug 16 2025 Jonnie <soulhotel@pm.me> - 1.0-1
+* Sun Aug 17 2025 Jonnie <soulhotel@pm.me> - 1.0-1
 - Initial RPM release
