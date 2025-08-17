@@ -24,8 +24,10 @@ body:
       label: "This issue is related to"
       description: "Specify what this issue is related to"
       options:
+        - 
         - Running the application
-        - Theme won't download
+        - Script related issue
+        - Theme wont download
         - Browsing webview
         - Something else
     validations:
