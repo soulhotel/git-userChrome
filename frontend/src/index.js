@@ -221,8 +221,15 @@ async function connectConfig() {
     }
     if (themeDropdown) {
         themeDropdown.innerHTML = "";
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "-- Select a theme --";
+        placeholder.disabled = true;
+        placeholder.selected = !cfg.selected_theme;
+        themeDropdown.appendChild(placeholder);
         Object.keys(cfg.saved_themes).forEach(theme => {
-            const opt = document.createElement("option"); opt.value = theme;
+            const opt = document.createElement("option");
+            opt.value = theme;
             opt.textContent = theme;
             if (cfg.selected_theme === theme) opt.selected = true;
             themeDropdown.appendChild(opt);
