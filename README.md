@@ -9,7 +9,7 @@
 </div>
 
 >[!NOTE]
-> **As of August 16, 2025. gituserChrome is available as both a standalone script or a GUI**
+> **As of August 16, 2025. gituserChrome is available as both a standalone script or a GUI.** The Application is still in it's early stages, while operations are successfully tested on Windows & Linux, it won't be the forefront until all platforms verified.
 
 
 ## Overview
