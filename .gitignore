@@ -5,8 +5,8 @@
 # build/pkg
 # build/rpm
 
-# node_modules
-# node_modules/
+node_modules
+node_modules/
 # frontend/dist
 # frontend/dist/
 
