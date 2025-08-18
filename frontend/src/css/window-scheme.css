@@ -1,0 +1,19 @@
+/* color schemes are more like appearance themes, this justifies both color
+and border-radius for buttons to be flexible and different between them  */
+
+@import url('color-schemes/system.css');
+@import url('color-schemes/translucent.css');
+
+/* styles for switches, buttons, etc */
+
+@import url('styles/icons.css');
+@import url('styles/buttons.css');
+@import url('styles/switches.css');
+@import url('styles/inputs-and-selects.css');
+
+/* */
+
+* {
+    scrollbar-width: thin !important;
+    scrollbar-color:rgba(70, 70, 80, 0.2) rgba(5,5,5, 0.0) !important;
+}

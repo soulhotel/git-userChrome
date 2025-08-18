@@ -28,3 +28,7 @@ logs
 *.log
 tmp/
 npm-debug.log*
+
+# project specific
+
+frontend/src/ui/design files

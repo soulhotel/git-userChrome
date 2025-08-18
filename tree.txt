@@ -1,0 +1,215 @@
+.
+├── app.go
+├── build
+│   ├── AppDir
+│   │   ├── AppRun -> usr/bin/gituserChrome
+│   │   ├── .DirIcon -> gituserChrome.png
+│   │   ├── gituserChrome.desktop
+│   │   ├── gituserChrome.png
+│   │   └── usr
+│   │       ├── bin
+│   │       │   └── gituserChrome
+│   │       └── share
+│   │           ├── applications
+│   │           │   └── gituserChrome.desktop
+│   │           └── icons
+│   │               └── hicolor
+│   │                   └── 256x256
+│   │                       └── apps
+│   │                           └── gituserChrome.png
+│   ├── appicon.png
+│   ├── bin
+│   │   ├── gituserChrome
+│   │   ├── gituserchrome-1.0-1-x86_64.pkg.tar.zst
+│   │   ├── gituserChrome-1.0-1.x86_64.rpm
+│   │   ├── gituserChrome-1.0_amd64.AppImage
+│   │   ├── gituserchrome-1.0_amd64.deb
+│   │   ├── gituserchrome-1.1-1-x86_64.pkg.tar.zst
+│   │   ├── gituserChrome-1.1-1.x86_64.rpm
+│   │   ├── gituserChrome-1.1_amd64.AppImage
+│   │   ├── gituserchrome-1.1_amd64.deb
+│   │   ├── gituserChrome.desktop
+│   │   └── gituserChrome.exe
+│   ├── darwin
+│   │   ├── Info.dev.plist
+│   │   └── Info.plist
+│   ├── deb
+│   │   ├── DEBIAN
+│   │   │   └── control
+│   │   └── usr
+│   │       ├── local
+│   │       │   └── bin
+│   │       │       └── gituserChrome
+│   │       └── share
+│   │           ├── applications
+│   │           │   └── gituserChrome.desktop
+│   │           └── icons
+│   │               └── hicolor
+│   │                   └── 256x256
+│   │                       └── apps
+│   │                           └── gituserChrome.png
+│   ├── pkg
+│   │   ├── pkg
+│   │   └── src
+│   │       ├── appicon.png
+│   │       ├── gituserChrome
+│   │       ├── gituserchrome-1.0-1-x86_64.pkg.tar.zst
+│   │       ├── gituserchrome-1.1-1-x86_64.pkg.tar.zst
+│   │       ├── gituserChrome.desktop
+│   │       ├── pkg
+│   │       │   └── gituserchrome
+│   │       │       ├── .BUILDINFO
+│   │       │       ├── .MTREE
+│   │       │       ├── .PKGINFO
+│   │       │       └── usr
+│   │       │           ├── bin
+│   │       │           │   └── gituserChrome
+│   │       │           └── share
+│   │       │               ├── applications
+│   │       │               │   └── gituserChrome.desktop
+│   │       │               └── icons
+│   │       │                   └── hicolor
+│   │       │                       └── 256x256
+│   │       │                           └── apps
+│   │       │                               └── gituserChrome.png
+│   │       ├── PKGBUILD
+│   │       └── src
+│   │           ├── appicon.png -> /home/j/Documents/projects/git-userChrome/build/pkg/src/appicon.png
+│   │           ├── gituserChrome -> /home/j/Documents/projects/git-userChrome/build/pkg/src/gituserChrome
+│   │           └── gituserChrome.desktop -> /home/j/Documents/projects/git-userChrome/build/pkg/src/gituserChrome.desktop
+│   ├── README.md
+│   ├── rpm
+│   │   ├── BUILD
+│   │   ├── RPMS
+│   │   │   └── x86_64
+│   │   ├── SOURCES
+│   │   ├── SPECS
+│   │   │   └── gituserChrome.spec
+│   │   ├── SRPMS
+│   │   └── usr
+│   │       ├── bin
+│   │       │   └── gituserChrome
+│   │       └── share
+│   │           └── icons
+│   │               └── hicolor
+│   │                   └── 256x256
+│   │                       └── apps
+│   │                           └── gituserChrome.png
+│   └── windows
+│       ├── icon.ico
+│       ├── info.json
+│       ├── installer
+│       │   ├── project.nsi
+│       │   └── wails_tools.nsh
+│       └── wails.exe.manifest
+├── dev
+│   ├── appimagetool-x86_64.AppImage
+│   └── buildall.sh
+├── frontend
+│   ├── package.json
+│   ├── package.json.md5
+│   ├── package-lock.json
+│   ├── src
+│   │   ├── conf
+│   │   │   ├── promo.json
+│   │   │   └── tauri.conf.json
+│   │   ├── css
+│   │   │   ├── color-schemes
+│   │   │   │   ├── system.css
+│   │   │   │   ├── translucent.css
+│   │   │   │   └── ultima.css
+│   │   │   ├── imports.css
+│   │   │   ├── index.css
+│   │   │   ├── page-fcss.css
+│   │   │   ├── page-git.css
+│   │   │   ├── page-more.css
+│   │   │   ├── page-settings.css
+│   │   │   ├── page-setup.css
+│   │   │   ├── styles
+│   │   │   │   ├── buttons.css
+│   │   │   │   ├── icons.css
+│   │   │   │   ├── inputs-and-selects.css
+│   │   │   │   └── switches.css
+│   │   │   ├── window-compact.css
+│   │   │   ├── window-scheme.css
+│   │   │   └── window-structure.css
+│   │   ├── index.html
+│   │   ├── index.js
+│   │   ├── ui
+│   │   │   ├── banner
+│   │   │   │   ├── brand banner.png
+│   │   │   │   ├── fcss banner.png
+│   │   │   │   ├── ffultima banner.png
+│   │   │   │   ├── mask.png
+│   │   │   │   ├── reddit banner.png
+│   │   │   │   └── trim
+│   │   │   ├── button
+│   │   │   │   ├── toggle1.gif
+│   │   │   │   └── toggle2.gif
+│   │   │   ├── design files
+│   │   │   │   ├── brand banner.ora
+│   │   │   │   ├── brand logo2.xcf
+│   │   │   │   ├── fcss banner.ora
+│   │   │   │   ├── ffultima banner.ora
+│   │   │   │   ├── logo.png
+│   │   │   │   ├── md1.ora
+│   │   │   │   ├── md2.ora
+│   │   │   │   └── reddit banner.ora
+│   │   │   ├── icon
+│   │   │   │   ├── arrowleft.png
+│   │   │   │   ├── arrowright.png
+│   │   │   │   ├── checkmark-icon8.svg
+│   │   │   │   ├── copy.svg
+│   │   │   │   ├── cs.png
+│   │   │   │   ├── folder.png
+│   │   │   │   ├── folder.svg
+│   │   │   │   ├── home.png
+│   │   │   │   ├── loading2.gif
+│   │   │   │   ├── loading.gif
+│   │   │   │   ├── openlink.svg
+│   │   │   │   ├── profile.svg
+│   │   │   │   ├── refresh.png
+│   │   │   │   ├── settings.svg
+│   │   │   │   ├── setup.svg
+│   │   │   │   └── trash.svg
+│   │   │   └── logo
+│   │   │       ├── fcs.png
+│   │   │       ├── firefoxd.png
+│   │   │       ├── firefoxmono.png
+│   │   │       ├── firefoxn.png
+│   │   │       ├── firefox.png
+│   │   │       ├── floorp.png
+│   │   │       ├── github.png
+│   │   │       ├── librewolf.png
+│   │   │       ├── linux.png
+│   │   │       ├── mac.png
+│   │   │       ├── ultima.dark.png
+│   │   │       ├── ultima.light.png
+│   │   │       ├── ultima.old.png
+│   │   │       ├── windows.png
+│   │   │       └── zen.png
+│   │   └── windowrules.js
+│   ├── vite.config.js
+│   └── wailsjs
+│       ├── go
+│       │   ├── main
+│       │   │   ├── App.d.ts
+│       │   │   └── App.js
+│       │   └── models.ts
+│       └── runtime
+│           ├── package.json
+│           ├── runtime.d.ts
+│           └── runtime.js
+├── .gitignore
+├── go.mod
+├── go.sum
+├── LICENSE
+├── main.go
+├── README.md
+├── scripts
+│   ├── gituserChrome.ps1
+│   └── gituserChrome.sh
+├── tree.txt
+└── wails.json
+
+72 directories, 141 files

@@ -577,6 +577,52 @@ func (a *App) ResetConfig() error {
 	}
 	return nil
 }
+func (a *App) DeleteConfig() error {
+	configPath := filepath.Join(getConfigDir(), "config.json")
+	if _, err := os.Stat(configPath); err == nil {
+		if err := os.Remove(configPath); err != nil {
+			return err
+		}
+	}
+	exe, err := os.Executable()
+	if err != nil {
+		return err
+	}
+	cmd := exec.Command(exe)
+	cmd.Start()
+	os.Exit(0)
+	return nil
+}
+func (a *App) OpenProfiles() error {
+	profileBase, _, err := findFirefoxProfiles()
+	if err != nil {
+		return err
+	}
+	var cmd *exec.Cmd
+	switch gruntime.GOOS {
+	case "windows":
+		cmd = exec.Command("explorer", profileBase)
+	case "darwin":
+		cmd = exec.Command("open", profileBase)
+	default: // Linux and others
+		cmd = exec.Command("xdg-open", profileBase)
+	}
+	return cmd.Start()
+}
+
+func (a *App) SelectFile() (string, error) {
+	fileBytes, err := wruntime.OpenFileDialog(a.ctx, wruntime.OpenDialogOptions{
+		Title: "Select a firefox executable to target",
+	})
+	if err != nil {
+		return "", err
+	}
+	if len(fileBytes) == 0 {
+		return "", nil
+	}
+	// [56] convert []bytes to strings!!!! remember.
+	return string(fileBytes), nil
+}
 
 // //////////////////////////////////////////////////////////////////////////////////
 

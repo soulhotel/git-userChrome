@@ -222,7 +222,7 @@ async function connectConfig() {
     if (themeDropdown) {
         themeDropdown.innerHTML = "";
         const placeholder = document.createElement("option");
-        placeholder.value = "";
+        placeholder.value = "placeholder";
         placeholder.textContent = "-- Select a theme --";
         placeholder.disabled = true;
         placeholder.selected = !cfg.selected_theme;
@@ -426,13 +426,34 @@ function attachFileSelectors() {
 
         btn.addEventListener("click", async () => {
             const path = await window.go.main.App.SelectFile();
-            if (path) inputEl.value = path;
+            if (!path) return;
+            if (path) {
+                const cfg = window.globalConfig;
+                if (!cfg) return;
+                if (firefoxKey) {
+                    inputEl.value = path;
+                    cfg.firefoxs[firefoxKey] = path;
+                    await window.go.main.App.WriteToConfig(`firefoxs.${firefoxKey}`, path);
+                } else if (key === "fsProfile") {
+                    const folderName = path.split(/[/\\]/).pop();
+                    inputEl.value = folderName;
+                    cfg.selected_profile = folderName;
+                    await window.go.main.App.WriteToConfig("selected_profile", folderName);
+                    const lastSep = Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\"));
+                    const folderBase = lastSep >= 0 ? path.slice(0, lastSep) : path;
+                    cfg.profile_base = folderBase;
+                    await window.go.main.App.WriteToConfig("profile_base", folderBase);
+                }
+                console.log(`Updated config for ${key}:`, path);
+            }
         });
     }
 }
 
 const openConfBtn = document.getElementById("openConf");
 const resetConfBtn = document.getElementById("resetConf");
+const deleteConfBtn = document.getElementById("deleteConf");
+const openProfilesBtn = document.getElementById("openProfiles");
 
 openConfBtn?.addEventListener("click", async () => {
     try {
@@ -441,7 +462,6 @@ openConfBtn?.addEventListener("click", async () => {
         console.error("Error opening config:", err);
     }
 });
-
 resetConfBtn?.addEventListener("click", async () => {
     try {
         await window.go.main.App.ResetConfig();
@@ -452,6 +472,20 @@ resetConfBtn?.addEventListener("click", async () => {
     } catch (err) {
         console.error("Error resetting config:", err);
     }    
+});
+deleteConfBtn?.addEventListener("click", async () => {
+    try {
+        await window.go.main.App.DeleteConfig(); /*reinit*/
+    } catch (err) {
+        console.error("Error deleting config:", err);
+    }
+});
+openProfilesBtn?.addEventListener("click", async () => {
+    try {
+        await window.go.main.App.OpenProfiles();
+    } catch (err) {
+        console.error("Error opening profile path", err);
+    }
 });
 
 function attachsaveSettingsBtn() {

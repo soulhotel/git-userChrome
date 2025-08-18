@@ -14,6 +14,10 @@ export function CreateConfig() {
   return window['go']['main']['App']['CreateConfig']();
 }
 
+export function DeleteConfig() {
+  return window['go']['main']['App']['DeleteConfig']();
+}
+
 export function GetOS() {
   return window['go']['main']['App']['GetOS']();
 }
@@ -30,6 +34,10 @@ export function OpenConfig() {
   return window['go']['main']['App']['OpenConfig']();
 }
 
+export function OpenProfiles() {
+  return window['go']['main']['App']['OpenProfiles']();
+}
+
 export function ProcessGit() {
   return window['go']['main']['App']['ProcessGit']();
 }
@@ -40,6 +48,10 @@ export function RemoveFromConfig(arg1) {
 
 export function ResetConfig() {
   return window['go']['main']['App']['ResetConfig']();
+}
+
+export function SelectFile() {
+  return window['go']['main']['App']['SelectFile']();
 }
 
 export function SendtoApp() {

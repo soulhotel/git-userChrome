@@ -7,9 +7,9 @@
     <script type="module" src="./index.js"></script>
     <title>git userChrome</title>
 </head>
-<body>
+<body color-scheme="system">
 
-    <div id="init" class="initializing">
+    <div id="init" class="initted">
         <div id="logo">...</div>
         <div id="status"><div id="loading">...</div><div id="init_text">Gitting everything ready ...</div></div>
         <div id="log">Searching for configuration</div>
@@ -18,25 +18,25 @@
 
     <div class="sidebar">
         <div class="header">
-            <div class="logo"></div><div class="label">gituserChrome</div>
+            <div class="logo"></div><label class="label">gituserChrome</label>
         </div>
         <div class="content">
             <div class="navigation">
-                <div class="nav-setup nav-entry" selected>
+                <button class="nav-setup nav-entry" selected>
                     <div class="logo"></div><div class="label">Setup userChrome</div><div class="indicator">•</div>
-                </div>
-                <div class="nav-fcss nav-entry">
+                </button>
+                <button class="nav-fcss nav-entry">
                     <div class="logo"></div><div class="label">Firefox CSS Store</div><div class="indicator">•</div>
-                </div>
-                <div class="nav-git nav-entry">
+                </button>
+                <button class="nav-git nav-entry">
                     <div class="logo"></div><div class="label">git</div><div class="indicator">•</div>
-                </div>
-                <div class="nav-settings nav-entry">
+                </button>
+                <button class="nav-settings nav-entry">
                     <div class="logo"></div><div class="label">Settings</div><div class="indicator">•</div>
-                </div>
-                <div class="nav-more nav-entry">
+                </button>
+                <button class="nav-more nav-entry">
                     <div class="logo"></div><div class="label">More..</div><div class="indicator">•</div>
-                </div>    
+                </button>    
             </div>           
         </div>        
     </div>
@@ -44,28 +44,28 @@
     <div class="main">
         <div class="header">
             <div class="cross-navigation">
-                <div class="nav-sidebar">☰</div><div class="logo"></div><div class="label">gituserChrome</div>     
+                <button class="nav-sidebar">☰</button><div class="logo"></div><div class="label">gituserChrome</div>     
             </div>  
             <div class="navigation">
-                <div class="nav-setup nav-entry" selected>
+                <button class="nav-setup nav-entry" selected>
                     <div class="logo" when-compact="show"></div><div class="label" when-compact="hide">Setup userChrome</div><div class="indicator"></div>
-                </div>
-                <div class="nav-fcss nav-entry">
+                </button>
+                <button class="nav-fcss nav-entry">
                     <div class="logo"></div><div class="label" when-compact="hide">Firefox CSS Store</div><div class="indicator"></div>
-                </div>
-                <div class="nav-git nav-entry">
+                </button>
+                <button class="nav-git nav-entry">
                     <div class="logo" when-compact="show"></div><div class="label" when-compact="hide">git</div><div class="indicator"></div>
-                </div>
-                <div class="nav-settings nav-entry">
+                </button>
+                <button class="nav-settings nav-entry">
                     <div class="logo" when-compact="show"></div><div class="label" when-compact="hide">Settings</div><div class="indicator"></div>
-                </div>      
+                </button>      
             </div>              
         </div>
         <div class="content navigation">
 
             <div class="page nav-setup" selected>
                 <div class="page-header">
-                    gituserChrome will automatically fill in choices based on detected or existing configuration..
+                    GituserChrome will automatically fill in choices based on detected or existing configuration..
                     Before you proceed to Git, please verify that the information below is correct.
                 </div>
                 <div class="page-container">
@@ -79,7 +79,10 @@
                     <div class="conf"><label class="q">If an existing chrome folder is found, back it up?</label>       <label class="switch"><input id="backup_chrome" type="checkbox" checked><span class="slider round"></span></label></div>      
                 </div>
                 <div class="page-footer">
-                        <div id="notify_git" class="notify-git-btn"></div><div id="submitgitBtn" class="submit-git-btn">Proceed</div>
+                        <div class="submit-wrapper">
+                            <label id="notifythemeLabel" class="notify-theme" title="Do you have a theme selected?">�</label>
+                            <label id="notifygitLabel" class="notify-git" title="Make sure you have git on your system before proceeding">⚠️</label>
+                            <button id="submitgitBtn" class="submit-git-btn">Proceed</button></div>
                 </div>
             </div>
 
@@ -115,23 +118,24 @@
 
             <div class="page nav-settings" >
                 <div class="page-header">
-                    Settings Page under construction...
+                    Settings
                 </div>
                 <div class="page-container">
                     <div class="conf"><label class="q">Color Scheme                      </label><div class="icon csicon"></div><select id="selectScheme" class="select" when-compact="shrink"><option value=""></option></select></div>
-                    <div class="conf"><label class="q">Edit userChrome Theme             </label><input type ="text" id="selectTheme" when-compact="shrink"><div id="addTheme">+</div><div id="removeTheme"><div class="icon trashicon"></div></div></div>
-                    <div class="conf"><label class="q">Configuration                     </label><div id="openConf" when-compact="shrink">open</div><div id="resetConf" when-compact="shrink">reset</div></div>
-                    <div class="conf"><label class="q">Specify Firefox                   </label><div class="icon ficon"></div><input type="text" id="fsFBinaryInput" when-compact="shrink"><div id="fsFBinary"><div class="icon fileicon"></div></div></div>
-                    <div class="conf"><label class="q">Specify Firefox Developer Edition </label><div class="icon fdeicon"></div><input type="text" id="fsFdBinaryInput" when-compact="shrink"><div id="fsFdBinary"><div class="icon fileicon"></div></div></div>
-                    <div class="conf"><label class="q">Specify Firefox Nightly           </label><div class="icon fnicon"></div><input type="text" id="fsFnBinaryInput" when-compact="shrink"><div id="fsFnBinary"><div class="icon fileicon"></div></div></div>
-                    <div class="conf"><label class="q">Specify Librewolf                 </label><div class="icon libreicon"></div><input type="text" id="fsLBinaryInput" when-compact="shrink"><div id="fsLBinary"><div class="icon fileicon"></div></div></div>
-                    <div class="conf"><label class="q">Specify Zen                       </label><div class="icon zenicon"></div><input type="text" id="fsZBinaryInput" when-compact="shrink"><div id="fsZBinary"><div class="icon fileicon"></div></div></div>
-                    <div class="conf"><label class="q">Specify Floorp                    </label><div class="icon floorpicon"></div><input type="text" id="fsFloorpBinaryInput" when-compact="shrink"><div id="fsFloorpBinary"><div class="icon fileicon"></div></div></div>
-                    <div class="conf"><label class="q">Add another profile (folder name) </label><div class="icon profileicon"></div><input type="text" id="fsProfileInput" when-compact="shrink"><div id="fsProfile"><div class="icon fileicon"></div></div></div>
+                    <div class="conf"><label class="q">Edit userChrome Theme             </label><input type ="text" id="selectTheme" when-compact="shrink"><button id="addTheme" title="Add theme to collection (url)">+</button><button id="removeTheme" title="Remove theme to collection (name or url)"><div class="icon trashicon"></div></button></div>
+                    <div class="conf"><label class="q">Configuration                     </label><button id="openConf" when-compact="shrink" title="Open your userchrome config.json">open config</button><button id="resetConf" when-compact="shrink" title="Reset userChrome configurations">reset config</button></div>
+                    <div class="conf">  <div class="q">                                  </div>  <button id="openProfiles" when-compact="shrink" title="View your profile folders">open profiles</button><button id="deleteConf" when-compact="shrink" title="Deleting your configuration well trigger a reinitiation">delete config</button></div>
+                    <div class="conf"><label class="q">Specify Firefox                   </label><div class="icon ficon"></div><input type="text" id="fsFBinaryInput" when-compact="shrink"><button id="fsFBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Specify Firefox Developer Edition </label><div class="icon fdeicon"></div><input type="text" id="fsFdBinaryInput" when-compact="shrink"><button id="fsFdBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Specify Firefox Nightly           </label><div class="icon fnicon"></div><input type="text" id="fsFnBinaryInput" when-compact="shrink"><button id="fsFnBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Specify Librewolf                 </label><div class="icon libreicon"></div><input type="text" id="fsLBinaryInput" when-compact="shrink"><button id="fsLBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Specify Zen                       </label><div class="icon zenicon"></div><input type="text" id="fsZBinaryInput" when-compact="shrink"><button id="fsZBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Specify Floorp                    </label><div class="icon floorpicon"></div><input type="text" id="fsFloorpBinaryInput" when-compact="shrink"><button id="fsFloorpBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Add another profile (folder name) </label><div class="icon profileicon"></div><input type="text" id="fsProfileInput" when-compact="shrink"><button id="fsProfile"><div class="icon fileicon"></div></button></div>
                     <!--<label  class="switch"><input id="git_is" type="checkbox"><span class="slider round"></span></label></div>-->
                 </div>
                 <div class="page-footer">
-                        <div id="saveSettingsBtn">Save & Exit</div>
+                        <div class="save-wrapper"><button id="saveSettingsBtn">Save & Exit</button></div>
                 </div>
             </div>
 

@@ -19,7 +19,7 @@ fi
 echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
 cd "$PROJECT_ROOT" && echo "Working Dir: $PROJECT_ROOT"
 echo -e "\nMake sure the working directory is project root...\n"
-echo -e "\nDo you want to build a .deb package [Y/n] "
+echo -e "Do you want to build a .deb package [Y/n] "
 read -r deb_answer
 
 if [[ "$deb_answer" =~ ^[Yy]$ ]]; then
@@ -45,6 +45,9 @@ if [[ "$deb_answer" =~ ^[Yy]$ ]]; then
     mkdir -p "$DEB_DIR/usr/local/bin"
     mkdir -p "$DEB_DIR/usr/share/applications"
     mkdir -p "$DEB_DIR/usr/share/icons/hicolor/256x256/apps"
+    if [ -f "$BUILD_DIR/appicon.png" ]; then
+        cp "$BUILD_DIR/appicon.png" "$DEB_DIR/usr/share/icons/hicolor/256x256/apps/$APP_BINARY.png"
+    fi
     cp "$BIN_SRC" "$DEB_DIR/usr/local/bin/$APP_BINARY"
     chmod 755 "$DEB_DIR/usr/local/bin/$APP_BINARY"
     cat > "$DEB_DIR/DEBIAN/control" <<EOF
@@ -74,7 +77,7 @@ fi
 echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
 cd "$PROJECT_ROOT" && echo "Working Dir: $PROJECT_ROOT"
 echo -e "\nMake sure the working directory is project root...\n"
-echo -e "\nDo you want to build an appimage [Y/n] "
+echo -e "Do you want to build an appimage [Y/n] "
 read -r appimage_answer
 
 if [[ "$appimage_answer" =~ ^[Yy]$ ]]; then
@@ -132,7 +135,7 @@ fi
 echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
 cd "$PROJECT_ROOT" && echo "Working Dir: $PROJECT_ROOT"
 echo -e "\nMake sure the working directory is project root...\n"
-echo -e "\nDo you want to build an RPM package [Y/n] "
+echo -e "Do you want to build an RPM package [Y/n] "
 read -r rpm_answer
 
 if [[ "$rpm_answer" =~ ^[Yy]$ ]]; then
@@ -265,3 +268,14 @@ EOF
     echo "Arch package created: $BUILD_DIR/bin/$(ls $BUILD_DIR/bin/*.pkg.tar.zst | xargs -n1 basename)"
     echo -e "to install it (for now): sudo pacman -U build/bin/$LATEST_PKG"
 fi
+
+
+echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
+cd "$PROJECT_ROOT" && echo "Root: $PROJECT_ROOT"
+echo -e "\nDo you want an updated tree? [Y/n] "
+read -r tree_answer
+
+if [[ "$tree_answer" =~ ^[Yy]$ ]]; then
+    tree -a -n -I 'node_modules|dist|*.log|tmp|.git|npm-debug.log*' > tree.txt
+fi
+

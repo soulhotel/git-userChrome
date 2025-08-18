@@ -15,7 +15,7 @@
   "info": {
       "companyName": "soulhotel",
       "productName": "git userChrome",
-      "productVersion": "1.0",
+      "productVersion": "1.1",
       "copyright": "© 2025 soulhotel. Free and Open Source under the MIT License.",
       "comments": "An automation tool to git userChrome themes."
   }

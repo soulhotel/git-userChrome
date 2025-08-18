@@ -8,6 +8,8 @@ export function CheckConfigExists():Promise<boolean>;
 
 export function CreateConfig():Promise<void>;
 
+export function DeleteConfig():Promise<void>;
+
 export function GetOS():Promise<string>;
 
 export function IsGitInstalled():Promise<boolean>;
@@ -16,11 +18,15 @@ export function LoadWindowConfig():Promise<main.Window>;
 
 export function OpenConfig():Promise<void>;
 
+export function OpenProfiles():Promise<void>;
+
 export function ProcessGit():Promise<boolean>;
 
 export function RemoveFromConfig(arg1:string):Promise<void>;
 
 export function ResetConfig():Promise<void>;
+
+export function SelectFile():Promise<string>;
 
 export function SendtoApp():Promise<void>;
 

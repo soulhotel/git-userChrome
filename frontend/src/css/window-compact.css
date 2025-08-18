@@ -1,0 +1,34 @@
+body[compact] {
+    *[when-compact="hide"] {
+        visibility: collapse;
+        display: none;
+    }
+}
+body:not([compact]) {
+    *[when-compact="show"] {
+        visibility: collapse;
+        display: none;
+    }
+}
+
+body[compact] {
+    & .main .content .nav-setup .conf .select[when-compact="shrink"] {
+        min-width: 200px !important;
+    }
+    & .main .content .nav-settings .conf .select[when-compact="shrink"] {
+        min-width: 265px !important;
+    }
+    & .main .content .nav-settings .conf #selectTheme[when-compact="shrink"] {
+        min-width: 185px !important;
+    }
+    & .main .content .nav-settings .conf input[when-compact="shrink"] {
+        min-width: 227.5px !important;
+    }
+    & .main .content .nav-settings .conf {
+        & #resetConf[when-compact="shrink"], & #openConf[when-compact="shrink"],
+        & #openProfiles[when-compact="shrink"], & #deleteConf[when-compact="shrink"] {
+            min-width: 130px !important;
+        } 
+    }
+}
+

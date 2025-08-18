@@ -1,0 +1,248 @@
+
+
+/* temp ////////////////////////////////////////////////////////////////////////// */
+/* .sidebar { border: 1px red solid; }
+.main { border: 1px blue solid; }
+.sidebar .header { border: 1px green solid; }
+.sidebar .content { border: 1px pink dashed; }
+.sidebar .navigation { border: 1px green dashed; }
+.main .header { border: 1px green dashed; }
+.main .header .cross-navigation { border: 2px black dashed; }
+.main .header .navigation { border: 1px pink dashed; }
+.main .content { border: 1px green solid; }
+.main .content .page { border: 1px yellow dashed; }
+.page-header, .page-container, .page-footer  { border: 1px red solid; }
+.main .content .nav-setup .conf { border:1px red solid; } */
+/* end /////////////////////////////////////////////////////////////////////////// */
+
+:root {
+    --sidebar-width: 300px;
+    --main-width: calc(100% - var(--sidebar-width));
+    --header-height: 75px;
+    --content-height: calc(100% - var(--header-height));
+    --app-font-size: 18px;
+}
+
+/* window //////////////////////////////////////////////////////////////////////// */
+
+body {
+    background-color: var(--app-bgc);
+    color: var(--app-fgc);
+    font-size: var(--app-font-size);
+    min-height: 100vh;
+    min-width:100vw;
+    margin: 0;
+    display:flex;
+    overflow: hidden;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* layout //////////////////////////////////////////////////////////////////////// */
+
+.sidebar, .main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar {
+    user-select: none;
+    -webkit-user-select: none;
+    min-width: var(--sidebar-width);
+    max-width:  var(--sidebar-width);
+    transition: min-width 0.1s linear 0.1s, max-width 0.1s linear 0.1s;
+    overflow-x: hidden;
+}
+:root:has(.sidebar[collapsed]) {
+    --sidebar-width: 0px !important;
+    & .sidebar .content {
+        display: none;
+    }
+    & .cross-navigation .logo,
+    & .cross-navigation .label {
+        transition: opacity 4s ease;
+    } 
+}
+:root:has(.sidebar:not([collapsed])) {
+    & .cross-navigation .logo,
+    & .cross-navigation .label {
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    } 
+}
+
+.main {
+    /* width: var(--main-width); */
+    width: 100vw;
+    transition: width 0.1s ease;
+}
+
+.sidebar .header,
+.sidebar .content,
+.main .header,
+.main .content {
+    width: 100%;
+    transition: width 0.1s ease;
+}
+
+/* sidebar /////////////////////////////////////////////////////////////////////// */
+
+/* spacing */
+
+.sidebar {
+    z-index: 10;
+    & .header {
+        display: flex;
+        align-items: center;
+        padding: 0px 5px;
+        height: var(--header-height);
+        & .logo {
+            width: var(--header-height);
+            height: var(--header-height);
+            background-image: var(--app-icon);
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+    & .content {
+        display: flex;
+        align-items: center;
+        padding: 15px 10px;
+    }
+    & .navigation {
+        align-items: center;
+        width: 100%;
+        & .nav-entry {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 30px;
+            padding: 20px 10px;
+            margin-bottom: 15px;
+        }
+        & .logo {
+            width: var(--app-font-size);
+            height: var(--app-font-size);
+            background-image: var(--app-icon);
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        & .nav-setup .logo {background-image: var(--setup-icon);}
+        & .nav-fcss .logo {background-image: var(--fcss-icon);}
+        & .nav-git .logo {background-image: var(--git-icon);}
+        & .nav-settings .logo {background-image: var(--settings-icon);}
+        & .label {
+            padding-inline: 10px;
+        }
+        & .indicator {
+            margin-inline: auto 5px;
+        }
+    }
+}
+
+/* main content ///////////////////////////////////////////////////////////////// */
+
+/* spacing */
+
+.main {
+    z-index: 9;
+    .header {
+        display: flex;
+        align-items: center;
+        height: var(--header-height);
+        justify-content: space-between;
+        & .cross-navigation {
+            display: flex;
+            align-items: center;
+            height: var(--header-height);
+            width: fit-content;
+            padding-inline: 10px 10px;
+            & .nav-sidebar {
+                width:32px;
+                height:32px;
+                border: none !important;
+                background: none !important;
+                box-shadow: none !important;
+            }
+            & .logo {
+                width: 75px;
+                height: 75px;
+                background-image: var(--app-icon);
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+        }
+        & .navigation {
+            height: calc(var(--header-height) - 15px);
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            padding-inline: 5px 5px;
+            margin-right:5px;
+            border-radius: calc(var(--btn-border-radius) + 10px);
+            & .nav-entry {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: auto;
+                height: 30px;
+                padding: 20px 11px;
+                margin-inline: 5px;
+                & .logo {
+                    width: var(--app-font-size);
+                    height: var(--app-font-size);
+                    background-image: var(--app-icon);
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                }
+                & .label {
+                    padding-inline: 10px;
+                }
+            }
+            & .nav-setup .logo {background-image: var(--setup-icon);}
+            & .nav-fcss .logo {background-image: var(--fcss-icon);}
+            & .nav-git .logo {background-image: var(--git-icon);}
+            & .nav-settings .logo {background-image: var(--settings-icon);}
+        }
+    }
+}
+
+/* content "page" structure ////////////////////////////////////////////////////// */
+
+.main .content {
+    display: block;
+    width:100%;
+    height: var(--content-height);
+    z-index: 1;
+}
+.main .content .page {
+    display: flex;
+    /* [1] beyond this point, i can have the "pages" sitting on top of each other
+    or scrollable like a webpage, or use height to transition their visibility */
+    position: fixed;
+    top: var(--header-height);
+    left: var(--sidebar-width);
+    right: 0; /* [1] */
+    bottom: 0;
+    overflow-y: auto;
+}
+
+/* page visibility */
+
+.main .content .page {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.1s ease 0s, visibility 0s ease 0.5s, left 1s ease, width 0.1s ease;
+}
+
+.main .content .page[selected] {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transition: opacity 0.5s ease 0s, visibility 0s ease 0s, left 1s ease, width 0.1s ease;
+}

@@ -1,0 +1,26 @@
+select {
+    border: none;
+    appearance: none;
+    color: var(--app-fgc);
+    background-color: var(--btn-bgc);
+    border-radius: calc(var(--btn-border-radius) - 10px);
+    box-shadow: var(--btn-box-shadow);
+    padding: 0.5em;
+    &:hover {
+        /* this background should be fine for dark and light */
+        background-color: color-mix(in srgb, var(--btn-bgc) 85%, rgb(50,50,50));
+        cursor: pointer;
+    }
+    text-align-last:center; /*webkits*/
+    -moz-text-align-last: center;
+    text-align: center;
+}
+
+input {
+    border: none;
+    appearance: none;
+    padding: 0.5em;
+    color: var(--app-fgc);
+    background-color: var(--btn-bgc);
+    border-radius: calc(var(--btn-border-radius) - 10px);
+}

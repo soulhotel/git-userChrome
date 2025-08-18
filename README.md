@@ -14,7 +14,7 @@
 
 ## Overview
 
-gituserChrome automates the installation of userChrome themes. It handles downloading, saving themes, and managing them between profiles and different flavors of Firefox (Firefox variants, Librewolf, Zen, FLoorp). With just <ins>**one**</ins> command (or 1 click). It can automate the installation process. Using a themes Homepage as the argument/flag allows you to grab any theme via github, codeberg, etc. This process is safe and smart ([see more](https://github.com/soulhotel/git-userChrome?tab=readme-ov-file#previews) about the order of operations below). The process is also well tested & vetted through users of my [FF Ultima](https://github.com/soulhotel/FF-ULTIMA) theme.
+gituserChrome automates the installation of userChrome themes. It handles downloading, saving themes, and managing them between profiles and different flavors of Firefox (Firefox variants, Librewolf, Zen, Floorp). With just <ins>**one**</ins> command (or 1 click), it can automate the installation process. Both the script and app can work with github, codeberg, etc. The full configuration process is safe and smart (see the [order of operations](https://github.com/soulhotel/git-userChrome?tab=readme-ov-file#previews) below). The original script is also well tested & vetted through users of my [FF Ultima](https://github.com/soulhotel/FF-ULTIMA) theme. You can find usage for the script below, or for the application, there's a version for each platform in the 1.0 Release ➜
 
 ## Scripts
 
@@ -35,7 +35,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "irm 'https://raw.githubu
 .\gituserChrome.ps1 -gitTheme "https://github.com/soulhotel/ff-ultima.git"
 ```
 
-###### *NEED GIT? (CLICK HERE)*
+###### *NEED GIT? (SOURCE BELOW)*
 ```
 sudo pacman -S git                        # ARCH
 sudo apt install git                      # DEBIAN/UBUNTU
@@ -53,6 +53,8 @@ The standalone script fully automates the installation process by:
 - Applying user.js if applicable.
 - Restarting Firefox.
 - Cleaning up user.is if applicable.
+
+> Note: The application expands on this experience with the ability to specify firefox binaries, profile locations, and such.
 
 ## Previews
 
