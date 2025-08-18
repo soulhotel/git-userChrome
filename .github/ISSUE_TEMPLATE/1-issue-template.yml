@@ -1,0 +1,51 @@
+name: 🚩 Bugs, Errors, and Other Issues
+description: Report an issue to help improve gituserChrome
+labels:
+  - "bug"
+  - "issue"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Before submitting, Please fill out the checklist.
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: "My Checklist:"
+      description: "Fill out the form below"
+      options:
+        - label: "My OS (operating system) is Windows."
+        - label: "My OS (operating system) is Linux."
+        - label: "My OS (operating system) is Mac."
+  - type: dropdown
+    id: issue-specification
+    attributes:
+      label: "This issue is related to"
+      description: "Specify what this issue is related to"
+      options:
+        - 
+        - Running the application
+        - Script related issue
+        - Theme wont download
+        - Browsing webview
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: "The Issue:"
+      description: "A detailed description of the issue. Or what you expect to happen."
+      placeholder: "A detailed description of the issue. Or what you expect to happen."
+    validations:
+      required: true
+
+  - type: textarea
+    id: picture-video
+    attributes:
+      label: "Picture/Video of the Issue:"
+      description: "Screenshot(s) or video of the issue are preferred."
+      placeholder: "Drag & Drop | Copy & Paste | or Link to Picture & Video"
+    validations:
+      required: false
