@@ -1,16 +1,16 @@
- build/darwin
- build/windows
- build/AppDir
- build/deb
- build/pkg
- build/rpm
+build/darwin
+build/windows
+build/AppDir
+build/deb
+build/pkg
+build/rpm
 
 node_modules
 node_modules/
 # frontend/dist
 # frontend/dist/
 
-dev
+# dev
 
 *.zip
 .DS_Store
