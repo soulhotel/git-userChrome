@@ -1,11 +1,15 @@
 
-@import url('./window.css');
-@import url('./index.css');
-@import url('./colors.css');
-@import url('./compact.css');
-@import url('./styles/switches.css');
-@import url('./page-setup.css');
-@import url('./page-fcss.css');
-@import url('./page-git.css');
-@import url('./page-settings.css');
-@import url('./page-more.css');
+@import url('./window-structure.css');      /* sidebar, main content, area structure  */
+
+@import url('./window-scheme.css');         /* color scheme foundation                */
+@import url('./window-compact.css');        /* window when compact                    */
+
+@import url('./index.css');                 /* i use this for the initiation (splash) */
+
+@import url('./page-setup.css');            /* setup userchrome (page)                */
+@import url('./page-fcss.css');             /* fcss (page)                            */
+@import url('./page-git.css');              /* git console (page)                     */
+@import url('./page-settings.css');         /* settings (page)                        */
+@import url('./page-more.css');             /* more (page)                            */
+
+@import url('./styles/switches.css');       /* toggle switches                        */

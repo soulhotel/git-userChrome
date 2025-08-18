@@ -4,6 +4,7 @@
         --app-fgc: white;
         --scheme-filter: brightness(0) saturate(100%) invert(100%);
         --btn-bgc: rgba(35, 35, 42, 0.3);
+        --btn-border-radius: 18px;
         --btn-selected-bgc: color-mix(in srgb, var(--btn-bgc) 80%, transparent);
         --btn-box-shadow: 0.15rem 0.3rem 0.3rem -0.1rem rgba(0,0,0,0.35);
         --btn-outline-color: 1px solid color-mix(in srgb, white 7%, transparent);

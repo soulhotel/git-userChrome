@@ -9,22 +9,21 @@
     user-select: none;
     -webkit-user-select: none;
     .page-header {
-        min-height: 100px;
+        min-height: 110px;
     }
     .page-container {
         min-height: 400px;
         overflow-y: auto;
+        justify-content: center;
     }
     .page-footer {
-        justify-items: right;
         min-height: 100px;
+        justify-content: center;
+        align-items: center;
     }
     .page-header, .page-container, .page-footer {
         align-content: center;
         padding: 0px 40px;
-    }
-    .page-container {
-        justify-content: center;
     }
 }
 
@@ -46,43 +45,41 @@
     .conf .select {
         min-width: 300px;
         height: 35px;
-        padding: 0.5em;
-        background-color: var(--btn-bgc);
-        color: var(--app-fgc);
-        appearance: none;
-        border: none;
-        border-radius: calc(var(--btn-border-radius) - 10px);
-        box-shadow: var(--btn-box-shadow);
         transition: width 0.5s ease, min-width 0.5s ease;
-        &:hover {
-            background-color: color-mix(in srgb, var(--btn-bgc) 80%, rgb(25,25,25));
-            cursor: pointer;
-        }
-        text-align-last:center;
-        -moz-text-align-last: center;
-        text-align: center;
+    }
+    .submit-wrapper {
+        display: flex;
+        padding: 10px;
+        margin-inline: auto;
+        min-width: 450px;
+        max-width:1000px;
+        height: 50px;
+        align-items: center;
+        justify-content: right;
+    }
+    .notify-git {
+        margin-right: 15px;
+        display: none;
+    }
+    .notify-theme {
+        margin-right: 15px;
+        display: none;
     }
     .submit-git-btn {
-        justify-self: right;
-        margin-left: auto;
         align-content: center;
-        background: var(--btn-bgc);
-        box-shadow: var(--btn-box-shadow);
-        border-radius: var(--btn-border-radius);
         width: fit-content;
-        height: 35px;
+        height: 36px;
         padding: 5px 20px;
-        user-select: none; -webkit-user-select: none;
-        &:hover {
-            background-color: color-mix(in srgb, var(--btn-bgc) 80%, rgb(25,25,25));
-            cursor: pointer;
-            transform: scale(1.1);
-        }
-        &:active {
-            transform: scale(0.95);
-        }
     }
 }
+
+:root:has(#git_is:not(:checked)) .notify-git {
+    display: flex;
+}
+:root:has(select option[value="placeholder"]:checked) .notify-theme {
+    display: flex;
+}
+
 
 #gitis .slider {
   position: absolute;
@@ -95,8 +92,6 @@
   -webkit-transition: .4s;
   transition: .4s;
 }
-
-
 #git_is {
     pointer-events: none !important;
 }

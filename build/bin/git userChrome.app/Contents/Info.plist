@@ -1,0 +1,29 @@
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>CFBundlePackageType</key>
+        <string>APPL</string>
+        <key>CFBundleName</key>
+        <string>git userChrome</string>
+        <key>CFBundleExecutable</key>
+        <string>gituserChrome</string>
+        <key>CFBundleIdentifier</key>
+        <string>com.wails.git userChrome</string>
+        <key>CFBundleVersion</key>
+        <string>1.1</string>
+        <key>CFBundleGetInfoString</key>
+        <string>An automation tool to git userChrome themes.</string>
+        <key>CFBundleShortVersionString</key>
+        <string>1.1</string>
+        <key>CFBundleIconFile</key>
+        <string>iconfile</string>
+        <key>LSMinimumSystemVersion</key>
+        <string>10.13.0</string>
+        <key>NSHighResolutionCapable</key>
+        <string>true</string>
+        <key>NSHumanReadableCopyright</key>
+        <string>© 2025 soulhotel. Free and Open Source under the MIT License.</string>
+        
+        
+    </dict>
+</plist>

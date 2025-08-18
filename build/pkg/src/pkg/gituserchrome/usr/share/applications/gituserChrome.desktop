@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=git userChrome
+Comment=An automation tool to git userChrome themes.
+Exec=/usr/bin/gituserChrome
+Icon=gituserChrome
+Terminal=false
+Type=Application
+Categories=Utility;

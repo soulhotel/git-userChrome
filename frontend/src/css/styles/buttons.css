@@ -1,0 +1,22 @@
+button {
+    border: none;
+    color: var(--app-fgc);
+    background: var(--btn-bgc);
+    box-shadow: var(--btn-box-shadow);
+    border-radius: var(--btn-border-radius);
+    &[selected] {
+        outline: var(--btn-outline-color);
+        & .indicator {color:green;}
+    }
+    &:hover {
+        outline: var(--btn-outline-color);
+        background-color: var(--btn-selected-bgc);
+    }
+    &:active {
+        transform: scale(0.97);
+    }
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none; /*webkits*/
+    -moz-user-select: none; /*webkits*/
+}
