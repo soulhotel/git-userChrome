@@ -11,13 +11,15 @@ read -r dmg_answer
 
 if [[ "$dmg_answer" =~ ^[Yy]$ ]]; then
     BUILD_DIR="$PROJECT_ROOT/build"
-    APP_BINARY="git userChrome"
+    WAILS_JSON="$PROJECT_ROOT/wails.json"
+    APP_NAME=$(jq -r '.info.productName' "$WAILS_JSON")
+    APP_BINARY=$(jq -r '.outputfilename' "$WAILS_JSON")
     APP_PATH="$BUILD_DIR/bin/${APP_BINARY}.app"
     OUTPUT_DMG="$BUILD_DIR/bin/${APP_BINARY}.dmg"
     if [ ! -d "$APP_PATH" ]; then
         echo "Error: Cant find app, $APP_PATH" && exit 1
     fi
-    MAIN_BIN="$APP_PATH/Contents/MacOS/$APP_BINARY"
+    MAIN_BIN="$APP_PATH/Contents/MacOS/gituserChrome"
     if [ -f "$MAIN_BIN" ]; then
         chmod +x "$MAIN_BIN"
     else
