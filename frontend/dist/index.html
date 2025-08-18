@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+    
+    <title>git userChrome</title>
+  <script type="module" crossorigin src="/assets/index.80e4ff42.js"></script>
+  <link rel="stylesheet" href="/assets/index.0c0091ab.css">
+</head>
+<body color-scheme="system">
+
+    <div id="init" class="initted">
+        <div id="logo">...</div>
+        <div id="status"><div id="loading">...</div><div id="init_text">Gitting everything ready ...</div></div>
+        <div id="log">Searching for configuration</div>
+        <div id="error"></div>
+    </div>
+
+    <div class="sidebar">
+        <div class="header">
+            <div class="logo"></div><label class="label">gituserChrome</label>
+        </div>
+        <div class="content">
+            <div class="navigation">
+                <button class="nav-setup nav-entry" selected>
+                    <div class="logo"></div><div class="label">Setup userChrome</div><div class="indicator">•</div>
+                </button>
+                <button class="nav-fcss nav-entry">
+                    <div class="logo"></div><div class="label">Firefox CSS Store</div><div class="indicator">•</div>
+                </button>
+                <button class="nav-git nav-entry">
+                    <div class="logo"></div><div class="label">git</div><div class="indicator">•</div>
+                </button>
+                <button class="nav-settings nav-entry">
+                    <div class="logo"></div><div class="label">Settings</div><div class="indicator">•</div>
+                </button>
+                <button class="nav-more nav-entry">
+                    <div class="logo"></div><div class="label">More..</div><div class="indicator">•</div>
+                </button>    
+            </div>           
+        </div>        
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <div class="cross-navigation">
+                <button class="nav-sidebar">☰</button><div class="logo"></div><div class="label">gituserChrome</div>     
+            </div>  
+            <div class="navigation">
+                <button class="nav-setup nav-entry" selected>
+                    <div class="logo" when-compact="show"></div><div class="label" when-compact="hide">Setup userChrome</div><div class="indicator"></div>
+                </button>
+                <button class="nav-fcss nav-entry">
+                    <div class="logo"></div><div class="label" when-compact="hide">Firefox CSS Store</div><div class="indicator"></div>
+                </button>
+                <button class="nav-git nav-entry">
+                    <div class="logo" when-compact="show"></div><div class="label" when-compact="hide">git</div><div class="indicator"></div>
+                </button>
+                <button class="nav-settings nav-entry">
+                    <div class="logo" when-compact="show"></div><div class="label" when-compact="hide">Settings</div><div class="indicator"></div>
+                </button>      
+            </div>              
+        </div>
+        <div class="content navigation">
+
+            <div class="page nav-setup" selected>
+                <div class="page-header">
+                    GituserChrome will automatically fill in choices based on detected or existing configuration..
+                    Before you proceed to Git, please verify that the information below is correct.
+                </div>
+                <div class="page-container">
+                    <div class="conf"><label class="q">Git seems to be installed...</label>           <label  class="switch"><input id="git_is" type="checkbox"><span class="slider round"></span></label></div> 
+                    <div class="conf"><label class="q">Your Operating System seems to be...</label>   <select id="os_is" class="select" when-compact="shrink"><option value=""></option></select></div>
+                    <div class="conf"><label class="q">Which Firefox are you theming today?</label>   <select id="firefox_is" class="select" when-compact="shrink"><option value=""></option></select></div>
+                    <div class="conf"><label class="q">Which Firefox Profile are you theming?</label> <select id="selected_profile" class="select" when-compact="shrink"><option value=""></option></select></div>
+                    <div class="conf"><label class="q">Choose a userChrome theme</label>              <select id="selected_theme" class="select" when-compact="shrink"><option value=""></option></select></div>
+                    <div class="conf"><label class="q">If a user.js is found, do you want to apply it?</label>          <label class="switch"><input id="apply_userjs" type="checkbox" checked><span class="slider round"></span></label></div>
+                    <div class="conf"><label class="q">Can gituserChrome restart Firefox for you (recommended)?</label> <label class="switch"><input id="allow_restart" type="checkbox" checked><span class="slider round"></span></label></div>
+                    <div class="conf"><label class="q">If an existing chrome folder is found, back it up?</label>       <label class="switch"><input id="backup_chrome" type="checkbox" checked><span class="slider round"></span></label></div>      
+                </div>
+                <div class="page-footer">
+                        <div class="submit-wrapper">
+                            <label id="notifythemeLabel" class="notify-theme" title="Do you have a theme selected?">�</label>
+                            <label id="notifygitLabel" class="notify-git" title="Make sure you have git on your system before proceeding">⚠️</label>
+                            <button id="submitgitBtn" class="submit-git-btn">Proceed</button></div>
+                </div>
+            </div>
+
+            <div class="page nav-fcss">
+                <div class="page-header">
+                    <div class="icon backicon"></div><div class="icon forwardicon"></div><div class="icon copyicon"></div><div class="icon openlinkicon"></div>
+                </div>
+                <div class="page-container">
+                    <iframe
+                        src="https://firefoxcss-store.github.io/" title="description"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation"
+                        allow="fullscreen; clipboard-read; clipboard-write">
+                    </iframe> 
+                </div>
+                <div class="page-function"></div>
+            </div>
+
+            <div class="page nav-git">
+                <div class="page-header">
+                    When trying new userChrome Themes, **always verify** what you download.
+                    Browse the Home Page. Look out for things like Firefox Version requirements.
+                    Check how long it's been since the last theme update. And if a user.js is required.
+                    Checking discussions and issues for a theme can provide some very useful information as well.
+                    Once you are confident with the theme you've selected, git it and enjoy!
+                </div>
+                <div class="page-container">
+                    <textarea class="gitConsole" id="gitConsole" readonly></textarea>
+                </div>
+                <div class="page-footer">
+                    <div class="icon statusicon"></div><div id="status">Gitting everything ready...</div><div id="toggleConsoleBtn">Show Console</div>
+                </div>
+            </div>
+
+            <div class="page nav-settings" >
+                <div class="page-header">
+                    Settings
+                </div>
+                <div class="page-container">
+                    <div class="conf"><label class="q">Color Scheme                      </label><div class="icon csicon"></div><select id="selectScheme" class="select" when-compact="shrink"><option value=""></option></select></div>
+                    <div class="conf"><label class="q">Edit userChrome Theme             </label><input type ="text" id="selectTheme" when-compact="shrink"><button id="addTheme" title="Add theme to collection (url)">+</button><button id="removeTheme" title="Remove theme to collection (name or url)"><div class="icon trashicon"></div></button></div>
+                    <div class="conf"><label class="q">Configuration                     </label><button id="openConf" when-compact="shrink" title="Open your userchrome config.json">open config</button><button id="resetConf" when-compact="shrink" title="Reset userChrome configurations">reset config</button></div>
+                    <div class="conf">  <div class="q">                                  </div>  <button id="openProfiles" when-compact="shrink" title="View your profile folders">open profiles</button><button id="deleteConf" when-compact="shrink" title="Deleting your configuration well trigger a reinitiation">delete config</button></div>
+                    <div class="conf"><label class="q">Specify Firefox                   </label><div class="icon ficon"></div><input type="text" id="fsFBinaryInput" when-compact="shrink"><button id="fsFBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Specify Firefox Developer Edition </label><div class="icon fdeicon"></div><input type="text" id="fsFdBinaryInput" when-compact="shrink"><button id="fsFdBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Specify Firefox Nightly           </label><div class="icon fnicon"></div><input type="text" id="fsFnBinaryInput" when-compact="shrink"><button id="fsFnBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Specify Librewolf                 </label><div class="icon libreicon"></div><input type="text" id="fsLBinaryInput" when-compact="shrink"><button id="fsLBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Specify Zen                       </label><div class="icon zenicon"></div><input type="text" id="fsZBinaryInput" when-compact="shrink"><button id="fsZBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Specify Floorp                    </label><div class="icon floorpicon"></div><input type="text" id="fsFloorpBinaryInput" when-compact="shrink"><button id="fsFloorpBinary"><div class="icon fileicon"></div></button></div>
+                    <div class="conf"><label class="q">Add another profile (folder name) </label><div class="icon profileicon"></div><input type="text" id="fsProfileInput" when-compact="shrink"><button id="fsProfile"><div class="icon fileicon"></div></button></div>
+                    <!--<label  class="switch"><input id="git_is" type="checkbox"><span class="slider round"></span></label></div>-->
+                </div>
+                <div class="page-footer">
+                        <div class="save-wrapper"><button id="saveSettingsBtn">Save & Exit</button></div>
+                </div>
+            </div>
+
+            <div class="page nav-more" >
+                <div class="page-header">
+                    <label>gituserChrome is a tool that helps automate the installation of userChrome themes in about 1 to 2 clicks.
+                    It also lets you save themes, backup chrome, and swap them out with different profiles.</label>
+                    <label>Hi, I'm soulhotel. Yup thats me. Youre probably wondering how I got here.
+                    Well it doesnt matter. I've spent quite a lot of time developing tools to automate the userChrome experience.
+                    And this iteration of gituserChrome has finally left me satisfied. This is my first time creating a GUI application,
+                    The pyQt attempt was successful, but also painful. The tauri + rust attempt was equally bitter.
+                    But anyway.. If you find yourself using this tool, I hope it serves you well.</label> 
+                </div>
+                <div class="page-container">
+                    <div class="l"><label>gituserChrome           </label><a href="#" id="link-gituserChrome">https://github.com/soulhotel/git-userChrome</a></div>
+                    <div class="l"><label>Firefox CSS Store       </label><a href="#" id="link-css-store">https://firefoxcss-store.github.io/</a></div>
+                    <div class="l"><label>Firefox CSS Subreddit   </label><a href="#" id="link-css-subreddit">https://www.reddit.com/r/firefoxcss</a></div>
+                    <div class="l"><label>Need Git?               </label><a href="#" id="link-git">https://github.com/soulhotel/git-userChrome?tab=readme-ov-file#need-git-click-here</a></div>
+                    <div class="l"><label>Support ❤️              </label><a href="#" id="link-support">https://github.com/sponsors/soulhotel</a></div>
+                </div>
+            </div>
+
+        </div>        
+    </div>
+
+</body>
+</html>

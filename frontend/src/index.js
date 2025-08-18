@@ -46,6 +46,9 @@ async function checkOS() {
     if (!osName) {
         errorReturned("Couldnt detect operating system..");
     }
+    if (osName === "darwin") {
+        document.body.classList.add("darwin"); // titlebar todo
+    }
     return osName;
 }
 
