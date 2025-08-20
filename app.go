@@ -62,9 +62,10 @@ type Config struct {
 }
 
 type Window struct {
-	Width       string          `json:"width"`
-	Height      string          `json:"height"`
-	ColorScheme map[string]bool `json:"color-scheme"`
+	Width        string          `json:"width"`
+	Height       string          `json:"height"`
+	ColorScheme  map[string]bool `json:"color-scheme"`
+	SidebarState string          `json:"sidebar-state"`
 }
 
 var ignoredFolders = map[string]struct{}{
@@ -125,6 +126,7 @@ func (a *App) LoadWindowConfig() Window {
 				"system":      true,
 				"translucent": false,
 			},
+			SidebarState: "",
 		}
 		data, err := json.MarshalIndent(defaultConfig, "", "  ")
 		if err != nil {

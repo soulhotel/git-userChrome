@@ -38,6 +38,7 @@ export namespace main {
 	    width: string;
 	    height: string;
 	    color-scheme: Record<string, boolean>;
+	    "sidebar-state": string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Window(source);
@@ -48,6 +49,7 @@ export namespace main {
 	        this.width = source["width"];
 	        this.height = source["height"];
 	        this["color-scheme"] = source["color-scheme"];
+	        this["sidebar-state"] = source["sidebar-state"];
 	    }
 	}
 

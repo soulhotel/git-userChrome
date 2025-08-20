@@ -132,11 +132,17 @@ const sidebar = document.querySelector('.sidebar');
 
 if (sidebarToggle && sidebar) {
     sidebarToggle.addEventListener('click', () => {
+        let state = "";
         if (sidebar.hasAttribute('collapsed')) {
             sidebar.removeAttribute('collapsed');
+            state = "";
         } else {
             sidebar.setAttribute('collapsed', '');
+            state = "collapsed";
         }
+        if (!window.windowConfig) return;
+        window.windowConfig["sidebar-state"] = state;
+        window.go.main.App.UpdateWindowConfig(window.windowConfig);
     });
 }
 

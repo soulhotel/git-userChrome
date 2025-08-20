@@ -39,6 +39,13 @@ window.loadWindowConfig = async function () {
             window.setColorScheme(selected);
         });
     }
+    const sidebarState = window.windowConfig["sidebar-state"] || "";
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebarState === "collapsed") {
+        sidebar.setAttribute("collapsed", "");
+    } else {
+        sidebar.removeAttribute("collapsed");
+    }
 };
 
 window.setColorScheme = async function (schemeName) {
@@ -49,7 +56,6 @@ window.setColorScheme = async function (schemeName) {
         window.windowConfig["color-scheme"][schemeName] = true;
     }
     document.body.setAttribute("color-scheme", schemeName);
-
     await window.go.main.App.UpdateWindowConfig(window.windowConfig);
 };
 
