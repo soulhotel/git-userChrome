@@ -6,7 +6,7 @@ xdata = pkgtype=pkg
 pkgver = 1.1-1
 pkgdesc = An automation tool to git userChrome themes.
 url = 
-builddate = 1755691165
+builddate = 1755691746
 packager = Unknown Packager
 size = 10766069
 arch = x86_64

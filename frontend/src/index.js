@@ -84,7 +84,7 @@ async function validateConfig() {
         validcfg = cfg;
         log("Validated.")
     }
-    await delay(300); return cfg;
+    await delay(200); return cfg;
 }
 
 function delay(ms) {
