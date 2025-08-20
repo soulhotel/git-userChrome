@@ -246,6 +246,7 @@ pkgrel=1
 pkgdesc="$APP_DESC"
 arch=('x86_64')
 license=('MIT')
+depends=('webkit2gtk')
 source=(${SRC_FILES[@]})
 sha256sums=(${SHA_LIST[@]})
 package() {
