@@ -20,15 +20,19 @@
 │   ├── appicon.png
 │   ├── bin
 │   │   ├── gituserChrome
-│   │   ├── gituserchrome-1.0-1-x86_64.pkg.tar.zst
-│   │   ├── gituserChrome-1.0-1.x86_64.rpm
-│   │   ├── gituserChrome-1.0_amd64.AppImage
-│   │   ├── gituserchrome-1.0_amd64.deb
 │   │   ├── gituserchrome-1.1-1-x86_64.pkg.tar.zst
 │   │   ├── gituserChrome-1.1-1.x86_64.rpm
 │   │   ├── gituserChrome-1.1_amd64.AppImage
 │   │   ├── gituserchrome-1.1_amd64.deb
+│   │   ├── git userChrome.app
+│   │   │   └── Contents
+│   │   │       ├── Info.plist
+│   │   │       ├── MacOS
+│   │   │       │   └── gituserChrome
+│   │   │       └── Resources
+│   │   │           └── iconfile.icns
 │   │   ├── gituserChrome.desktop
+│   │   ├── gituserChrome.dmg
 │   │   └── gituserChrome.exe
 │   ├── darwin
 │   │   ├── Info.dev.plist
@@ -53,7 +57,6 @@
 │   │   └── src
 │   │       ├── appicon.png
 │   │       ├── gituserChrome
-│   │       ├── gituserchrome-1.0-1-x86_64.pkg.tar.zst
 │   │       ├── gituserchrome-1.1-1-x86_64.pkg.tar.zst
 │   │       ├── gituserChrome.desktop
 │   │       ├── pkg
@@ -102,9 +105,13 @@
 │       │   ├── project.nsi
 │       │   └── wails_tools.nsh
 │       └── wails.exe.manifest
+├── changelog.md
 ├── dev
 │   ├── appimagetool-x86_64.AppImage
-│   └── buildall.sh
+│   ├── buildall.sh
+│   ├── buildonmac.sh
+│   └── workflows
+│       └── wails-build.yml
 ├── frontend
 │   ├── package.json
 │   ├── package.json.md5
@@ -200,6 +207,9 @@
 │           ├── package.json
 │           ├── runtime.d.ts
 │           └── runtime.js
+├── .github
+│   └── ISSUE_TEMPLATE
+│       └── 1-issue-template.yml
 ├── .gitignore
 ├── go.mod
 ├── go.sum
@@ -212,4 +222,4 @@
 ├── tree.txt
 └── wails.json
 
-72 directories, 141 files
+79 directories, 144 files
