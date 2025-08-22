@@ -14,7 +14,7 @@
 
 ## Overview
 
-gituserChrome automates the installation of userChrome themes. It handles downloading, saving themes, and managing them between profiles and different flavors of Firefox (Firefox variants, Librewolf, Zen, Floorp). With just <ins>**one**</ins> command (or 1 click), it can automate the installation process. Both the script and app can work with github, codeberg, etc. The full configuration process is safe and smart (see the [order of operations](https://github.com/soulhotel/git-userChrome?tab=readme-ov-file#previews) below). The original script is also well tested & vetted through users of my [FF Ultima](https://github.com/soulhotel/FF-ULTIMA) theme. You can find usage for the script below, or for the application, there's a version for each platform in the 1.0 Release ➜
+gituserChrome automates the installation of userChrome themes in several ways. It handles downloading Themes, saving them, and managing them between Profiles, Firefoxs (Firefox variants, Librewolf, Zen, Floorp), and Operating Systems. Both the script and app can work with github, codeberg, etc, backups of existing chrome, user.js and restarts. And all of this can be done with just <ins>**one**</ins> command (or click). The full configuration process is safe and smart (see the [order of operations](https://github.com/soulhotel/git-userChrome?tab=readme-ov-file#previews) below). The original script is also well tested & vetted through users of my [FF Ultima](https://github.com/soulhotel/FF-ULTIMA) theme. You can find usage for the script below, or for the application, there's a version for each platform on the Releases Page ➜
 
 ## Scripts
 
@@ -58,16 +58,12 @@ The standalone script fully automates the installation process by:
 
 ## Previews
 
-###### *WINDOWS PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=yc3xRjVgR8A&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2))
-<!-- https://github.com/user-attachments/assets/f93c548e-54f4-4e9e-96db-15753e60171c -->
+###### Script Previews: The full script operation put on youtube for better quality ([windows](https://www.youtube.com/watch?v=yc3xRjVgR8A&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2), [linux](https://www.youtube.com/watch?v=Cb350ZcjUu0&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=1), [mac](https://www.youtube.com/watch?v=jDK7I6Ph3gU))
 
-###### *LINUX PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=Cb350ZcjUu0&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=1))
-<!-- https://github.com/user-attachments/assets/1306eedf-f1ec-400d-8e0d-9e0021b4a5e5 -->
-
-###### *MAC PREVIEW* (better quality [on youtube](https://www.youtube.com/watch?v=jDK7I6Ph3gU))
-
-###### *GUI on WINDOWS*
+###### App Previews: For Windows 11, Arch Linux (kde), Mac Sonoma (VM)
 
 <img width="1561" height="725" alt="Screenshot_20250815_212950" src="https://github.com/user-attachments/assets/203de812-cdda-4c51-b867-1ba43bebff16" />
 
+![1 2](https://github.com/user-attachments/assets/f5b874ff-13a4-468a-a261-cdd33b2815c0)
 
+<img width="1369" height="880" alt="b" src="https://github.com/user-attachments/assets/fb6d1828-335f-44b5-bd84-fcc374756632" />
