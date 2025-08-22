@@ -60,10 +60,13 @@ The standalone script fully automates the installation process by:
 
 ###### Script Previews: The full script operation put on youtube for better quality ([windows](https://www.youtube.com/watch?v=yc3xRjVgR8A&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=2), [linux](https://www.youtube.com/watch?v=Cb350ZcjUu0&list=PLTVs0Y4lTV55tEwbkGwlooQinDbge3a6O&index=1), [mac](https://www.youtube.com/watch?v=jDK7I6Ph3gU))
 
-###### App Previews: For Windows 11, Arch Linux (kde), Mac Sonoma (VM)
+###### App Previews: For Windows 11, Arch Linux (kde), Mac Sonoma (VM), Windows 10
 
 <img width="1561" height="725" alt="Screenshot_20250815_212950" src="https://github.com/user-attachments/assets/203de812-cdda-4c51-b867-1ba43bebff16" />
 
 ![1 2](https://github.com/user-attachments/assets/f5b874ff-13a4-468a-a261-cdd33b2815c0)
 
 <img width="1369" height="880" alt="b" src="https://github.com/user-attachments/assets/fb6d1828-335f-44b5-bd84-fcc374756632" />
+
+<img width="1880" height="873" alt="image" src="https://github.com/user-attachments/assets/3fc7b090-9761-417d-b4d9-d6075046c3d7" />
+
