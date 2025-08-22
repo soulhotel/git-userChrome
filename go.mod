@@ -1,4 +1,4 @@
-module git-userChrome-wails
+module git-userChrome
 
 go 1.23
 

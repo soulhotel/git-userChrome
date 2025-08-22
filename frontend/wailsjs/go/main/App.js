@@ -54,6 +54,10 @@ export function SelectFile() {
   return window['go']['main']['App']['SelectFile']();
 }
 
+export function SelectFolder() {
+  return window['go']['main']['App']['SelectFolder']();
+}
+
 export function SendtoApp() {
   return window['go']['main']['App']['SendtoApp']();
 }

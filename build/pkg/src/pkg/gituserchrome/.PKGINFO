@@ -3,11 +3,13 @@
 pkgname = gituserchrome
 pkgbase = gituserchrome
 xdata = pkgtype=pkg
-pkgver = 1.1-1
+pkgver = 1.2-1
 pkgdesc = An automation tool to git userChrome themes.
 url = 
-builddate = 1755519184
+builddate = 1755861921
 packager = Unknown Packager
-size = 10766069
+size = 10774489
 arch = x86_64
 license = MIT
+depend = webkit2gtk
+depend = git

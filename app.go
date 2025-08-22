@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"git-userChrome/frontend/platforms"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -51,8 +52,7 @@ type Config struct {
 	OSIs            string            `json:"os_is"`
 	FirefoxIs       string            `json:"firefox_is"`
 	Firefoxs        map[string]string `json:"firefoxs"`
-	ProfileBase     string            `json:"profile_base"`
-	FirefoxProfiles []string          `json:"firefox_profiles"`
+	FirefoxProfiles map[string]string `json:"firefox_profiles"`
 	SelectedProfile string            `json:"selected_profile"`
 	SavedThemes     map[string]string `json:"saved_themes"`
 	SelectedTheme   string            `json:"selected_theme"`
@@ -62,15 +62,39 @@ type Config struct {
 }
 
 type Window struct {
-	Width       string          `json:"width"`
-	Height      string          `json:"height"`
-	ColorScheme map[string]bool `json:"color-scheme"`
+	Width        string          `json:"width"`
+	Height       string          `json:"height"`
+	ColorScheme  map[string]bool `json:"color-scheme"`
+	SidebarState string          `json:"sidebar-state"`
 }
 
 var ignoredFolders = map[string]struct{}{
 	"Crash Reports":  {},
 	"Pending Pings":  {},
 	"Profile Groups": {},
+}
+
+var profileDirs = map[string]map[string]string{
+	"firefox": {
+		"windows": "Mozilla\\Firefox\\Profiles",
+		"darwin":  "Firefox/Profiles",
+		"linux":   ".mozilla/firefox",
+	},
+	"librewolf": {
+		"windows": "LibreWolf\\Profiles",
+		"darwin":  "librewolf/Profiles",
+		"linux":   ".librewolf",
+	},
+	"floorp": {
+		"windows": "Floorp\\Profiles",
+		"darwin":  "Floorp/Profiles",
+		"linux":   ".floorp",
+	},
+	"zen": {
+		"windows": "Zen\\Profiles",
+		"darwin":  "Zen/Profiles",
+		"linux":   ".zen",
+	},
 }
 
 func (a *App) GetOS() string {
@@ -125,6 +149,7 @@ func (a *App) LoadWindowConfig() Window {
 				"system":      true,
 				"translucent": false,
 			},
+			SidebarState: "",
 		}
 		data, err := json.MarshalIndent(defaultConfig, "", "  ")
 		if err != nil {
@@ -181,16 +206,23 @@ func (a *App) CreateConfig() error {
 	if firefoxIs == "" {
 		firefoxIs = "None detected"
 	}
-	// Find profiles and base path
-	profileBase, profiles, err := findFirefoxProfiles()
+	// Find profiles
+	profiles, err := findFirefoxProfiles()
 	if err != nil {
-		profileBase = ""
-		profiles = []string{}
+		profiles = map[string]string{}
 	}
 	// Select most recent profile
 	selectedProfile := ""
-	if len(profiles) > 0 {
-		selectedProfile = profiles[0]
+	var latestModTime time.Time
+	for name, path := range profiles {
+		info, err := os.Stat(path)
+		if err != nil {
+			continue
+		}
+		if info.ModTime().After(latestModTime) {
+			latestModTime = info.ModTime()
+			selectedProfile = name
+		}
 	}
 	savedThemes := map[string]string{
 		"cascade":             "https://github.com/cascadefox/cascade",
@@ -207,7 +239,6 @@ func (a *App) CreateConfig() error {
 		OSIs:            osIs,
 		FirefoxIs:       firefoxIs,
 		Firefoxs:        firefoxs,
-		ProfileBase:     profileBase,
 		FirefoxProfiles: profiles,
 		SelectedProfile: selectedProfile,
 		SavedThemes:     savedThemes,
@@ -406,59 +437,64 @@ func findFirefoxs() map[string]string {
 	return detected
 }
 
-func findFirefoxProfiles() (profileBase string, profiles []string, err error) {
+func findFirefoxProfiles() (profiles map[string]string, err error) {
+	profiles = make(map[string]string)
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
-		return "", nil, err
+		return nil, err
 	}
-	switch gruntime.GOOS {
-	case "windows":
-		appData := os.Getenv("APPDATA")
-		if appData == "" {
-			return "", nil, os.ErrNotExist
-		}
-		profileBase = filepath.Join(appData, "Mozilla", "Firefox", "Profiles")
-	case "darwin":
-		profileBase = filepath.Join(homeDir, "Library", "Application Support", "Firefox", "Profiles")
-	default:
-		profileBase = filepath.Join(homeDir, ".mozilla", "firefox")
-	}
-	info, err := os.Stat(profileBase)
-	if err != nil || !info.IsDir() {
-		return profileBase, nil, os.ErrNotExist
-	}
-	entries, err := os.ReadDir(profileBase)
-	if err != nil {
-		return profileBase, nil, err
-	}
-	type profileInfo struct {
-		name    string
-		modTime time.Time
-	}
-	var validProfiles []profileInfo
-
-	for _, entry := range entries {
-		if !entry.IsDir() {
+	osKey := gruntime.GOOS
+	for _, dirs := range profileDirs {
+		dirPath, ok := dirs[osKey]
+		if !ok {
 			continue
 		}
-		if _, ignored := ignoredFolders[entry.Name()]; ignored {
+		var fullPath string
+		if osKey == "windows" {
+			appData := os.Getenv("APPDATA")
+			if appData == "" {
+				continue
+			}
+			fullPath = filepath.Join(appData, dirPath)
+		} else if osKey == "darwin" {
+			fullPath = filepath.Join(homeDir, "Library", "Application Support", dirPath)
+		} else {
+			fullPath = filepath.Join(homeDir, dirPath)
+		}
+		info, err := os.Stat(fullPath)
+		if err != nil || !info.IsDir() {
 			continue
 		}
-		info, err := entry.Info()
+		entries, err := os.ReadDir(fullPath)
 		if err != nil {
 			continue
 		}
-		validProfiles = append(validProfiles, profileInfo{name: entry.Name(), modTime: info.ModTime()})
+		type profileInfo struct {
+			name    string
+			modTime time.Time
+		}
+		var validProfiles []profileInfo
+		for _, entry := range entries {
+			if !entry.IsDir() {
+				continue
+			}
+			if _, ignored := ignoredFolders[entry.Name()]; ignored {
+				continue
+			}
+			info, err := entry.Info()
+			if err != nil {
+				continue
+			}
+			validProfiles = append(validProfiles, profileInfo{name: entry.Name(), modTime: info.ModTime()})
+		}
+		sort.Slice(validProfiles, func(i, j int) bool {
+			return validProfiles[i].modTime.After(validProfiles[j].modTime)
+		})
+		for _, p := range validProfiles {
+			profiles[p.name] = filepath.Join(fullPath, p.name)
+		}
 	}
-	// Sort by modification date
-	sort.Slice(validProfiles, func(i, j int) bool {
-		return validProfiles[i].modTime.After(validProfiles[j].modTime)
-	})
-	profiles = make([]string, len(validProfiles))
-	for i, p := range validProfiles {
-		profiles[i] = p.name
-	}
-	return profileBase, profiles, nil
+	return profiles, nil
 }
 
 // WRITE TO CONFIG (UPDATE)
@@ -470,7 +506,6 @@ func (a *App) WriteToConfig(key string, value interface{}) error {
 	if err != nil {
 		return fmt.Errorf("read config: %w", err)
 	}
-
 	// pain
 	var config map[string]interface{}
 	if err := json.Unmarshal(data, &config); err != nil {
@@ -510,18 +545,15 @@ func (a *App) WriteToConfig(key string, value interface{}) error {
 func (a *App) RemoveFromConfig(key string) error {
 	configDir := getConfigDir()
 	configPath := filepath.Join(configDir, "config.json")
-	// 1. Read current config
 	data, err := os.ReadFile(configPath)
 	if err != nil {
 		return fmt.Errorf("read config: %w", err)
 	}
-
 	var config map[string]interface{}
 	if err := json.Unmarshal(data, &config); err != nil {
 		return fmt.Errorf("parse config: %w", err)
 	}
-
-	// 2. Navigate nested keys via dot notation
+	// this is from internet, really really need to get this one down
 	parts := strings.Split(key, ".")
 	current := config
 	for i := 0; i < len(parts)-1; i++ {
@@ -532,11 +564,8 @@ func (a *App) RemoveFromConfig(key string) error {
 			return fmt.Errorf("key %s is not a map", part)
 		}
 	}
-
-	// 3. Delete the final key
 	delete(current, parts[len(parts)-1])
 
-	// 4. Save back to file
 	newData, err := json.MarshalIndent(config, "", "  ")
 	if err != nil {
 		return fmt.Errorf("encode config: %w", err)
@@ -545,7 +574,6 @@ func (a *App) RemoveFromConfig(key string) error {
 		return fmt.Errorf("write config: %w", err)
 	}
 
-	// 5. Update in-memory config
 	var newCfg Config
 	if err := json.Unmarshal(newData, &newCfg); err != nil {
 		return fmt.Errorf("update in-memory config: %w", err)
@@ -561,6 +589,7 @@ func (a *App) OpenConfig() error {
 	switch gruntime.GOOS {
 	case "windows":
 		cmd = exec.Command("cmd", "/C", "start", "", configPath)
+		platforms.HideSystemConsole(cmd)
 	case "darwin":
 		cmd = exec.Command("open", configPath)
 	default: // Linux and others
@@ -594,9 +623,33 @@ func (a *App) DeleteConfig() error {
 	return nil
 }
 func (a *App) OpenProfiles() error {
-	profileBase, _, err := findFirefoxProfiles()
+	homeDir, err := os.UserHomeDir()
 	if err != nil {
 		return err
+	}
+	selectedVariant := ""
+	for variant, profiles := range profileDirs {
+		if _, ok := profiles[gruntime.GOOS]; ok && a.cfg.SelectedProfile != "" {
+			selectedVariant = variant
+			break
+		}
+	}
+	if selectedVariant == "" {
+		return fmt.Errorf("failed to determine firefox variant?")
+	}
+	dirPath := profileDirs[selectedVariant][gruntime.GOOS]
+	var profileBase string
+	switch gruntime.GOOS {
+	case "windows":
+		appData := os.Getenv("APPDATA")
+		if appData == "" {
+			return fmt.Errorf("APPDATA not set")
+		}
+		profileBase = filepath.Join(appData, dirPath)
+	case "darwin":
+		profileBase = filepath.Join(homeDir, "Library", "Application Support", dirPath)
+	default:
+		profileBase = filepath.Join(homeDir, dirPath)
 	}
 	var cmd *exec.Cmd
 	switch gruntime.GOOS {
@@ -604,7 +657,7 @@ func (a *App) OpenProfiles() error {
 		cmd = exec.Command("explorer", profileBase)
 	case "darwin":
 		cmd = exec.Command("open", profileBase)
-	default: // Linux and others
+	default:
 		cmd = exec.Command("xdg-open", profileBase)
 	}
 	return cmd.Start()
@@ -622,6 +675,18 @@ func (a *App) SelectFile() (string, error) {
 	}
 	// [56] convert []bytes to strings!!!! remember.
 	return string(fileBytes), nil
+}
+func (a *App) SelectFolder() (string, error) {
+	folderPath, err := wruntime.OpenDirectoryDialog(a.ctx, wruntime.OpenDialogOptions{
+		Title: "Select a Firefox profile folder",
+	})
+	if err != nil {
+		return "", err
+	}
+	if len(folderPath) == 0 {
+		return "", nil
+	}
+	return folderPath, nil
 }
 
 // //////////////////////////////////////////////////////////////////////////////////
@@ -642,7 +707,7 @@ func (a *App) ProcessGit() (bool, error) {
 		logToConsole(err.Error())
 		return false, err
 	}
-	profilePath := filepath.Join(a.cfg.ProfileBase, a.cfg.SelectedProfile)
+	profilePath := a.cfg.FirefoxProfiles[a.cfg.SelectedProfile]
 	chromePath := filepath.Join(profilePath, "chrome")
 
 	if a.cfg.BackupChrome {
@@ -664,7 +729,9 @@ func (a *App) ProcessGit() (bool, error) {
 		}
 	}
 	// git clone
+	// https://stackoverflow.com/questions/49674855/build-error-unknown-field-hidewindow
 	cmd := exec.Command("git", "clone", themeURL, chromePath)
+	platforms.HideSystemConsole(cmd)
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
@@ -734,7 +801,9 @@ func (a *App) ProcessGit() (bool, error) {
 		var cmd *exec.Cmd
 		switch gruntime.GOOS {
 		case "windows":
-			cmd = exec.Command("taskkill", "/F", "/IM", filepath.Base(firefoxPath))
+			psCmd := fmt.Sprintf(`Get-Process | Where-Object { $_.Path -eq "%s" } | Stop-Process -Force`, firefoxPath)
+			cmd = exec.Command("powershell", "-NoProfile", "-WindowStyle", "Hidden", "-Command", psCmd)
+			platforms.HideSystemConsole(cmd)
 		case "darwin":
 			cmd = exec.Command("pkill", "-9", "-f", firefoxPath)
 		default: // has to be forceful
@@ -755,6 +824,7 @@ func (a *App) ProcessGit() (bool, error) {
 			cmdCheck := exec.Command("pgrep", "-f", filepath.Base(firefoxPath))
 			if gruntime.GOOS == "windows" {
 				cmdCheck = exec.Command("tasklist", "/FI", fmt.Sprintf("IMAGENAME eq %s", filepath.Base(firefoxPath)))
+				platforms.HideSystemConsole(cmdCheck)
 			}
 			stdout.Reset()
 			stderr.Reset()
@@ -768,6 +838,7 @@ func (a *App) ProcessGit() (bool, error) {
 
 		// Start Firefox
 		cmd = exec.Command(firefoxPath)
+		platforms.HideSystemConsole(cmd)
 		stdout.Reset()
 		stderr.Reset()
 		cmd.Stdout = &stdout

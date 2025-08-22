@@ -9,7 +9,7 @@
 </head>
 <body color-scheme="system">
 
-    <div id="init" class="initted">
+    <div id="init" class="initializing">
         <div id="logo">...</div>
         <div id="status"><div id="loading">...</div><div id="init_text">Gitting everything ready ...</div></div>
         <div id="log">Searching for configuration</div>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="page-container">
                     <div class="conf"><label class="q">Color Scheme                      </label><div class="icon csicon"></div><select id="selectScheme" class="select" when-compact="shrink"><option value=""></option></select></div>
-                    <div class="conf"><label class="q">Edit userChrome Theme             </label><input type ="text" id="selectTheme" when-compact="shrink"><button id="addTheme" title="Add theme to collection (url)">+</button><button id="removeTheme" title="Remove theme to collection (name or url)"><div class="icon trashicon"></div></button></div>
+                    <div class="conf"><label class="q">Edit userChrome Theme             </label><input type ="text" id="selectTheme" when-compact="shrink" placeholder="Try: github.com/some/theme"><button id="addTheme" title="Add theme to collection (url)">+</button><button id="removeTheme" title="Remove theme to collection (name or url)"><div class="icon trashicon"></div></button></div>
                     <div class="conf"><label class="q">Configuration                     </label><button id="openConf" when-compact="shrink" title="Open your userchrome config.json">open config</button><button id="resetConf" when-compact="shrink" title="Reset userChrome configurations">reset config</button></div>
                     <div class="conf">  <div class="q">                                  </div>  <button id="openProfiles" when-compact="shrink" title="View your profile folders">open profiles</button><button id="deleteConf" when-compact="shrink" title="Deleting your configuration well trigger a reinitiation">delete config</button></div>
                     <div class="conf"><label class="q">Specify Firefox                   </label><div class="icon ficon"></div><input type="text" id="fsFBinaryInput" when-compact="shrink"><button id="fsFBinary"><div class="icon fileicon"></div></button></div>

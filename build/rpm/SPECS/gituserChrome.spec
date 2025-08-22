@@ -1,11 +1,12 @@
 Name: gituserChrome
-Version: 1.1
+Version: 1.2
 Release: 1%{?dist}
 Summary: An automation tool to git userChrome themes.
 License: MIT
 URL: https://github.com/soulhotel/git-userChrome
 Group: Applications/Utilities
 BuildArch: x86_64
+Requires: git, libwebkit2gtk
 
 %description
 An automation tool to git userChrome themes.
@@ -21,5 +22,5 @@ cp -p /home/j/Documents/projects/git-userChrome/build/rpm/usr/share/icons/hicolo
 /usr/share/icons/hicolor/256x256/apps/gituserChrome.png
 
 %changelog
-* Mon Aug 18 2025 Jonnie <soulhotel@pm.me> - 1.1-1
+* Fri Aug 22 2025 Jonnie <soulhotel@pm.me> - 1.2-1
 - Initial RPM release

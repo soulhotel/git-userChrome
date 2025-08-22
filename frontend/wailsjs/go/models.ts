@@ -5,8 +5,7 @@ export namespace main {
 	    os_is: string;
 	    firefox_is: string;
 	    firefoxs: Record<string, string>;
-	    profile_base: string;
-	    firefox_profiles: string[];
+	    firefox_profiles: Record<string, string>;
 	    selected_profile: string;
 	    saved_themes: Record<string, string>;
 	    selected_theme: string;
@@ -24,7 +23,6 @@ export namespace main {
 	        this.os_is = source["os_is"];
 	        this.firefox_is = source["firefox_is"];
 	        this.firefoxs = source["firefoxs"];
-	        this.profile_base = source["profile_base"];
 	        this.firefox_profiles = source["firefox_profiles"];
 	        this.selected_profile = source["selected_profile"];
 	        this.saved_themes = source["saved_themes"];
@@ -38,6 +36,7 @@ export namespace main {
 	    width: string;
 	    height: string;
 	    color-scheme: Record<string, boolean>;
+	    "sidebar-state": string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Window(source);
@@ -48,6 +47,7 @@ export namespace main {
 	        this.width = source["width"];
 	        this.height = source["height"];
 	        this["color-scheme"] = source["color-scheme"];
+	        this["sidebar-state"] = source["sidebar-state"];
 	    }
 	}
 

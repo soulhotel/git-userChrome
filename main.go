@@ -89,7 +89,7 @@ func main() {
 		},
 		Linux: &linux.Options{
 			WindowIsTranslucent: true,
-			WebviewGpuPolicy:    linux.WebviewGpuPolicyAlways,
+			WebviewGpuPolicy:    linux.WebviewGpuPolicyOnDemand,
 			ProgramName:         "gituserChrome",
 		},
 		//Debug: options.Debug{

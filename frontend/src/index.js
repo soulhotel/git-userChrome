@@ -84,7 +84,7 @@ async function validateConfig() {
         validcfg = cfg;
         log("Validated.")
     }
-    await delay(300); return cfg;
+    await delay(200); return cfg;
 }
 
 function delay(ms) {
@@ -100,7 +100,7 @@ async function initialize() {
         if ((cfg && gitInstalled) || validcfg) {
             initialized = true;
             log("Ready.");
-            await delay(2000);
+            await delay(1200);
             initW.classList.remove('initializing');
             connectConfig();
             initW.classList.add('doneinit');
@@ -113,6 +113,10 @@ async function initialize() {
             errorReturned("Git required for gituserChrome...");
         } else {
             errorReturned("Init failure. What a bummer..");
+            await delay(3000);
+            errorReturned("Deleting Config and trying again...");
+            await delay(3000);
+            await window.go.main.App.DeleteConfig();
         }
     } catch (e) {
         errorReturned("Init failed: " + e.message);
@@ -132,11 +136,17 @@ const sidebar = document.querySelector('.sidebar');
 
 if (sidebarToggle && sidebar) {
     sidebarToggle.addEventListener('click', () => {
+        let state = "";
         if (sidebar.hasAttribute('collapsed')) {
             sidebar.removeAttribute('collapsed');
+            state = "";
         } else {
             sidebar.setAttribute('collapsed', '');
+            state = "collapsed";
         }
+        if (!window.windowConfig) return;
+        window.windowConfig["sidebar-state"] = state;
+        window.go.main.App.UpdateWindowConfig(window.windowConfig);
     });
 }
 
@@ -215,10 +225,11 @@ async function connectConfig() {
     }
     if (profileDropdown) {
         profileDropdown.innerHTML = "";
-        cfg.firefox_profiles.forEach(profile => {
-            const opt = document.createElement("option"); opt.value = profile;
-            opt.textContent = profile;
-            if (cfg.selected_profile === profile) opt.selected = true;
+        Object.entries(cfg.firefox_profiles).forEach(([profileName, profilePath]) => {
+            const opt = document.createElement("option");
+            opt.value = profileName;
+            opt.textContent = profileName;
+            if (cfg.selected_profile === profileName) opt.selected = true;
             profileDropdown.appendChild(opt);
         });
     }
@@ -377,10 +388,7 @@ async function removeTheme(cfg, name, themeInput) {
     await window.go.main.App.RemoveFromConfig(`saved_themes.${name}`);
     delete cfg.saved_themes[name];
     if (Object.keys(cfg.saved_themes).length === 0) {
-        cfg.saved_themes["ff-ultima"] = "https://github.com/soulhotel/ff-ultima";
-        cfg.selected_theme = "ff-ultima";
-        await window.go.main.App.WriteToConfig(`saved_themes.ff-ultima`, cfg.saved_themes["ff-ultima"]);
-        await window.go.main.App.WriteToConfig("selected_theme", "ff-ultima");
+        cfg.selected_theme = "";
         themeInput.value = "";
         themeInput.dataset.theme = "";
     } else {
@@ -388,6 +396,23 @@ async function removeTheme(cfg, name, themeInput) {
         await window.go.main.App.WriteToConfig("selected_theme", cfg.selected_theme);
         themeInput.value = "";
         themeInput.dataset.theme = "";
+    }
+    const themeDropdown = document.getElementById("selectTheme");
+    if (themeDropdown) {
+        themeDropdown.innerHTML = "";
+        const placeholder = document.createElement("option");
+        placeholder.value = "placeholder";
+        placeholder.textContent = "-- Select a theme --";
+        placeholder.disabled = true;
+        placeholder.selected = !cfg.selected_theme;
+        themeDropdown.appendChild(placeholder);
+        Object.keys(cfg.saved_themes).forEach(theme => {
+            const opt = document.createElement("option");
+            opt.value = theme;
+            opt.textContent = theme;
+            if (cfg.selected_theme === theme) opt.selected = true;
+            themeDropdown.appendChild(opt);
+        });
     }
     await connectConfig();
     console.log(`Theme removed: ${name}`);
@@ -426,29 +451,30 @@ function attachFileSelectors() {
         const btn = document.getElementById(btnId);
         const inputEl = document.getElementById(inputId);
         if (!btn || !inputEl) continue;
-
         btn.addEventListener("click", async () => {
-            const path = await window.go.main.App.SelectFile();
-            if (!path) return;
-            if (path) {
-                const cfg = window.globalConfig;
-                if (!cfg) return;
-                if (firefoxKey) {
-                    inputEl.value = path;
-                    cfg.firefoxs[firefoxKey] = path;
-                    await window.go.main.App.WriteToConfig(`firefoxs.${firefoxKey}`, path);
-                } else if (key === "fsProfile") {
-                    const folderName = path.split(/[/\\]/).pop();
-                    inputEl.value = folderName;
-                    cfg.selected_profile = folderName;
-                    await window.go.main.App.WriteToConfig("selected_profile", folderName);
-                    const lastSep = Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\"));
-                    const folderBase = lastSep >= 0 ? path.slice(0, lastSep) : path;
-                    cfg.profile_base = folderBase;
-                    await window.go.main.App.WriteToConfig("profile_base", folderBase);
-                }
-                console.log(`Updated config for ${key}:`, path);
+            let path;
+            if (key === "fsProfile") {
+                path = await window.go.main.App.SelectFolder();
+            } else {
+                path = await window.go.main.App.SelectFile();
             }
+            if (!path) return;
+            const cfg = window.globalConfig;
+            if (!cfg) return;
+            if (firefoxKey) {
+                inputEl.value = path;
+                cfg.firefoxs[firefoxKey] = path;
+                await window.go.main.App.WriteToConfig(`firefoxs.${firefoxKey}`, path);
+            } else if (key === "fsProfile") {
+                const folderName = path.split(/[/\\]/).pop();
+                inputEl.value = folderName;
+                cfg.firefox_profiles[folderName] = path;
+                await window.go.main.App.WriteToConfig(`firefox_profiles.${folderName}`, path);
+                cfg.selected_profile = folderName;
+                await window.go.main.App.WriteToConfig("selected_profile", folderName);
+                console.log(`Profile added: ${folderName} -> ${path}`);
+            }
+            console.log(`Updated config for ${key}:`, path);
         });
     }
 }
@@ -503,12 +529,6 @@ function attachsaveSettingsBtn() {
             if (firefoxKey) {
                 cfg.firefoxs[firefoxKey] = inputEl.value;
                 await window.go.main.App.WriteToConfig(`firefoxs.${firefoxKey}`, inputEl.value);
-            } else if (inputEl.value.trim()) {
-                if (!cfg.firefox_profiles.includes(inputEl.value.trim())) {
-                    cfg.firefox_profiles.push(inputEl.value.trim());
-                    await window.go.main.App.WriteToConfig(`firefox_profiles`, cfg.firefox_profiles);
-                    inputEl.value = "";
-                }
             }
         }
         const themeInput = document.getElementById("selectTheme");
@@ -533,6 +553,7 @@ function attachsaveSettingsBtn() {
         console.debug("CONFIG SAVED", cfg);
     });
 }
+
 
 const settingsPageNav = document.querySelectorAll('.nav-settings');
 

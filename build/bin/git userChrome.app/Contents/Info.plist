@@ -10,11 +10,11 @@
         <key>CFBundleIdentifier</key>
         <string>com.wails.git userChrome</string>
         <key>CFBundleVersion</key>
-        <string>1.1</string>
+        <string>1.2</string>
         <key>CFBundleGetInfoString</key>
         <string>An automation tool to git userChrome themes.</string>
         <key>CFBundleShortVersionString</key>
-        <string>1.1</string>
+        <string>1.2</string>
         <key>CFBundleIconFile</key>
         <string>iconfile</string>
         <key>LSMinimumSystemVersion</key>

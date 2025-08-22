@@ -20,15 +20,20 @@
 │   ├── appicon.png
 │   ├── bin
 │   │   ├── gituserChrome
-│   │   ├── gituserchrome-1.0-1-x86_64.pkg.tar.zst
-│   │   ├── gituserChrome-1.0-1.x86_64.rpm
-│   │   ├── gituserChrome-1.0_amd64.AppImage
-│   │   ├── gituserchrome-1.0_amd64.deb
 │   │   ├── gituserchrome-1.1-1-x86_64.pkg.tar.zst
-│   │   ├── gituserChrome-1.1-1.x86_64.rpm
-│   │   ├── gituserChrome-1.1_amd64.AppImage
-│   │   ├── gituserchrome-1.1_amd64.deb
+│   │   ├── gituserchrome-1.2-1-x86_64.pkg.tar.zst
+│   │   ├── gituserChrome-1.2-1.x86_64.rpm
+│   │   ├── gituserChrome-1.2_amd64.AppImage
+│   │   ├── gituserchrome-1.2_amd64.deb
+│   │   ├── git userChrome.app
+│   │   │   └── Contents
+│   │   │       ├── Info.plist
+│   │   │       ├── MacOS
+│   │   │       │   └── gituserChrome
+│   │   │       └── Resources
+│   │   │           └── iconfile.icns
 │   │   ├── gituserChrome.desktop
+│   │   ├── gituserChrome.dmg
 │   │   └── gituserChrome.exe
 │   ├── darwin
 │   │   ├── Info.dev.plist
@@ -53,20 +58,20 @@
 │   │   └── src
 │   │       ├── appicon.png
 │   │       ├── gituserChrome
-│   │       ├── gituserchrome-1.0-1-x86_64.pkg.tar.zst
 │   │       ├── gituserchrome-1.1-1-x86_64.pkg.tar.zst
+│   │       ├── gituserchrome-1.2-1-x86_64.pkg.tar.zst
 │   │       ├── gituserChrome.desktop
+│   │       ├── gituserChrome_nvidia.desktop
 │   │       ├── pkg
 │   │       │   └── gituserchrome
-│   │       │       ├── .BUILDINFO
-│   │       │       ├── .MTREE
 │   │       │       ├── .PKGINFO
 │   │       │       └── usr
 │   │       │           ├── bin
 │   │       │           │   └── gituserChrome
 │   │       │           └── share
 │   │       │               ├── applications
-│   │       │               │   └── gituserChrome.desktop
+│   │       │               │   ├── gituserChrome.desktop
+│   │       │               │   └── gituserChrome_nvidia.desktop
 │   │       │               └── icons
 │   │       │                   └── hicolor
 │   │       │                       └── 256x256
@@ -76,7 +81,8 @@
 │   │       └── src
 │   │           ├── appicon.png -> /home/j/Documents/projects/git-userChrome/build/pkg/src/appicon.png
 │   │           ├── gituserChrome -> /home/j/Documents/projects/git-userChrome/build/pkg/src/gituserChrome
-│   │           └── gituserChrome.desktop -> /home/j/Documents/projects/git-userChrome/build/pkg/src/gituserChrome.desktop
+│   │           ├── gituserChrome.desktop -> /home/j/Documents/projects/git-userChrome/build/pkg/src/gituserChrome.desktop
+│   │           └── gituserChrome_nvidia.desktop -> /home/j/Documents/projects/git-userChrome/build/pkg/src/gituserChrome_nvidia.desktop
 │   ├── README.md
 │   ├── rpm
 │   │   ├── BUILD
@@ -102,13 +108,21 @@
 │       │   ├── project.nsi
 │       │   └── wails_tools.nsh
 │       └── wails.exe.manifest
+├── changelog.md
 ├── dev
 │   ├── appimagetool-x86_64.AppImage
-│   └── buildall.sh
+│   ├── buildall.sh
+│   ├── buildonmac.sh
+│   └── workflows
+│       └── wails-build.yml
 ├── frontend
 │   ├── package.json
 │   ├── package.json.md5
 │   ├── package-lock.json
+│   ├── platforms
+│   │   ├── darwin.go
+│   │   ├── linux.go
+│   │   └── windows.go
 │   ├── src
 │   │   ├── conf
 │   │   │   ├── promo.json
@@ -200,6 +214,9 @@
 │           ├── package.json
 │           ├── runtime.d.ts
 │           └── runtime.js
+├── .github
+│   └── ISSUE_TEMPLATE
+│       └── 1-issue-template.yml
 ├── .gitignore
 ├── go.mod
 ├── go.sum
@@ -212,4 +229,4 @@
 ├── tree.txt
 └── wails.json
 
-72 directories, 141 files
+80 directories, 150 files
