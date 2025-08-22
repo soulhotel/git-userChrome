@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=git userChrome (NVIDIA)
+Comment=An automation tool to git userChrome themes.
+Exec=env __GL_THREADED_OPTIMIZATIONS=0 __NV_DISABLE_EXPLICIT_SYNC=1 /usr/bin/gituserChrome
+Icon=gituserChrome
+Terminal=false
+Type=Application
+Categories=Utility;

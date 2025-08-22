@@ -19,10 +19,9 @@ fi
 echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
 cd "$PROJECT_ROOT" && echo "Working Dir: $PROJECT_ROOT"
 echo -e "\nMake sure the working directory is project root...\n"
-echo -e "Do you want to build a .deb package [Y/n] "
-read -r deb_answer
+read -p "Do you want to build a .deb package [Y/n] " deb_answer
 
-if [[ "$deb_answer" =~ ^[Yy]$ ]]; then
+if [[ -z "$deb_answer" || "$deb_answer" =~ ^[Yy]$ ]]; then
     BUILD_DIR="$PROJECT_ROOT/build"
     DEB_DIR="$BUILD_DIR/deb"
     WAILS_JSON="$PROJECT_ROOT/wails.json"
@@ -56,6 +55,7 @@ Version: $APP_VERSION
 Section: utils
 Priority: optional
 Architecture: amd64
+Depends: git, libwebkit2gtk
 Maintainer: $APP_AUTHOR_NAME <$APP_AUTHOR_EMAIL>
 Description: $APP_DESC
 EOF
@@ -77,10 +77,9 @@ fi
 echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
 cd "$PROJECT_ROOT" && echo "Working Dir: $PROJECT_ROOT"
 echo -e "\nMake sure the working directory is project root...\n"
-echo -e "Do you want to build an appimage [Y/n] "
-read -r appimage_answer
+read -p "Do you want to build an appimage [Y/n] " appimage_answer
 
-if [[ "$appimage_answer" =~ ^[Yy]$ ]]; then
+if [[ -z "$appimage_answer" || "$appimage_answer" =~ ^[Yy]$ ]]; then
     BUILD_DIR="$PROJECT_ROOT/build"
     APPDIR="$BUILD_DIR/AppDir"
     AIT="$PROJECT_ROOT/dev/appimagetool-x86_64.AppImage"
@@ -135,10 +134,9 @@ fi
 echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
 cd "$PROJECT_ROOT" && echo "Working Dir: $PROJECT_ROOT"
 echo -e "\nMake sure the working directory is project root...\n"
-echo -e "Do you want to build an RPM package [Y/n] "
-read -r rpm_answer
+read -p "Do you want to build an RPM package [Y/n] " rpm_answer
 
-if [[ "$rpm_answer" =~ ^[Yy]$ ]]; then
+if [[ -z "$rpm_answer" || "$rpm_answer" =~ ^[Yy]$ ]]; then
     BUILD_DIR="$PROJECT_ROOT/build"
     RPMDIR="$BUILD_DIR/rpm"
     WAILS_JSON="$PROJECT_ROOT/wails.json"
@@ -173,6 +171,7 @@ License: MIT
 URL: https://github.com/soulhotel/git-userChrome
 Group: Applications/Utilities
 BuildArch: x86_64
+Requires: git, libwebkit2gtk
 
 %description
 $APP_DESC
@@ -200,10 +199,10 @@ fi
 
 echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
 cd "$PROJECT_ROOT" && echo "Working Dir: $PROJECT_ROOT"
-echo -e "\nDo you want to build an Arch package [Y/n] "
-read -r arch_answer
+echo
+read -p "Do you want to build an Arch package [Y/n] " arch_answer
 
-if [[ "$arch_answer" =~ ^[Yy]$ ]]; then
+if [[ -z "$arch_answer" || "$arch_answer" =~ ^[Yy]$ ]]; then
     BUILD_DIR="$PROJECT_ROOT/build"
     PKGDIR="$BUILD_DIR/pkg"
     mkdir -p "$PKGDIR/src" "$PKGDIR/pkg"
@@ -220,6 +219,7 @@ if [[ "$arch_answer" =~ ^[Yy]$ ]]; then
         cp "$BUILD_DIR/appicon.png" "$PKGDIR/src/appicon.png"
         SRC_FILES+=("appicon.png")
     fi
+
     DESKTOP_FILE="$PKGDIR/src/$APP_BINARY.desktop"
     cat > "$DESKTOP_FILE" <<EOF
 [Desktop Entry]
@@ -232,6 +232,18 @@ Type=Application
 Categories=Utility;
 EOF
     SRC_FILES+=("$APP_BINARY.desktop")
+    NV_DESKTOP_FILE="$PKGDIR/src/${APP_BINARY}_nvidia.desktop"
+    cat > "$NV_DESKTOP_FILE" <<EOF
+[Desktop Entry]
+Name=$APP_NAME (NVIDIA)
+Comment=$APP_DESC
+Exec=env __GL_THREADED_OPTIMIZATIONS=0 __NV_DISABLE_EXPLICIT_SYNC=1 /usr/bin/$APP_BINARY
+Icon=$APP_BINARY
+Terminal=false
+Type=Application
+Categories=Utility;
+EOF
+    SRC_FILES+=("${APP_BINARY}_nvidia.desktop")
 
     SHA_LIST=()
     for f in "${SRC_FILES[@]}"; do
@@ -246,7 +258,7 @@ pkgrel=1
 pkgdesc="$APP_DESC"
 arch=('x86_64')
 license=('MIT')
-depends=('webkit2gtk')
+depends=('webkit2gtk' 'git')
 source=(${SRC_FILES[@]})
 sha256sums=(${SHA_LIST[@]})
 package() {
@@ -258,6 +270,7 @@ EOF
     fi
     if [ -f "$PKGDIR/src/$APP_BINARY.desktop" ]; then
         echo "    install -Dm644 \"\$srcdir/$APP_BINARY.desktop\" \"\$pkgdir/usr/share/applications/$APP_BINARY.desktop\"" >> "$PKGDIR/src/PKGBUILD"
+        echo "    install -Dm644 \"\$srcdir/${APP_BINARY}_nvidia.desktop\" \"\$pkgdir/usr/share/applications/${APP_BINARY}_nvidia.desktop\"" >> "$PKGDIR/src/PKGBUILD"
     fi
 
     echo "}" >> "$PKGDIR/src/PKGBUILD"
@@ -266,6 +279,13 @@ EOF
     makepkg -f --noconfirm
     cp *.pkg.tar.zst "$BUILD_DIR/bin/"
     LATEST_PKG=$(ls -1t *.pkg.tar.zst | head -n1)
+    INFOS_PATH="$PKGDIR/src/pkg/gituserchrome"
+    for f in "$INFOS_PATH"/.BUILDINFO "$INFOS_PATH"/.MTREE; do
+        if [[ -f "$f" ]]; then
+            echo "Found $f, let's get rid of that"
+            rm -f "$f"
+        fi
+    done
     echo "Arch package created: $BUILD_DIR/bin/$(ls $BUILD_DIR/bin/*.pkg.tar.zst | xargs -n1 basename)"
     echo -e "to install it (for now): sudo pacman -U build/bin/$LATEST_PKG"
 fi
@@ -273,10 +293,9 @@ fi
 
 echo -e "\n• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •\n"
 cd "$PROJECT_ROOT" && echo "Root: $PROJECT_ROOT"
-echo -e "\nDo you want an updated tree? [Y/n] "
-read -r tree_answer
+read -p "Do you want an updated tree? [Y/n] " tree_answer
 
-if [[ "$tree_answer" =~ ^[Yy]$ ]]; then
+if [[ -z "$tree_answer" || "$tree_answer" =~ ^[Yy]$ ]]; then
     tree -a -n -I 'node_modules|dist|*.log|tmp|.git|npm-debug.log*' > tree.txt
 fi
 

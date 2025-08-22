@@ -19,7 +19,8 @@ window.compactWindow = function() {
 
 window.loadWindowConfig = async function () {
     window.windowConfig = await window.go.main.App.LoadWindowConfig();
-    console.log("Window Config:", window.windowConfig);
+    console.debug("Window Config loaded");
+    console.debug("Window Config:", window.windowConfig);
     const cs = window.windowConfig["color-scheme"] || {};
     const activeScheme = Object.entries(cs).find(([k, v]) => v === true);
     if (activeScheme) document.body.setAttribute("color-scheme", activeScheme[0]);

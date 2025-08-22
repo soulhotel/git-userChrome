@@ -1,19 +1,13 @@
 
-# 1.1.1
+# 1.2 Calm before the storm
 
-- Sidebar state (collapsed) restoration
-- todo Testing for GPUondemand instead of always
-- todo port site
-
-
-potential solution to Windows cmd
-``
-cmd.SysProcAttr = &syscall.SysProcAttr{
-	HideWindow:    true,
-	CreationFlags: 0x08000000,
-}
-cmd.Start()
-``
+- Config; firefox profiles are now stored as a map including the profiles path, this was needed to properly interact with profiles for other firefox variants
+- Config; this also adds another level of verification based on a selected_profiles dynamic path when comparing librewolf path to floorp to zen, etc
+- Config; profiles on initiation, are now populated by scanning for these 4 firefox variant potential paths
+- Config; Window remembers sidebar state on close
+- Settings; folder dialog for adding profile folder correction
+- Runtime; runtime now has a more leniant gpu acceleration policy, Arch packages now include a _nvidia.desktop file to counteract ongoing issues with webkit2gtk hardware acceleration
+- Runtime; Finally figured out proper way to hide console executions on Windows. No more console popups! **thank you stackoverflow**
 
 # 1.1 Tested on all 3 major platforms
 

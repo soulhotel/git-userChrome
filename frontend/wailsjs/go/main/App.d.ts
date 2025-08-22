@@ -28,6 +28,8 @@ export function ResetConfig():Promise<void>;
 
 export function SelectFile():Promise<string>;
 
+export function SelectFolder():Promise<string>;
+
 export function SendtoApp():Promise<void>;
 
 export function UpdateWindowConfig(arg1:main.Window):Promise<void>;
