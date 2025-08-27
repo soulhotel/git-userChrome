@@ -98,7 +98,7 @@ body {
         display: flex;
         align-items: center;
         padding: 0px 5px;
-        height: var(--header-height);
+        height: 4px; /* height: var(--header-height); */
         & .logo {
             width: var(--header-height);
             height: var(--header-height);

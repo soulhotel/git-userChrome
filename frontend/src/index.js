@@ -28,21 +28,16 @@ window.runtime.EventsOn("logToGitConsole", (message) => {
     gitConsole.scrollTop = gitConsole.scrollTop;
 });
 toggleConsoleBtn?.addEventListener("click", () => {
-    if (gitConsole.style.display === "none") {
-        gitConsole.style.display = "block"; toggleConsoleBtn.textContent = "Hide Console";
-    } else {
-        gitConsole.style.display = "none"; toggleConsoleBtn.textContent = "Show Console";
-    }
-}); // revisit
+    if (gitConsole.style.display === "none") { gitConsole.style.display = "block"; toggleConsoleBtn.textContent = "Hide Console"; }
+    else { gitConsole.style.display = "none"; toggleConsoleBtn.textContent = "Show Console"; }
+});
 
 // init // [0] ///////////////////////////////////////////////////////////////////////////////////////////////
 
 async function checkOS() {
     log("Detecting OS...");
-    const osName = await window.go.main.App.GetOS();
-    await delay(800);
-    log(`Operating System detected: ${osName}`);
-    await delay(200);
+    const osName = await window.go.main.App.GetOS(); await delay(400);
+    log(`Operating System detected: ${osName}`); await delay(200);
     if (!osName) {
         errorReturned("Couldnt detect operating system..");
     }
@@ -51,7 +46,6 @@ async function checkOS() {
     }
     return osName;
 }
-
 async function checkGit() {
     log("Checking if git is installed...");
     const gitInstalled = await window.go.main.App.IsGitInstalled();
@@ -60,7 +54,6 @@ async function checkGit() {
     }
     await delay(200); return gitInstalled;
 }
-
 async function checkConfig() {
     log("Searching for configuration...");
     let configExists = await window.go.main.App.CheckConfigExists();
@@ -74,7 +67,6 @@ async function checkConfig() {
     }
     await delay(200); return configExists;
 }
-
 async function validateConfig() {
     log("Validating configuration...");
     const cfg = await window.go.main.App.ValidateConfig();
@@ -86,11 +78,9 @@ async function validateConfig() {
     }
     await delay(200); return cfg;
 }
-
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 async function initialize() {
     try {
         const osName = await checkOS();
@@ -124,9 +114,6 @@ async function initialize() {
 }
 
 initialize();
-
-// //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 window.compactWindow();
 
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -348,7 +335,6 @@ async function connectSettings() {
     }
 }
 
-// Add / remove theme buttons
 const addThemeBtn = document.getElementById("addTheme");
 const removeThemeBtn = document.getElementById("removeTheme");
 
@@ -553,7 +539,6 @@ function attachsaveSettingsBtn() {
         console.debug("CONFIG SAVED", cfg);
     });
 }
-
 
 const settingsPageNav = document.querySelectorAll('.nav-settings');
 
