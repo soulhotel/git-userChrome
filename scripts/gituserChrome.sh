@@ -12,16 +12,23 @@ echo -e "• • • gitTheme selected: $gitTheme, now choose a profile..\n"
 # List all folders in typical OS directory -------------------------
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    profile_base="$HOME/Library/Application Support/Firefox/Profiles"
+    profile_bases=(
+        "$HOME/Library/Application Support/Firefox/Profiles"
+        "$HOME/Library/Application Support/librewolf/Profiles"
+    )
 else
-    profile_base="$HOME/.mozilla/firefox"
-    profile_base_snap="$HOME/snap/firefox/common/.mozilla/firefox"
+    profile_bases=(
+        "$HOME/.mozilla/firefox"
+        "$HOME/snap/firefox/common/.mozilla/firefox"
+        "$HOME/.librewolf"
+        "$HOME/.var/app/io.gitlab.librewolf-community/.librewolf"
+    )
 fi
 
 profiles=()
 profile_paths=()
 index=1
-for base in "$profile_base" "$profile_base_snap"; do
+for base in "${profile_bases[@]}"; do
     [[ -d "$base" ]] || continue
     for dir in "$base"/*/; do
         folder_name=$(basename "$dir")
@@ -30,7 +37,9 @@ for base in "$profile_base" "$profile_base_snap"; do
                 continue
                 ;;
         esac
-        echo "$index) $folder_name"
+        label=""
+        [[ "$base" == *[Ll]ibre[Ww]olf* ]] && label=" (LibreWolf)"
+        echo "$index) $folder_name$label"
         profiles+=("$folder_name")
         profile_paths+=("$base")
         index=$((index + 1))

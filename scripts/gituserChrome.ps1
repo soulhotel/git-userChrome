@@ -9,22 +9,30 @@ Write-Host "• • • gituserChrome (Windows Version)"
 Write-Host "• • • This script can be used to download any userChrome Theme via the gitTheme variable."
 Write-Host "• • • gitTheme selected: $gitTheme , now choose a profile..`n"
 
-$profileRoot = "$env:APPDATA\Mozilla\Firefox\Profiles"
-$dirs = Get-ChildItem -Directory $profileRoot | Where-Object {
-    $_.Name -notin @("Crash Reports", "Pending Pings", "Profile Groups")
-}
+$profileRoots = @(
+    "$env:APPDATA\Mozilla\Firefox\Profiles",
+    "$env:APPDATA\LibreWolf\Profiles"
+) | Where-Object { Test-Path $_ }
 $profiles = @()
+$profilePaths = @()
 $index = 1
-foreach ($dir in $dirs) {
-    Write-Host "$index) $($dir.Name)"
-    $profiles += $dir.Name
-    $index++
+foreach ($root in $profileRoots) {
+    $dirs = Get-ChildItem -Directory $root | Where-Object {
+        $_.Name -notin @("Crash Reports", "Pending Pings", "Profile Groups")
+    }
+    foreach ($dir in $dirs) {
+        $label = if ($root -like "*LibreWolf*") { " (LibreWolf)" } else { "" }
+        Write-Host "$index) $($dir.Name)$label"
+        $profiles += $dir.Name
+        $profilePaths += $dir.FullName
+        $index++
+    }
 }
 
 Write-Host ""
 $profileChoice = Read-Host "• ? • Which profile are we installing the theme into?"
 $selectedProfile = $profiles[$profileChoice - 1]
-$profilePath = Join-Path $profileRoot $selectedProfile
+$profilePath = $profilePaths[$profileChoice - 1]
 
 Clear-Host
 
